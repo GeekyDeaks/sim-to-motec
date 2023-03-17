@@ -46,9 +46,6 @@ class MotecBase:
             # unpickle
             for (k, v) in state.items():
                 setattr(self, k, v)
-
-    def __disable_repr__(self):
-        return pformat(vars(self), sort_dicts=False, compact=True, width=200)
     
     @classmethod
     def from_string(cls, data, start = 0, pad = False):
@@ -61,48 +58,54 @@ class MotecBase:
 class MotecEvent(MotecBase):
 
     header = MotecStruct([
-        ("64s", "name"),
-        ("64s", "session"),
+        (  "64s", "name"),
+        (  "64s", "session"),
         ("1024s", "comment"),
-        ("H", "venuepos")
+        (    "H", "venuepos")
     ])
 
 class MotecChannel(MotecBase):
 
     header = MotecStruct([
-        ("I", "prevpos"),
-        ("I", "nextpos"),
-        ("I", "datapos"),
-        ("I", "numsamples"),
-        ("2s", None),
-        ("H", "datatype"),
-        ("H", "datalen"),
-        ("H", "freq"),
-        ("h", "shift"),
-        ("h", "multiplier"),
-        ("h", "scale"),
-        ("h", "decplaces"),
+        (  "I", "prevpos"),
+        (  "I", "nextpos"),
+        (  "I", "datapos"),
+        (  "I", "numsamples"),
+        (  "2s", None),
+        (  "H", "datatype"),
+        (  "H", "datasize"),
+        (  "H", "freq"),
+        (  "h", "shift"),
+        (  "h", "multiplier"),
+        (  "h", "scale"),
+        (  "h", "decplaces"),
         ("32s", "name"),
-        ("8s", "shortname"),
+        ( "8s", "shortname"),
         ("12s", "units"),
         ("32s", None)
     ])
+
+    datatypes = {
+        0x0007: { # float
+            0x0002: "e", # 2 byte float
+            0x0004: "f", # 4 byte float
+        },
+        0x0003: { # int
+            0x0001: "b", # 1 byte int
+            0x0002: "h", # 2 byte int
+            0x0004: "i", # 4 byte int
+        }
+    }
 
     @classmethod
     def from_string(cls, data, start = 0, pad = False):
         # the log has to start from zero
         channel = super().from_string(data, start=start, pad=pad)
 
-        # determine the data type
-        if channel.datatype in [ 7 ]:
-            # float
-            fmt = [ None, "e", None, "f" ][ channel.datalen - 1 ]
-
-        elif channel.datatype in [ 3 ]:
-            # int
-            fmt = [ "b", "h", None, "i" ][ channel.datalen - 1 ]
-        else:
-            raise ValueError(f"unknown datatype {channel.datatype}")
+        try:
+            fmt = cls.datatypes[channel.datatype][channel.datasize]
+        except:
+            raise ValueError(f"unknown datatype 0x{channel.datatype:04X} / 0x{channel.datasize:04X}")
 
         # go to the start of the data and unpack all the values
         values = []
