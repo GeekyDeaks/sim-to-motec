@@ -2,3 +2,4 @@
 __pycache__
 /tmp
 /.vscode
+.DS_Store
