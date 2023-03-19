@@ -1,6 +1,6 @@
 import struct
-from pprint import pformat
 import binascii
+from io import BytesIO
 
 class MotecStruct:
 
@@ -50,16 +50,7 @@ class MotecStruct:
             else:
                 values.append(state[key])
             
-        return struct.pack(self.fmt, *values)      
-    
-
-class MotecByteArray:
-    def __init__(self, s = b''):
-        self.buffer = bytearray(s)
-
-    def update(self, pos, s):
-        self.buffer += b"\x00" * (pos - len(self.buffer))
-        self.buffer[pos:pos + len(s)] = s
+        return struct.pack(self.fmt, *values)
 
 
 class MotecBase:
@@ -90,6 +81,73 @@ class MotecEvent(MotecBase):
         (    "H", "venuepos")
     ])
 
+
+class MotecSamples():
+
+    datatypes = {
+        0x0007: { # float
+            0x0002: "e", # 2 byte float
+            0x0004: "f", # 4 byte float
+        },
+        0x0003: { # int
+            0x0001: "b", # 1 byte int
+            0x0002: "h", # 2 byte int
+            0x0004: "i", # 4 byte int
+        }
+    }
+
+    converttypes = {
+        0x0007: float,
+        0x0003: int
+    }
+
+    def __init__(self, channel = None, samples = None):
+        if samples:
+            self.samples = samples
+        else:
+            self.samples = []
+
+        self.channel = channel
+        self.channel.numsamples = len(self.samples)
+        self.fmt = self.datatypes[channel.datatype][channel.datasize]
+        self.convert = self.converttypes[channel.datatype]
+        self.datasize = struct.calcsize(self.fmt)
+        self.multiplier = channel.multiplier
+        self.shift = channel.shift
+        self.scale = channel.scale
+        self.decplaces = channel.decplaces
+
+    def add_sample(self, sample):
+        self.samples.append(sample)
+        self.channel.numsamples = len(self.samples)
+
+    def to_string(self):
+        data = bytearray()
+        for v in self.samples:
+            v = ( (v / self.multiplier) - self.shift) * self.scale / pow(10.0, -self.decplaces)
+            v = self.convert(v)
+            data += struct.pack(self.fmt, v)
+
+        return data
+
+    @classmethod
+    def from_string(cls, data, channel = None):
+
+        if not channel:
+            return
+        
+        samples = cls(channel=channel)
+
+        # go to the start of the data and unpack all the values
+        startpos = channel.datapos
+        endpos = startpos + (samples.datasize * channel.numsamples)
+        for (v, ) in struct.iter_unpack(samples.fmt, data[startpos:endpos]):
+            v = (v / channel.scale * pow(10., -channel.decplaces) + channel.shift) * channel.multiplier
+            samples.add_sample(v)
+
+        return samples
+
+
 class MotecChannel(MotecBase):
 
     header = MotecStruct([
@@ -114,70 +172,19 @@ class MotecChannel(MotecBase):
     def __init__(self, state):
         super().__init__(state)
 
+        # check if we have any samples defined
+        if not getattr(self, "samples", None):
+            self.samples = MotecSamples(channel=self)
 
     def add_sample(self, sample):
-        samples = getattr(self, "samples", [])
-        samples.append(sample)
-        self.numsamples = len(samples)
-        self.samples = samples
-
-
-    datatypes = {
-        0x0007: { # float
-            0x0002: "e", # 2 byte float
-            0x0004: "f", # 4 byte float
-        },
-        0x0003: { # int
-            0x0001: "b", # 1 byte int
-            0x0002: "h", # 2 byte int
-            0x0004: "i", # 4 byte int
-        }
-    }
-
-    convert = {
-        0x0007: float,
-        0x0003: int
-    }
+        self.samples.add_sample(sample)
 
     @classmethod
     def from_string(cls, data, start = 0, pad = False):
         # the log has to start from zero
         channel = super().from_string(data, start=start, pad=pad)
-
-        try:
-            fmt = cls.datatypes[channel.datatype][channel.datasize]
-        except:
-            raise ValueError(f"unknown datatype 0x{channel.datatype:04X} / 0x{channel.datasize:04X}")
-
-        # go to the start of the data and unpack all the values
-        samples = []
-        datasize = struct.calcsize(fmt)
-        startpos = channel.datapos
-        endpos = startpos + (datasize * channel.numsamples)
-        channel._datasize = datasize
-        for (v, ) in struct.iter_unpack(fmt, data[startpos:endpos]):
-            v = (v / channel.scale * pow(10., -channel.decplaces) + channel.shift) * channel.multiplier
-            samples.append(v)
-
-        channel.samples = samples
+        channel.samples = MotecSamples.from_string(data, channel)
         return channel
-    
-
-    def samples_to_string(self):
-        data = bytearray()
-        try:
-            fmt = self.datatypes[self.datatype][self.datasize]
-        except:
-            raise ValueError(f"unknown datatype 0x{self.datatype:04X} / 0x{self.datasize:04X}")
-
-        convert = self.convert[self.datatype]
-
-        for v in self.samples:
-            v = ( (v / self.multiplier) - self.shift) * self.scale / pow(10.0, -self.decplaces)
-            v = convert(v)
-            data += struct.pack(fmt, v)
-
-        return data
 
 class MotecLog(MotecBase):
 
@@ -213,12 +220,13 @@ class MotecLog(MotecBase):
 
     def __init__(self, state):
         super().__init__(state)
+        if not getattr(self, "channels", None):
+            self.channels = []
+            self.numchannels = 0
 
     def add_channel(self, channel_def):
-        channels = getattr(self, "channels", [])
-        channels.append(MotecChannel(channel_def))
-        self.numchannels = len(channels)
-        self.channels = channels
+        self.channels.append(MotecChannel(channel_def))
+        self.numchannels = len(self.channels)
 
     def add_samples(self, samples):
         for (idx, sample) in enumerate(samples):
@@ -246,7 +254,7 @@ class MotecLog(MotecBase):
 
     def to_string(self):
 
-        data = MotecByteArray()
+        data = BytesIO()
 
         # pack the event
         eventpos = 0
@@ -254,7 +262,8 @@ class MotecLog(MotecBase):
         if getattr(self, "event", None):
             eventpos = nextpos
             nextpos = nextpos + self.event.header.size
-            data.update(eventpos, self.event.to_string())
+            data.seek(eventpos)
+            data.write(self.event.to_string())
             
         self.eventpos = eventpos
 
@@ -275,10 +284,7 @@ class MotecLog(MotecBase):
 
         if self.numchannels:
 
-            # fudge, bump nextpos ahead
-            #nextpos = 13384
-
-            # we can work out the first datapos
+            # work out the first datapos
             datapos = nextpos + (MotecChannel.header.size * self.numchannels)
             self.firstchannelpos = nextpos
             self.firstchanneldatapos = datapos
@@ -295,18 +301,20 @@ class MotecLog(MotecBase):
 
                 ci.prevpos = prevpos
                 ci.datapos = datapos
-                data.update(thispos, ci.to_string())
+                data.seek(thispos)
+                data.write(ci.to_string())
 
                 # get the samples for the channel
-                samples = ci.samples_to_string()
-                data.update(datapos, samples)
+                samples = ci.samples.to_string()
+                data.seek(datapos)
+                data.write(samples)
                 
-                # finall, update all the pointers
+                # finally, update all the pointers
                 datapos += len(samples)
                 prevpos = thispos
                 thispos = ci.nextpos
 
         # now pack the log header
-        data.update(0, super().to_string())
-        #data[self.eventpos:self.eventpos + self.event.header.size] = self.event.to_string()
-        return data.buffer
+        data.seek(0)
+        data.write(super().to_string())
+        return data.getbuffer()

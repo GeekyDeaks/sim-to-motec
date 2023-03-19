@@ -38,7 +38,7 @@ with open(out_file, "w") as fout:
             str(c.datapos),
             str(c.numsamples),
             str(c.header.size),
-            str(c._datasize)
+            str(c.samples.datasize)
         ]) + "\n")
 
 for (idx, c) in enumerate(l.channels):
