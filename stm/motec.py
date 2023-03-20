@@ -21,16 +21,14 @@ class MotecStruct:
         tup = struct.unpack(self.fmt, data)
         d = dict()
 
-        padidx = 0
         for (idx, val) in enumerate(tup):
 
             (fmt, key) = self.fields[idx]
 
             if pad and not key:
-                key = f"pad{padidx}"
-                padidx += 1
-                val = binascii.hexlify(val, sep=" ", bytes_per_sep=4)
-            elif fmt[-1] == "s":
+                key = f"pad{idx}"
+                val = binascii.hexlify(val)
+            elif key and fmt[-1] == "s":
                 val = val.decode('utf-8').rstrip('\0')
 
             if key:
@@ -42,9 +40,18 @@ class MotecStruct:
 
         # build a tuple for packing
         values = []
-        for (fmt, key) in self.fields:
+        for (idx, field) in enumerate(self.fields):
+            fmt, key = field
             if not key:
-                values.append(b"")
+                # make a pad key
+                key = f"pad{idx}"
+                # check if we have set the pad value
+                # if so, use it
+                if key in state:
+                    values.append( binascii.unhexlify(state[key]) )
+                else:
+                    values.append(b"")
+
             elif fmt[-1] == "s":
                 values.append(state[key].encode("utf-8"))
             else:
@@ -108,7 +115,6 @@ class MotecSamples():
             self.samples = []
 
         self.channel = channel
-        self.channel.numsamples = len(self.samples)
         self.fmt = self.datatypes[channel.datatype][channel.datasize]
         self.convert = self.converttypes[channel.datatype]
         self.datasize = struct.calcsize(self.fmt)
@@ -117,9 +123,12 @@ class MotecSamples():
         self.scale = channel.scale
         self.decplaces = channel.decplaces
 
+    @property
+    def numsamples(self):
+        return len(self.samples)
+
     def add_sample(self, sample):
         self.samples.append(sample)
-        self.channel.numsamples = len(self.samples)
 
     def to_string(self):
         data = bytearray()
@@ -135,7 +144,7 @@ class MotecSamples():
 
         if not channel:
             return
-        
+
         samples = cls(channel=channel)
 
         # go to the start of the data and unpack all the values
@@ -179,6 +188,10 @@ class MotecChannel(MotecBase):
     def add_sample(self, sample):
         self.samples.add_sample(sample)
 
+    def to_string(self):
+        self.numsamples = self.samples.numsamples
+        return super().to_string()
+
     @classmethod
     def from_string(cls, data, start = 0, pad = False):
         # the log has to start from zero
@@ -196,11 +209,11 @@ class MotecLog(MotecBase):
         (  "20s", None),
         (    "I", "eventpos" ),
         (  "26s", None),
-        (    "I", "sig1"), # not sure what this is? int value 1000000
+        (    "I", "sig1"),
         (    "I", "serial"),
         (   "8s", "type"),
         (    "H", "version"),
-        (    "H", "sig2"), # another unknown, 128
+        (    "H", "sig2"),
         (    "I", "numchannels"),
         (   "4s", None),
         (  "16s", "date"),
@@ -212,7 +225,7 @@ class MotecLog(MotecBase):
         (  "64s", None),
         (  "64s", "venue"),
         ("1088s", None),
-        (   "I" , "pro"),
+        (   "4s", None),
         (  "66s", None),
         (  "64s", "comment"),
         ( "126s", None)
@@ -224,8 +237,18 @@ class MotecLog(MotecBase):
             self.channels = []
             self.numchannels = 0
 
-    def add_channel(self, channel_def):
-        self.channels.append(MotecChannel(channel_def))
+        # we need these 'magics' to make it work, so set some defaults
+        self.id = getattr(self, "id", 64)
+        self.sig1 = getattr(self, "sig1", 1000000)
+        self.sig2 = getattr(self, "sig2", 128)
+        self.type = getattr(self, "type", "ADL")
+        self.version = getattr(self, "version", 420)
+        self.serial = getattr(self, "serial", 12007)
+
+    def add_channel(self, channel):
+        if not isinstance(channel, MotecChannel):
+            channel = MotecChannel(channel)
+        self.channels.append(channel)
         self.numchannels = len(self.channels)
 
     def add_samples(self, samples):
@@ -247,7 +270,7 @@ class MotecLog(MotecBase):
 
         while channelpos:
             channel = MotecChannel.from_string(data, start = channelpos, pad=pad)
-            log.channels.append(channel)
+            log.add_channel(channel)
             channelpos = channel.nextpos
 
         return log
@@ -270,17 +293,6 @@ class MotecLog(MotecBase):
         # work out the channel pointers
         self.firstchanneldatapos = 0
         self.firstchannelpos = 0
-
-        self.id = 64
-
-        # these are required for pro to work
-        self.pro = 13764642
-        self.sig1 = 1000000
-        self.sig2 = 128
-
-        self.type = "ADL"
-        self.version = 420
-        self.serial = 12007
 
         if self.numchannels:
 

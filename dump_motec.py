@@ -45,6 +45,7 @@ for (idx, c) in enumerate(l.channels):
     out_file = channel_dir.joinpath(f"{idx:03}_{c.shortname}.txt")
     with open(out_file, "w") as fout:
         fout.write(pformat(vars(c), sort_dicts=False, compact=True))
+        fout.write(pformat(vars(c.samples), compact=True))
 
 
 

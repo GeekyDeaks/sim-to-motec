@@ -2,6 +2,7 @@ import argparse
 import os
 import csv
 from stm.motec import MotecLog
+import stm.gps as gps
 import xml.dom.minidom as minidom
 from stm.motec import MotecLog, MotecEvent
 from pprint import pprint
@@ -29,7 +30,7 @@ laps.sort(key=lambda a: a[1])
 freq = 1 / 20
 samples = []
 laptimes = []
-mult = [ 1, 100/255, 100/255, 1, 1, 1, 1, 1 ]
+mult = [ 1, 100/255, 100/255, 1, 1, 1, 1, -1 ]
 
 for (fn, lap) in laps:
 
@@ -56,10 +57,14 @@ for (fn, lap) in laps:
 
             next_t += freq
             mv = [ (v * mult[i]) for (i, v) in enumerate(values)]
+
+            # convert x and z to lat / long
+            mv[7], mv[5] = gps.convert(x=mv[5], z=mv[7], latmid=54.45542226228547, longmid=-1.5547022498076541)
             samples.append(mv)
 
         laptimes.append(maxtime)
 
+print(f"found columns: {headers}")
 print(f"got {len(samples)} samples")
 
 # dump the samples
@@ -161,7 +166,8 @@ channels = {
         "units": "%"
     },
     "brake": {
-        "id": 50015,
+        #"id": 50015,
+        "id": 10001,
         "datatype": 3,
         "datasize": 2,
         "freq": 20,
@@ -174,7 +180,8 @@ channels = {
         "units": "%"
     },
     "speed_Mph": {
-        "id": 50000,
+        #"id": 50000,
+        "id": 10000,
         "datatype": 3,
         "datasize": 2,
         "freq": 20,
@@ -194,18 +201,45 @@ channels = {
         "shift": 0,
         "multiplier": 1,
         "scale": 1,
-        "decplaces": 2,
+        "decplaces": 0,
         "name": "Steered Angle",
         "shortname": "Str Ang",
         "units": "deg"
+    },
+    "z": {
+        "id": 10002,
+        "datatype": 7,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 0,
+        "name": "GPS Latitude",
+        "shortname": "GPSLat",
+        "units": "deg"
+    },
+    "x": {
+        "id": 10003,
+        "datatype": 7,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 0,
+        "name": "GPS Longitude",
+        "shortname": "GPSLong",
+        "units": "deg"
     }
+
 }
 
 name = args.inputdir.replace("/", "_")
 					
 event  = MotecEvent({
     "name": f"event_{name}",
-    "session": "unnknown session",
+    "session": "unknown session",
     "comment": f"converted from {args.inputdir}",
     "venuepos": 0
 })
@@ -213,7 +247,7 @@ event  = MotecEvent({
 log = MotecLog({
     "date": "06/01/2023",
     "time": "10:01",
-    "driver": "unknown deiver",
+    "driver": "unknown driver",
     "vehicle": "unknown vehicle",
     "venue": f"{name}",
     "comment": f"converted from {args.inputdir}",
@@ -227,12 +261,13 @@ for (idx, header) in enumerate(headers):
     if header not in channels:
         continue
 
+    print(f"using column: {header}")
     cols.append(idx)
     log.add_channel(channels[header])
 
 # now read in the data
 for row in samples:
-    log.add_samples([ float(row[c]) for c in cols])
+    log.add_samples([ row[c] for c in cols])
 
 with open(Path(args.inputdir).joinpath("motec.ld"), "wb") as fout:
     fout.write(log.to_string())
