@@ -1,7 +1,6 @@
 import math
 
-
-def convert(x=None, z=None, latmid=0.0, longmid=0.0):
+def convert(x=None, z=None, latmid=52.83067304956695, longmid=-1.3740268265085214):
 
     # we consider lat to be z
     # therefore long x

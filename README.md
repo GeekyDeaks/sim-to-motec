@@ -7,6 +7,11 @@ Simple sim telemetry to MoTeC log conversion
     python3 -m venv py
     source py/bin/activate
 
+
+# tests
+
+    python -m unittest discover -v -s stm -p '*_test.py'
+
 # TODO
 
 * port AC UDP logger from https://github.com/GeekyDeaks/raw-sim-telemetry

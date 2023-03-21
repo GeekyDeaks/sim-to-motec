@@ -4,7 +4,6 @@
 SHAREDMEM_NAME="$pcars2$"
 
 
-
 class AMS2DataLogger:
 
 

@@ -46,8 +46,28 @@ class GT7DataPacket:
         "i" # CAR_CODE / i / 4x
     )
 
-    def __init__(self):
-        pass
+    def __init__(self, buf, encrypted=True):
+
+        if encrypted:
+            buf = self.decrypt(buf)
+
+        (
+            self.positionX,
+            self.positionY,
+            self.positionZ,
+            self.velocityX,
+            self.velocityY,
+            self.velocityZ,
+            self.rotationX,
+            self.rotationY,
+            self.rotationZ,
+            self.rotation_north,
+            self.angular_velocityX,
+            self.angular_velocityY,
+            self.angular_velocityZ,
+            *self.t  # remaining stuff
+        )  = self.fmt.unpack(buf)
+
 
     @staticmethod
     def decrypt(dat):
@@ -65,19 +85,4 @@ class GT7DataPacket:
         if magic != 0x47375330:
             return bytearray(b'')
         return ddata
-    
-
-    @classmethod
-    def unpack(cls, data):
-        return cls.fmt.unpack(data)
-
-    @classmethod
-    def from_encrypted_string(cls, data):
-        pkt = cls.decrypt(data)
-
-        return cls.unpack(pkt)
-
-        # fmt
-
-
 

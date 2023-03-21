@@ -10,7 +10,7 @@ class TestMotecLog(unittest.TestCase):
             "id": 0x40
         })
         self.assertIsInstance(log, MotecLog, "should be an instance of MotecLog")
-        self.assertEqual(log.id, 0x40, "should have assigned the correct id")
+        self.assertEqual(log.id, 0x40, "should have assigned the correct")
 
 if __name__ == '__main__':
     unittest.main()
