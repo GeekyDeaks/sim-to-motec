@@ -25,6 +25,7 @@ fmt = struct.Struct(
 freq = 20
 wait = 0
 sample_count = 0
+saved_count = 0
 
 isodate = datetime.datetime.now().replace(microsecond=0).isoformat().replace('-', '').replace(':', '')
 con = sqlite3.connect(os.path.join(PATH, f"ams2-samples-{isodate}.db") )
@@ -42,12 +43,16 @@ while True:
             shm_b = shared_memory.SharedMemory("$pcars2$")
 
         v = fmt.unpack(shm_b.buf[:fmt.size])
+        
         sample_count += 1
-        timestamp = int(time.time() * 1000)
-        cur.execute("INSERT INTO samples(timestamp, data) VALUES (?, ?)", (timestamp, shm_b.buf))
+
+        if v[2] == 2: # mGameState = PLAYING
+            saved_count += 1
+            timestamp = int(time.time() * 1000)
+            cur.execute("INSERT INTO samples(timestamp, data) VALUES (?, ?)", (timestamp, shm_b.buf))
 
         if (sample_count % (freq * 10)) == 0:
-            print(f"sampled {sample_count} times, last: {v}")
+            print(f"saved {saved_count} samples out of {sample_count}, last: {v}")
             con.commit()
 
         wait = 1 / freq
@@ -58,7 +63,7 @@ while True:
 
     except KeyboardInterrupt:
         print('stopping')
-        con.commmit()
+        con.commit()
         break
 
 con.close()
