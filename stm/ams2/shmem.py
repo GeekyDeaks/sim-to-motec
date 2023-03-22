@@ -39,16 +39,16 @@ class AMS2ParticipantInfo:
 class AMS2SharedMemory:
 
     fmt = Struct(
-            "<"
-            "I" # mVersion
-            "I" # mBuildVersionNumber
-            "I" # mGameState
-            "I" # mSessionState
-            "I" # mRaceState
-            "i" # mViewedParticipantIndex
-            "i" # mNumParticipants
-            # STORED_PARTICIPANTS_MAX * AMS2ParticipantInfo.size
-            "6400s" # mParticipantInfo
+        "<"
+        "I" # mVersion
+        "I" # mBuildVersionNumber
+        "I" # mGameState
+        "I" # mSessionState
+        "I" # mRaceState
+        "i" # mViewedParticipantIndex
+        "i" # mNumParticipants
+        # STORED_PARTICIPANTS_MAX * AMS2ParticipantInfo.size
+        "6400s" # mParticipantInfo
     )
 
     def __init__(self, buf):
