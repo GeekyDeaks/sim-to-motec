@@ -5,9 +5,10 @@ class AMS2ParticipantInfo:
     fmt = Struct(
         "<"
         "?" # mIsActive
-        "63s" # mName (STRING_LENGTH_MAX - 1)
-        "3f" #  mWorldPosition
-        "d" # mCurrentLapDistance
+        "64s" # mName (STRING_LENGTH_MAX - 1)
+        "3x" # alignment padding
+        "3f" # mWorldPosition
+        "f" # mCurrentLapDistance
         "I" # mRacePosition
         "I" # mLapsCompleted
         "I" # mCurrentLap
@@ -29,7 +30,7 @@ class AMS2ParticipantInfo:
 
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
-        self.mName = mName.decode('utf-8').rstrip('\0')
+        self.mName = mName.decode('latin-1').rstrip('\0')
 
     @property
     def size(self):
@@ -49,6 +50,24 @@ class AMS2SharedMemory:
         "i" # mNumParticipants
         # STORED_PARTICIPANTS_MAX * AMS2ParticipantInfo.size
         "6400s" # mParticipantInfo
+        "f" # mUnfilteredThrottle
+        "f" # mUnfilteredBrake
+        "f" # mUnfilteredSteering
+        "f" # mUnfilteredClutch
+        "64s" # mCarName
+        "64s" # mCarClassName
+        "I" # mLapsInEvent
+        "64s" # mTrackLocation
+        "64s" # mTrackVariation
+        "f" # mTrackLength
+        "i" # mNumSectors
+        "?" # mLapInvalidated
+        "3x" # alignment padding
+        "f" # mBestLapTime
+        "f" # mLastLapTime
+
+
+
     )
 
     def __init__(self, buf):
@@ -61,9 +80,27 @@ class AMS2SharedMemory:
             self.mRaceState,
             self.mViewedParticipantIndex,
             self.mNumParticipants,
-            mParticipantInfo
-
+            mParticipantInfo,
+            self.mUnfilteredThrottle,
+            self.mUnfilteredBrake,
+            self.mUnfilteredSteering,
+            self.mUnfilteredClutch,
+            mCarName,
+            mCarClassName,
+            self.mLapsInEvent,
+            mTrackLocation,
+            mTrackVariation,
+            self.mTrackLength,
+            self.mNumSectors,
+            self.mLapInvalidated,
+            self.mBestLapTime,
+            self.mLastLapTime
         ) = self.fmt.unpack(buf[:self.fmt.size])
+
+        self.mCarName = mCarName.decode('utf-8').rstrip('\0')
+        self.mCarClassName = mCarClassName.decode('utf-8').rstrip('\0')
+        self.mTrackLocation = mTrackLocation.decode('utf-8').rstrip('\0')
+        self.mTrackVariation = mTrackVariation.decode('utf-8').rstrip('\0')
 
         self.participants = []
         #  unpack the participants

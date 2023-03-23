@@ -15,6 +15,13 @@ class TestAMS2SharedMemory(unittest.TestCase):
             self.assertEqual(sm.mVersion, 13)
 
 
+    def test_idle_alignment_padding(self):
+        with open(os.path.join(PATH, "test", "ams2_idle.bin"), "rb") as fin:
+
+            sm = AMS2SharedMemory(fin.read())
+            # check values after variables that tend to break alignment e.g. boolean
+            self.assertEqual(sm.mBestLapTime, -1.0)
+            self.assertEqual(sm.mLastLapTime, -1.0)
 
     def test_inrace_participants(self):
         with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
