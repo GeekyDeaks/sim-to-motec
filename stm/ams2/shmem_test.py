@@ -34,6 +34,15 @@ class TestAMS2SharedMemory(unittest.TestCase):
             self.assertEqual(sm.participants[0].mName , "Scott Deakin")
             self.assertEqual(sm.participants[20].mName , "Bill Elliott")
 
+    def test_inrace_controls(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+
+            sm = AMS2SharedMemory(fin.read())
+            self.assertEqual(sm.mGear, 0)
+            self.assertEqual(sm.mClutch, 1.0)
+            self.assertEqual(sm.mThrottle, 0.0)
+            self.assertEqual(sm.mBrake, 1.0)
+
 
 if __name__ == '__main__':
     unittest.main()

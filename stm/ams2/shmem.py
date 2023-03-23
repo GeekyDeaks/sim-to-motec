@@ -65,9 +65,16 @@ class AMS2SharedMemory:
         "3x" # alignment padding
         "f" # mBestLapTime
         "f" # mLastLapTime
-
-
-
+        "f" # mCurrentTime
+        "120x" # skip a load of stuff we are not currently interested in
+        "f" # mSpeed
+        "f" # mRpm
+        "f" # mMaxRPM
+        "f" # mBrake
+        "f" # mThrottle
+        "f" # mClutch
+        "f" # mSteering
+        "i" # mGear
     )
 
     def __init__(self, buf):
@@ -94,7 +101,16 @@ class AMS2SharedMemory:
             self.mNumSectors,
             self.mLapInvalidated,
             self.mBestLapTime,
-            self.mLastLapTime
+            self.mLastLapTime,
+            self.mCurrentTime,
+            self.mSpeed,
+            self.mRpm,
+            self.mMaxRPM,
+            self.mBrake,
+            self.mThrottle,
+            self.mClutch,
+            self.mSteering,
+            self.mGear
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
         self.mCarName = mCarName.decode('utf-8').rstrip('\0')
