@@ -198,13 +198,13 @@ con.close()
 os.makedirs(out_path, exist_ok=True)
 
 # dump the ldx
-with open(os.path.join(out_path, f"{args.name}.ldx"), "w") as fout:
+ldxfilename = os.path.join(out_path, f"{args.name}.ldx")
+print(f"writing laptimes to {ldxfilename}")
+with open(ldxfilename, "w") as fout:
     fout.write(logx.to_string())
 
-
 # dump the log
-with open(os.path.join(out_path, f"{args.name}.ld"), "wb") as fout:
+ldfilename = os.path.join(out_path, f"{args.name}.ld")
+print(f"writing MoTeC log to {ldfilename}")
+with open(ldfilename, "wb") as fout:
     fout.write(log.to_string())
-
-
-
