@@ -11,14 +11,20 @@ class MotecLogExtra:
         
     def get_fastest_lap(self):
 
-        if len(self.laps) < 2:
+        if len(self.laps) < 1:
             return ( None, None )
         
-        laps_without_outlap = self.laps[1:]
-        fastestlap, fastesttime =  sorted(enumerate(laps_without_outlap), key=lambda a: float(a[1]))[0]
+        laps = self.laps
+        if len(laps) > 1:
+            # ignore the outlap
+            laps = laps[:1]
+            fastestlap, fastesttime =  sorted(enumerate(laps), key=lambda a: float(a[1]))[0]
 
-        fastestlap += 2 # we removed the outlap and also index from 0
-        return (fastestlap, fastesttime)
+            fastestlap += 2 # we removed the outlap and also index from 0
+            return (fastestlap, fastesttime)
+        else:
+            # just return the one lap we have
+            return ( 1, laps[0] )
     
     def get_beacons(self):
 
@@ -44,9 +50,11 @@ class MotecLogExtra:
         totallaps = len(markers) + 1 # count the in lap
 
         fastestlap, fastesttime = self.get_fastest_lap()
-        minutes = int(fastesttime % 3600 // 60)
-        seconds = fastesttime % 3600 % 60
-        fastesttime = f"{minutes:02d}:{seconds:06.3f}"
+        if fastesttime:
+            minutes = int(fastesttime % 3600 // 60)
+            seconds = fastesttime % 3600 % 60
+            fastesttime = f"{minutes:02d}:{seconds:06.3f}"
+
         xmllines = [
             """<?xml version="1.0"?>""",
             """<LDXFile Locale="English_United Kingdom.1252" DefaultLocale="C" Version="1.6">"""
