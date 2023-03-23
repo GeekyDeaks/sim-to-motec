@@ -1,3 +1,5 @@
+from xml.dom import minidom
+
 class MotecLogExtra:
     
     def __init__(self):
@@ -40,14 +42,45 @@ class MotecLogExtra:
 
     def to_string(self):
 
-        markers = []
-        for (marker, elapsedtime) in self.get_beacons():
-            m = f"""        <Marker Version="100" ClassName="BCN" Name="Manual.{marker}" Flags="77" Time="{elapsedtime}"/>"""
-            markers.append(m)
+        root = minidom.Document()
 
+        ldx = root.createElement("LDXFile")
+        root.appendChild(ldx)
 
-        beacons = len(markers) - 1
-        totallaps = len(markers) + 1 # count the in lap
+        ldx.setAttribute("locale", "English_United Kingdom.1252")
+        ldx.setAttribute("DefaultLocale", "C")
+        ldx.setAttribute("Version", "1.6")
+
+        layers = root.createElement("Layers")
+        ldx.appendChild(layers)
+
+        layer = root.createElement("Layer")
+        layers.appendChild(layer)
+
+        markerblock = root.createElement("MarkerBlock")
+        layer.appendChild(markerblock)
+
+        markergroup = root.createElement("MarkerGroup")
+        markerblock.appendChild(markergroup)
+        markergroup.setAttribute("Name", "Beacons")
+        markergroup.setAttribute("Index", str(len(self.laps) - 1)) # number of beacons 0 index
+
+        for (lapnum, elapsedtime) in self.get_beacons():
+            marker = root.createElement("Marker")
+            marker.setAttribute("Version", "100")
+            marker.setAttribute("ClassName", "BCN")
+            marker.setAttribute("Name", f"Manual.{lapnum}")
+            marker.setAttribute("Flags", "77")
+            marker.setAttribute("Time", f"{elapsedtime:0.2f}")
+            markergroup.appendChild(marker)
+
+        details = root.createElement("Details")
+        layers.appendChild(details)
+
+        totallaps = root.createElement("String")
+        details.appendChild(totallaps)
+        totallaps.setAttribute("Id", "Total Laps")
+        totallaps.setAttribute("Value", str(len(self.laps) + 1)) # include the in-lap
 
         fastestlap, fastesttime = self.get_fastest_lap()
         if fastesttime:
@@ -55,24 +88,14 @@ class MotecLogExtra:
             seconds = fastesttime % 3600 % 60
             fastesttime = f"{minutes:02d}:{seconds:06.3f}"
 
-        xmllines = [
-            """<?xml version="1.0"?>""",
-            """<LDXFile Locale="English_United Kingdom.1252" DefaultLocale="C" Version="1.6">"""
-            """<Layers>""",
-            """  <Layer>""",
-            """    <MarkerBlock>""",
-           f"""      <MarkerGroup Name="Beacons" Index="{beacons}">""",
-            *markers,
-            """      </MarkerGroup>""",
-            """    </MarkerBlock>""",
-            """    <RangeBlock/>""",
-            """  </Layer>""",
-            """  <Details>""",
-           f"""    <String Id="Total Laps" Value="{totallaps}"/>""",
-           f"""    <String Id="Fastest Time" Value="{fastesttime}"/>""",
-           f"""    <String Id="Fastest Lap" Value="{fastestlap}"/>""",
-            """  </Details>""",
-            """</Layers>""",
-            """</LDXFile>"""
-        ]
-        return("\n".join(xmllines))
+            ft = root.createElement("String")
+            details.appendChild(ft)
+            ft.setAttribute("Id", "Fastest Time")
+            ft.setAttribute("Value", fastesttime)
+
+            fl = root.createElement("String")
+            details.appendChild(fl)
+            fl.setAttribute("Id", "Fastest Lap")
+            fl.setAttribute("Value", str(fastestlap))
+
+        return(root.toprettyxml(indent="  "))
