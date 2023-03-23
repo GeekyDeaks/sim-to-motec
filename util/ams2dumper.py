@@ -6,6 +6,11 @@ import datetime
 import sqlite3
 import os
 from multiprocessing import shared_memory
+import argparse
+
+parser = argparse.ArgumentParser(description="Dump AMS2 shared memory to sqlite DB")
+parser.add_argument("--freq", type=int, default=20, help="frequency of samples Hz")
+args = parser.parse_args()
 
 PATH = "logs/raw"
 os.makedirs(PATH, exist_ok=True)
@@ -22,16 +27,20 @@ fmt = struct.Struct(
     "I" # mRaceState
 )
 
-freq = 20
 wait = 0
 sample_count = 0
 saved_count = 0
 next_sample = 0
 
 isodate = datetime.datetime.now().replace(microsecond=0).isoformat().replace('-', '').replace(':', '')
-con = sqlite3.connect(os.path.join(PATH, f"ams2-samples-{isodate}.db") )
+dbfilename = os.path.join(PATH, f"ams2-samples-{isodate}.db")
+con = sqlite3.connect(dbfilename )
 cur = con.cursor()
 cur.execute("CREATE TABLE samples(timestamp int, data blob)")
+cur.execute("CREATE TABLE settings(name, value)")
+cur.execute("INSERT INTO settings(name, value) values (?, ?)", ("freq", args.freq) )
+
+print(f"sampling at {args.freq} Hz to {dbfilename}")
 
 while True:
 
@@ -55,13 +64,13 @@ while True:
             
             cur.execute("INSERT INTO samples(timestamp, data) VALUES (?, ?)", (int(now * 1000), shm_b.buf))
 
-        if (sample_count % (freq * 10)) == 0:
+        if (sample_count % (args.freq * 10)) == 0:
             print(f"saved {saved_count} samples out of {sample_count}, last: {v}")
             con.commit()
 
         # work out when the next sample will be
         now = time.time()
-        next_sample = max(next_sample + (1 / freq), now)
+        next_sample = max(next_sample + (1 / args.freq), now)
         wait = next_sample - now
 
     except FileNotFoundError:
