@@ -8,9 +8,14 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Convert GT7 sqlite samples to MoTeC log")
 parser.add_argument("db", type=str, help="db file to convert")
-parser.add_argument("--start", help="start tick")
-parser.add_argument("--end", help="end tick")
+parser.add_argument("--start", type=int, help="start tick")
+parser.add_argument("--end", type=int, help="end tick")
 parser.add_argument("--name", default="test-motec", help="name of the file (used for filename)")
+parser.add_argument("--driver", type=str, default="")
+parser.add_argument("--session", type=str, default="")
+parser.add_argument("--vehicle", type=str, default="")
+parser.add_argument("--venue", type=str, default="")
+parser.add_argument("--freq", type=int, default=60)
 args = parser.parse_args()
 
 out_path = "logs/gt7"
@@ -20,7 +25,7 @@ channels = {
         "id": 50078,
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
+        "freq": args.freq,
         "shift": 0,
         "multiplier": 1,
         "scale": 1,
@@ -33,7 +38,7 @@ channels = {
         "id": 50014,
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
+        "freq": args.freq,
         "shift": 0,
         "multiplier": 1,
         "scale": 1,
@@ -61,7 +66,7 @@ channels = {
         "id": 10000,
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
+        "freq": args.freq,
         "shift": 0,
         "multiplier": 1,
         "scale": 1,
@@ -74,7 +79,7 @@ channels = {
         "id": 10002,
         "datatype": 7,
         "datasize": 4,
-        "freq": 20,
+        "freq": args.freq,
         "shift": 0,
         "multiplier": 1,
         "scale": 1,
@@ -87,7 +92,7 @@ channels = {
         "id": 10003,
         "datatype": 7,
         "datasize": 4,
-        "freq": 20,
+        "freq": args.freq,
         "shift": 0,
         "multiplier": 1,
         "scale": 1,
@@ -104,38 +109,42 @@ cur = con.cursor()
 res = cur.execute("select * from samples")
 
 lastlap = None
-
-freq = 1 / 20
 lap_samples = 0
-
-event  = MotecEvent({
-    "name": args.name,
-    "session": "unknown",
-    "comment": f"converted by gt7dump-to-motec",
-    "venuepos": 0
-})
-
-log = MotecLog({
-    "date": datetime.today().strftime('%d/%m/%Y'),
-    "time": datetime.today().strftime('%H:%M:%S'),
-    "driver": "unknown",
-    "vehicle": "unknown vehicle",
-    "venue": f"unknown",
-    "comment": f"converted by gt7dump-to-motec",
-    "event": event
-})
-
-logx = MotecLogExtra()
-
-for c in channels.keys():
-
-    print(f"""creating channel: {c} / {channels[c]["name"]}""")
-    log.add_channel(channels[c])
-
+log = None
 
 for record in res.fetchall():
 
     timestamp, data = record
+
+    if not log:
+
+        now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        then = datetime.fromtimestamp(timestamp / 1000)
+
+        event  = MotecEvent({
+            "name": args.name,
+            "session": args.session,
+            "comment": f"converted by gt7dump-to-motec at {now}",
+            "venuepos": 0
+        })
+
+        log = MotecLog({
+            "date": then.strftime('%d/%m/%Y'),
+            "time": then.strftime('%H:%M:%S'),
+            "driver": args.driver,
+            "vehicle": args.vehicle,
+            "venue": args.venue,
+            "comment": f"converted by gt7dump-to-motec at {now}",
+            "event": event
+        })
+
+        logx = MotecLogExtra()
+
+        for c in channels.keys():
+
+            print(f"""creating channel: {c} / {channels[c]["name"]}""")
+            log.add_channel(channels[c])
+
 
     p = GT7DataPacket(data)
 
@@ -161,7 +170,7 @@ for record in res.fetchall():
             logx.add_lap(p.last_laptime / 1000.0)
         else:
             # guess it from the number of samples
-            logx.add_lap(lap_samples * freq)
+            logx.add_lap(lap_samples / args.freq)
 
         lap_samples = 0
         print(f"adding lap {lastlap}")
@@ -191,7 +200,7 @@ for record in res.fetchall():
             f" {p.speed:3.0f} {p.current_lap:2}/{p.laps:2}"
             f" {p.best_laptime:6}/{p.last_laptime:6}"
             f" {p.race_position:3}/{p.opponents:3} {p.gear & 0x0f} {p.throttle:3} {p.brake:3}"
-            f" {p.car_code}"
+            f" {p.car_code:5}"
         )
 
 con.close()
