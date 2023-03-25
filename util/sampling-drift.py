@@ -4,16 +4,20 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Raw sample drift analysis")
 parser.add_argument("db", type=str, help="db file to analyse")
+parser.add_argument("--freq", type=int)
 args = parser.parse_args()
 
 
 con = sqlite3.connect(args.db)
 cur = con.cursor()
-try:
-    res = cur.execute("SELECT value FROM settings WHERE name='freq'")
-    (freq, ) = res.fetchone()
-except:
-    freq = 20
+if not args.freq:
+    try:
+        res = cur.execute("SELECT value FROM settings WHERE name='freq'")
+        (freq, ) = res.fetchone()
+    except:
+        freq = args.freq
+else:
+    freq = args.freq
 
 res = cur.execute("SELECT timestamp FROM samples ORDER BY timestamp")
 
