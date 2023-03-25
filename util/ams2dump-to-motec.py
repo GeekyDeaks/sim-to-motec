@@ -13,6 +13,15 @@ args = parser.parse_args()
 
 out_path = "logs/ams2"
 
+sessionstates = {
+    1: "Practice",
+    2: "Test",
+    3: "Qualify",
+    4: "Race",
+    5: "Race",
+    6: "Time Trial"
+}
+
 channels = {
     "gear": {
         "id": 50078,
@@ -136,21 +145,29 @@ for (scount, record) in enumerate(res.fetchall()):
 
     if not log:
         # create the log files
-        now = datetime.now().isoformat()
+        now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        then = datetime.fromtimestamp(timestamp / 1000)
+
+        if p.mSessionState in sessionstates:
+            session = sessionstates[p.mSessionState]
+        else:
+            session = then.strftime('%Y-%m-%d %H:%M:%S')
+
+        print(f"creating event: {args.name} {session} {p.mTrackVariation}")
 
         event  = MotecEvent({
             "name": args.name,
-            "session": "unknown",
+            "session": session,
             "comment": f"converted by ams2dump-to-motec at {now}",
             "venuepos": 0
         })
 
         log = MotecLog({
-            "date": datetime.fromtimestamp(timestamp / 1000).strftime('%d/%m/%Y'),
-            "time": datetime.fromtimestamp(timestamp / 1000).strftime('%H:%M:%S'),
+            "date": then.strftime('%d/%m/%Y'),
+            "time": then.strftime('%H:%M:%S'),
             "driver": driver.mName,
             "vehicle": p.mCarName,
-            "venue": p.mTrackLocation,
+            "venue": p.mTrackVariation,
             "comment": f"converted by ams2dump-to-motec at {now}",
             "event": event
         })
@@ -162,25 +179,32 @@ for (scount, record) in enumerate(res.fetchall()):
             print(f"""creating channel: {c} / {channels[c]["name"]}""")
             log.add_channel(channels[c])
 
+    if p.mRaceState != 2:
+        continue
+
+    """
     if not started and driver.mCurrentLap == 1 and p.mLapInvalidated:
         # AMS2 reports the run up to the start line as an invalid lap1
         driver.mCurrentLap = 0
     else:
         started = True
+    """
 
     if lastlap is None:
         lastlap = driver.mCurrentLap
 
     if driver.mCurrentLap != lastlap:
         # figure out the laptimes
+        sampletime = lap_samples * freq
         if p.mLastLapTime > 0:
-            logx.add_lap(p.mLastLapTime)
+            laptime = p.mLastLapTime
         else:
             # guess it from the number of samples
-            logx.add_lap(lap_samples * freq)
+            laptime = sampletime
 
+        logx.add_lap(laptime)
+        print(f"adding lap {lastlap}, laptime: {laptime}, samples: {lap_samples}, sampletime: {sampletime}")
         lap_samples = 0
-        print(f"adding lap {lastlap}")
     else:
         lap_samples += 1
 
@@ -197,14 +221,15 @@ for (scount, record) in enumerate(res.fetchall()):
         p.mThrottle * 100,
         p.mBrake * 100,
         p.mSteering,
-        p.mSpeed, # m/s to mph,
+        p.mSpeed * 2.23693629, # m/s to mph
         lat,
         long
     ])
 
     if (scount % 100) == 0:
         print(
-            f"{timestamp:6} {driver.mWorldPositionX:11.5f} {driver.mWorldPositionY:11.5f} {driver.mWorldPositionZ:11.5f}"
+            f"{timestamp:6} {p.mSessionState:2} {p.mRaceState:2}"
+            f" {driver.mWorldPositionX:11.5f} {driver.mWorldPositionY:11.5f} {driver.mWorldPositionZ:11.5f}"
             f" {driver.mCurrentLap:2} {driver.mCurrentSector:2} {p.mLapInvalidated}"
             f" {p.mBestLapTime:6.2f}/{p.mLastLapTime:6.2f}"
             f" {p.mUnfilteredThrottle:4.2f} {p.mUnfilteredBrake:4.2f} {p.mUnfilteredSteering:5.2f}"
