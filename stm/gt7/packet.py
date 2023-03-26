@@ -46,6 +46,8 @@ class GT7DataPacket:
         "I" # CAR_CODE / i / 4x
     )
 
+    size = fmt.size
+
     def __init__(self, buf, encrypted=True):
 
         if encrypted:
@@ -87,4 +89,3 @@ class GT7DataPacket:
         if magic != 0x47375330:
             return bytearray(b'')
         return ddata
-
