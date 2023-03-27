@@ -44,3 +44,37 @@ class BaseSampler(Thread):
         self.running = False
         if self.con:
             self.con.close()
+
+
+class RawSampler(Thread):
+
+    def __init__(self, rawfile=None):
+        super().__init__()
+        self.samples = Queue(maxsize=1)
+        self.running = False
+        self.rawfile = rawfile
+
+    def run(self):
+        self.running = True
+        con = sqlite3.connect(self.rawfile, isolation_level=None)
+        cur = con.cursor()
+        res = cur.execute("SELECT * FROM samples ORDER BY timestamp")
+
+        while self.running:
+
+            try:
+                timestamp, data = next(res)
+                if isinstance(timestamp, int):
+                    timestamp = timestamp / 1000.0
+                self.samples.put( (timestamp, data), block=True )
+            except:
+                self.running = False
+
+        con.close()
+
+    def get(self, timeout=None):
+        return self.samples.get(timeout=timeout)
+    
+    def stop(self):
+        l.warn("stopping sampler")
+        self.running = False

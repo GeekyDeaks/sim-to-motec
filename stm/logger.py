@@ -33,6 +33,7 @@ class BaseLogger:
                 l.warn("stopping")
                 break
 
+        self.save_log()
         self.sampler.stop()
         self.sampler.join()
 
@@ -51,7 +52,10 @@ class BaseLogger:
             template_vars[k] = v
 
         filename = self.filetemplate.format(**template_vars)
-        self.filename = re.sub(r'_+', '_', filename)
+        filename = re.sub(r'_+', '_', filename)
+        self.filename = re.sub(r'/_', '/', filename)
+
+        l.info(f"starting new log {self.filename}")
 
         self.log = MotecLog({
             "date": event.date,
@@ -78,10 +82,13 @@ class BaseLogger:
     def add_samples(self, samples):
         self.log.add_samples(samples)
 
-    def add_log(self, laptime):
+    def add_lap(self, laptime):
         self.logx.add_lap(laptime)
 
     def save_log(self):
+
+        if not self.log:
+            return
 
         os.makedirs(os.path.dirname(self.filename), exist_ok=True)
 

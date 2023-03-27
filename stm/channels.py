@@ -96,8 +96,6 @@ CHANNELS = {
 
 def get_channel_definition(name, freq=20):
 
-    if name not in CHANNELS:
-        return
     cd = dict(CHANNELS[name])
     cd["freq"] = freq
-
+    return cd

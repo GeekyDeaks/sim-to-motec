@@ -38,6 +38,7 @@ class GT7Logger(BaseLogger):
 
     def process_sample(self, timestamp, sample):
 
+        new_log = False
         p = GT7DataPacket(sample)
 
         if p.current_lap < 0:
@@ -47,10 +48,12 @@ class GT7Logger(BaseLogger):
         if self.last_lap is None:
             self.lap_samples = 0
             self.last_lap = p.current_lap
-            self.new_log(channels=self.channels, event=self.event)
+            new_log = True
 
         if p.current_lap < self.last_lap:
-            # start a new log
+            new_log = True
+
+        if new_log:
             self.new_log(channels=self.channels, event=self.event)
 
         if p.current_lap != self.last_lap:

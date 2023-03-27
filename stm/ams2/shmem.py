@@ -1,4 +1,34 @@
 from struct import Struct
+from enum import Enum
+
+class AMS2GameState(Enum):
+    EXITED = 0
+    FRONT_END = 1
+    INGAME_PLAYING = 2
+    INGAME_PAUSED = 3
+    INGAME_INMENU_TIME_TICKING = 4
+    INGAME_RESTARTING = 5
+    INGAME_REPLAY = 6
+    FRONT_END_REPLAY = 7
+
+class AMS2SessionState(Enum):
+    INVALID = 0
+    PRACTICE = 1
+    TEST = 2
+    QUALIFY = 3
+    FORMATION_LAP = 4
+    RACE = 5
+    TIME_ATTACK = 6
+
+class AMS2RaceState(Enum):
+    INVALID = 0
+    NOT_STARTED = 1
+    RACING = 2
+    FINISHED = 3
+    DISQUALIFIED = 4
+    RETIRED = 5
+    DNF = 6
+
 
 class AMS2ParticipantInfo:
 

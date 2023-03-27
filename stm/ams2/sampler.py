@@ -23,6 +23,7 @@ class AMS2Sampler(BaseSampler):
 
         self.running = True # this is set to False in BaseSampler when we are done
         wait = None
+        shm_b = None
 
         while self.running:
 
