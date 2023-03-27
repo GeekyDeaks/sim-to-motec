@@ -6,17 +6,26 @@ Simple sim telemetry to MoTeC log conversion
 
     python3 -m venv py
     source py/bin/activate
+    pip install -r requirements.txt
 
+# GT7
+
+    python gt7.py <IP Address of PS>
+
+# AMS2
+
+    python ams2.py
 
 # architecture
 
-Sampler -> Logger -> Log
+Sampler -> Logger -> MoTeC
 
-- Sampler collects the raw UDP/Memory packets from the SIM and queues them
-- Logger converts samples and decides if a new session/log is to be created
-- Log saves all samples until the session ends or the process is stopped and then saves them to a MoTeC log
+- Sampler collects the raw UDP/Memory packets from the SIM and queues them, optionally saving the raw samples for later playback
+- Logger converts and saves samples and decides if a new session/log is to be created
+- MoTeC creates a MoTeC ld and ldx file from the collected samples and laptimes
 
-Sample and Session are Sim specific
+Sampler and Logger are Sim specific, but they have BaseSampler and BaseLogger to handle the core loops and common functions like adding samples,
+saving a log file and starting a new one
 
 # tests
 
@@ -25,5 +34,3 @@ Sample and Session are Sim specific
 # TODO
 
 * port AC UDP logger from https://github.com/GeekyDeaks/raw-sim-telemetry
-* port GT7 UDP logger from https://github.com/GeekyDeaks/raw-sim-telemetry
-* finish AMS2 shared memory logger
