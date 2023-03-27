@@ -23,6 +23,7 @@ class STMEvent:
             date = now.strftime('%d/%m/%Y')
             time = now.strftime('%H:%M:%S')
 
+        self.datetime = datetime.strptime(date, "%d/%m/%Y").strftime("%Y-%m-%d") + "T" + time
         self.name = name
         self.date = date
         self.time = time

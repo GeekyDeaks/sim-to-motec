@@ -1,6 +1,7 @@
 from stm.logger import BaseLogger
 from stm.event import STMEvent
 import stm.gps as gps
+from datetime import datetime
 from .packet import GT7DataPacket
 from logging import getLogger
 l = getLogger(__name__)
@@ -13,13 +14,13 @@ class GT7Logger(BaseLogger):
     def __init__(self, 
                 sampler=None,
                 filetemplate=None,
-                name=None,
-                session=None,
-                vehicle=None,
-                driver=None,
-                venue=None, 
-                comment=None,
-                shortcomment=None,
+                name="",
+                session="",
+                vehicle="",
+                driver="",
+                venue="", 
+                comment="",
+                shortcomment="",
                 freq=None ):
         super().__init__(sampler=sampler, filetemplate=filetemplate)
 
@@ -54,7 +55,19 @@ class GT7Logger(BaseLogger):
             new_log = True
 
         if new_log:
-            self.new_log(channels=self.channels, event=self.event)
+            then = datetime.fromtimestamp(timestamp)
+            event = STMEvent(
+                name=self.event.name,
+                session=self.event.session,
+                vehicle=self.event.vehicle,
+                driver=self.event.driver,
+                venue=self.event.venue,
+                comment=self.event.comment,
+                shortcomment=self.event.shortcomment,
+                date = then.strftime('%d/%m/%Y'),
+                time = then.strftime('%H:%M:%S')
+            )
+            self.new_log(channels=self.channels, event=event)
 
         if p.current_lap != self.last_lap:
             # figure out the laptimes
@@ -62,10 +75,10 @@ class GT7Logger(BaseLogger):
                 self.add_lap(p.last_laptime / 1000.0)
             else:
                 # guess it from the number of samples
-                self.add_lap(lap_samples / self.freq)
-            lap_samples = 0
+                self.add_lap(self.lap_samples / self.freq)
+            self.lap_samples = 0
         else:
-            lap_samples += 1
+            self.lap_samples += 1
 
 
         self.last_lap = p.current_lap
@@ -82,7 +95,7 @@ class GT7Logger(BaseLogger):
             long
         ])
 
-        if (p.tick % 100) == 0:
+        if (p.tick % 1000) == 0:
             l.info(
                 f"{timestamp:6} tick: {p.tick:6}"
                 f" {p.positionX:10.5f} {p.positionY:10.5f} {p.positionZ:10.5f}"

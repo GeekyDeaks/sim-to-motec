@@ -20,7 +20,7 @@ def main():
     parser.add_argument("--loadraw", help="load raw samples", default="")
     args = parser.parse_args()
 
-    filetemplate = os.path.join("logs", "ams2", "{name}_{driver}_{venue}_{vehicle}_{date}_{time}_{session}")
+    filetemplate = os.path.join("logs", "ams2", "{name}_{driver}_{venue}_{vehicle}_{datetime}_{session}")
 
     if args.saveraw:
         rawfile = os.path.join("logs", "raw", "ams2", f"{time.time():.0f}.db" )
@@ -31,7 +31,7 @@ def main():
         sampler = RawSampler(rawfile=args.loadraw)
     else:
         sampler = AMS2Sampler(freq=args.freq, rawfile=rawfile)
-        
+
     logger = AMS2Logger(
         sampler=sampler,
         filetemplate=filetemplate
