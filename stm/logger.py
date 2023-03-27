@@ -3,6 +3,8 @@ from .motec import MotecLog, MotecLogExtra, MotecEvent
 from .channels import get_channel_definition
 import os
 import re
+from logging import getLogger
+l = getLogger(__name__)
 
 class BaseLogger:
 
@@ -13,6 +15,7 @@ class BaseLogger:
 
     def start(self):
 
+        l.info("starting logger")
         # start the sampler
         self.sampler.start()
 
@@ -27,7 +30,7 @@ class BaseLogger:
                 pass
 
             except KeyboardInterrupt:
-                print("stopping")
+                l.warn("stopping")
                 break
 
         self.sampler.stop()
@@ -80,16 +83,16 @@ class BaseLogger:
 
     def save_log(self):
 
-        os.makedirs(os.path.dirname(self.filename))
+        os.makedirs(os.path.dirname(self.filename), exist_ok=True)
 
         # dump the ldx
         ldxfilename = f"{self.filename}.ldx"
-        print(f"writing laptimes to {ldxfilename}")
+        l.info(f"writing laptimes to {ldxfilename}")
         with open(ldxfilename, "w") as fout:
             fout.write(self.logx.to_string())
 
         # dump the log
         ldfilename = f"{self.filename}.ld"
-        print(f"writing MoTeC log to {ldfilename}")
+        l.info(f"writing MoTeC log to {ldfilename}")
         with open(ldfilename, "wb") as fout:
             fout.write(self.log.to_string())

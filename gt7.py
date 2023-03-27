@@ -1,6 +1,13 @@
+from logging import getLogger, basicConfig, DEBUG
+basicConfig(
+     level=DEBUG,
+     format="%(asctime)s.%(msecs)03d [%(levelname)s] %(name)s: %(message)s",
+     datefmt="%Y-%m-%d %H:%M:%S"
+)
+l = getLogger(__name__)
+
 import argparse
 import os
-
 from stm.gt7 import GT7Logger, GT7Sampler
 
 def main():
@@ -30,7 +37,6 @@ def main():
     )
 
     logger.start()
-
 
 if __name__ == '__main__':
     main()

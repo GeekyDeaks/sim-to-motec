@@ -1,29 +1,26 @@
-from threading import Thread
+from stm.sampler import BaseSampler
 import socket
 import time
-from queue import Queue
-from .packet import GT7DataPacket
 
 DEFAULT_PORT = 33740
 DEFAULT_HEARTBEAT_PORT = 33739
+PACKETSIZE = 1500
 
-class GT7Sampler(Thread):
+class GT7Sampler(BaseSampler):
 
-    def __init__(self, addr=None, port=DEFAULT_PORT, hb_port=DEFAULT_HEARTBEAT_PORT):
-        super().__init__()
+    def __init__(self, addr=None, port=DEFAULT_PORT, hb_port=DEFAULT_HEARTBEAT_PORT, rawfile=None):
+        super().__init__(rawfile=rawfile)
         self.hb_addr = (addr, hb_port)
-        self.running = False
 
         # Create a UDP socket for the inbound packets
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # Bind to any address
         self.socket.bind( ('0.0.0.0', port) )
         self.socket.settimeout(1)
-        self.samples = Queue()
 
     def run(self):
 
-        self.running = True
+        self.running = True # this is set to False in BaseSampler when we are done
         #
         self.send_hb()
         pkt_count = 0
@@ -31,7 +28,7 @@ class GT7Sampler(Thread):
         while self.running:
             try:
 
-                data, _ = self.socket.recvfrom(GT7DataPacket.size)
+                data, _ = self.socket.recvfrom(PACKETSIZE)
                 ts = time.time()
                 pkt_count += 1
 
@@ -39,8 +36,8 @@ class GT7Sampler(Thread):
                     # send a heartbeat about every 6 seconds
                     self.send_hb()
 
-                p = GT7DataPacket(data)
-                self.samples.put((ts, p), block=False)
+
+                self.put((ts, data))
 
             except TimeoutError:
                 self.send_hb()
@@ -49,8 +46,3 @@ class GT7Sampler(Thread):
         send_data = b'A'
         self.socket.sendto(send_data, self.hb_addr)
 
-    def stop(self):
-        self.running = False
-
-    def get(self, timeout=None):
-        return self.samples.get(timeout=timeout)
