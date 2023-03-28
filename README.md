@@ -10,7 +10,7 @@ Simple sim telemetry to MoTeC log conversion
 
 # GT7
 
-    python gt7.py <IP Address of PS>
+    python gt7.py <IP Address of PS> --driver <DRIVER NAME> --venue <TRACK NAME>
 
 # AMS2
 
