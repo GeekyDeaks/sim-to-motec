@@ -3,6 +3,7 @@ from stm.event import STMEvent
 import stm.gps as gps
 from datetime import datetime
 from .packet import GT7DataPacket
+from .db.cars import lookup_car_name
 from logging import getLogger
 l = getLogger(__name__)
 
@@ -62,7 +63,7 @@ class GT7Logger(BaseLogger):
             if self.event.vehicle:
                 vehicle = self.event.vehicle
             else:
-                vehicle = f"CAR-{p.car_code}"
+                vehicle = lookup_car_name(p.car_code)
 
             event = STMEvent(
                 name=self.event.name,

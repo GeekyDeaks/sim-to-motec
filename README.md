@@ -12,6 +12,11 @@ Simple sim telemetry to MoTeC log conversion
 
     python gt7.py <IP Address of PS> --driver <DRIVER NAME> --venue <TRACK NAME>
 
+
+## update DB from ddm999
+
+    curl https://raw.githubusercontent.com/ddm999/gt7info/web-new/_data/db/cars.csv -o stm/gt7/cars.csv
+
 # AMS2
 
     python ams2.py
