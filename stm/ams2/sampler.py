@@ -40,7 +40,7 @@ class AMS2Sampler(BaseSampler):
                     l.info("connected to AMS2 shared memory")
                     next_sample = now
 
-                self.put(( now, shm_b.buf() ))
+                self.put(( now, shm_b.buf ))
 
                 # work out when the next sample will be
                 now = time.time()
@@ -48,5 +48,6 @@ class AMS2Sampler(BaseSampler):
                 wait = next_sample - now
 
             except FileNotFoundError:
-                l.info("waiting for AMS2 to start")
-                wait = 5
+                if wait is None:
+                    l.info("waiting for AMS2 to start")
+                wait = 1

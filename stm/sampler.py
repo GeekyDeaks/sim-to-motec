@@ -53,6 +53,7 @@ class RawSampler(Thread):
         self.samples = Queue(maxsize=1)
         self.running = False
         self.rawfile = rawfile
+        self.freq = None # get the freq from the sample file
 
     def run(self):
         self.running = True

@@ -94,7 +94,10 @@ CHANNELS = {
     }
 }
 
-def get_channel_definition(name, freq=20):
+def get_channel_definition(name, freq=None):
+
+    if freq is None:
+        freq = 20
 
     cd = dict(CHANNELS[name])
     cd["freq"] = freq

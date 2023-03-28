@@ -8,10 +8,11 @@ l = getLogger(__name__)
 
 class BaseLogger:
 
-    def __init__(self, sampler=None, filetemplate=None):
+    def __init__(self, sampler=None, filetemplate=None, freq=None):
         self.sampler = sampler
         self.filetemplate = filetemplate
         self.log = None
+        self.freq = freq
 
     def start(self):
 
@@ -36,6 +37,9 @@ class BaseLogger:
         self.save_log()
         self.sampler.stop()
         self.sampler.join()
+
+    def active_log(self):
+        return self.log is not None
 
     def new_log(self, event=None, channels=None):
         if self.log:
@@ -76,7 +80,7 @@ class BaseLogger:
         # add the channels
 
         for channel in channels:
-            cd = get_channel_definition(channel)
+            cd = get_channel_definition(channel, self.freq)
             self.log.add_channel(cd)
 
     def add_samples(self, samples):
@@ -89,17 +93,25 @@ class BaseLogger:
 
         if not self.log:
             return
+        
+        # check if have at least 2 laps? out + pace
+        if self.logx.valid_laps():
 
-        os.makedirs(os.path.dirname(self.filename), exist_ok=True)
 
-        # dump the ldx
-        ldxfilename = f"{self.filename}.ldx"
-        l.info(f"writing laptimes to {ldxfilename}")
-        with open(ldxfilename, "w") as fout:
-            fout.write(self.logx.to_string())
+            os.makedirs(os.path.dirname(self.filename), exist_ok=True)
 
-        # dump the log
-        ldfilename = f"{self.filename}.ld"
-        l.info(f"writing MoTeC log to {ldfilename}")
-        with open(ldfilename, "wb") as fout:
-            fout.write(self.log.to_string())
+            # dump the ldx
+            ldxfilename = f"{self.filename}.ldx"
+            l.info(f"writing laptimes to {ldxfilename}")
+            with open(ldxfilename, "w") as fout:
+                fout.write(self.logx.to_string())
+
+            # dump the log
+            ldfilename = f"{self.filename}.ld"
+            l.info(f"writing MoTeC log to {ldfilename}")
+            with open(ldfilename, "wb") as fout:
+                fout.write(self.log.to_string())
+        else:
+            l.warn(f"aborting log {self.filename}, not enough laps")
+
+        self.log = None

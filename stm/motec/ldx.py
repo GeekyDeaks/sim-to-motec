@@ -5,6 +5,9 @@ class MotecLogExtra:
     def __init__(self):
         self.laps = []
 
+    def valid_laps(self):
+        return len(self.laps) >= 2
+
     def add_lap(self, laptime=None, lapnum=None):
         if lapnum:
             self.laps[lapnum] = laptime
@@ -19,7 +22,7 @@ class MotecLogExtra:
         laps = self.laps
         if len(laps) > 1:
             # ignore the outlap
-            laps = laps[:1]
+            laps = laps[1:]
             fastestlap, fastesttime =  sorted(enumerate(laps), key=lambda a: float(a[1]))[0]
 
             fastestlap += 2 # we removed the outlap and also index from 0

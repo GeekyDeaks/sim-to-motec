@@ -14,7 +14,7 @@ class AMS2Logger(BaseLogger):
                 sampler=None,
                 filetemplate=None):
         
-        super().__init__(sampler=sampler, filetemplate=filetemplate)
+        super().__init__(sampler=sampler, filetemplate=filetemplate, freq=sampler.freq)
 
         self.last_lap = None
         self.last_session = None
@@ -74,7 +74,7 @@ class AMS2Logger(BaseLogger):
                 laptime = self.lap_samples / self.freq
 
             self.add_lap(laptime)
-            l.info(f"adding lap {self.last_lap}, laptime: {laptime}, samples: {self.lap_samples}")
+            l.info(f"adding lap {self.last_lap}, laptime: {laptime:.3f}, samples: {self.lap_samples}")
             self.lap_samples = 0
         else:
             self.lap_samples += 1
