@@ -1,6 +1,9 @@
-from salsa20 import Salsa20_xor
-import struct
+try:
+    from salsa20 import Salsa20_xor
+except:
+    from .pure_salsa20 import Salsa20_xor
 
+import struct
 
 class GT7DataPacket:
 

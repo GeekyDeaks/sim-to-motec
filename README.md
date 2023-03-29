@@ -39,3 +39,9 @@ saving a log file and starting a new one
 # TODO
 
 * port AC UDP logger from https://github.com/GeekyDeaks/raw-sim-telemetry
+
+
+# references
+
+- Salsa20 https://github.com/oconnor663/pure_python_salsa_chacha
+- GT7 DB Files: https://github.com/ddm999/gt7info
