@@ -29,11 +29,13 @@ class AMS2Logger(BaseLogger):
         # check we are playing
         if AMS2GameState(p.mGameState) != AMS2GameState.INGAME_PLAYING:
             self.last_lap = None
+            self.save_log()
             return
         
         # check if we are on the track
         if AMS2RaceState(p.mRaceState) != AMS2RaceState.RACING:
             self.last_lap = None
+            self.save_log()
             return
 
         # get the first participant (us)
@@ -51,6 +53,7 @@ class AMS2Logger(BaseLogger):
             self.last_session = p.mSessionState
 
         if self.last_session != p.mSessionState:
+            l.info("new session state: " + AMS2SessionState(p.mSessionState).name)
             new_log = True
 
         if new_log:
