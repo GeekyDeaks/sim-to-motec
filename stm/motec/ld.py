@@ -92,20 +92,33 @@ class MotecEvent(MotecBase):
 class MotecSamples():
 
     datatypes = {
-        0x0007: { # float
-            0x0002: "e", # 2 byte float
-            0x0004: "f", # 4 byte float
+        0x0000: { # int
+            0x0001: "b", # 1 byte int
+            0x0002: "h", # 2 byte int
+            0x0004: "i", # 4 byte int
         },
         0x0003: { # int
             0x0001: "b", # 1 byte int
             0x0002: "h", # 2 byte int
             0x0004: "i", # 4 byte int
+        },
+        0x0005: { # int
+            0x0001: "b", # 1 byte int
+            0x0002: "h", # 2 byte int
+            0x0004: "i", # 4 byte int
+        },
+            0x0007: { # float
+            0x0002: "e", # 2 byte float
+            0x0004: "f", # 4 byte float
         }
     }
 
     converttypes = {
+        0x0000: int,
+        0x0003: int,
+        0x0005: int,
         0x0007: float,
-        0x0003: int
+
     }
 
     def __init__(self, channel = None, samples = None):
@@ -114,14 +127,17 @@ class MotecSamples():
         else:
             self.samples = []
 
-        self.channel = channel
-        self.fmt = self.datatypes[channel.datatype][channel.datasize]
-        self.convert = self.converttypes[channel.datatype]
-        self.datasize = struct.calcsize(self.fmt)
-        self.multiplier = channel.multiplier
-        self.shift = channel.shift
-        self.scale = channel.scale
-        self.decplaces = channel.decplaces
+        try:
+            self.channel = channel
+            self.fmt = self.datatypes[channel.datatype][channel.datasize]
+            self.convert = self.converttypes[channel.datatype]
+            self.datasize = struct.calcsize(self.fmt)
+            self.multiplier = channel.multiplier
+            self.shift = channel.shift
+            self.scale = channel.scale
+            self.decplaces = channel.decplaces
+        except Exception as e:
+            raise ValueError(f"failed to determine samples for {channel.datatype} / {channel.datasize}")
 
     @property
     def numsamples(self):

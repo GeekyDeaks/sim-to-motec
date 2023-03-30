@@ -1,6 +1,5 @@
 CHANNELS = {
     "gear": {
-        "id": 50078,
         "datatype": 3,
         "datasize": 2,
         "freq": 20,
@@ -13,7 +12,6 @@ CHANNELS = {
         "units": ""
     },
     "throttle": {
-        "id": 50014,
         "datatype": 3,
         "datasize": 2,
         "freq": 20,
@@ -26,8 +24,6 @@ CHANNELS = {
         "units": "%"
     },
     "brake": {
-        #"id": 50015,
-        "id": 10001,
         "datatype": 3,
         "datasize": 2,
         "freq": 20,
@@ -40,7 +36,6 @@ CHANNELS = {
         "units": "%"
     },
     "steer": {
-        "id": 50018,
         "datatype": 3,
         "datasize": 2,
         "freq": 20,
@@ -53,8 +48,6 @@ CHANNELS = {
         "units": "deg"
     },
     "speed": {
-        #"id": 50000,
-        "id": 10000,
         "datatype": 3,
         "datasize": 2,
         "freq": 20,
@@ -67,32 +60,35 @@ CHANNELS = {
         "units": "mph"
     },
     "lat": {
-        "id": 10002,
-        "datatype": 7,
+        "datatype": 5,
         "datasize": 4,
         "freq": 20,
         "shift": 0,
         "multiplier": 1,
         "scale": 1,
-        "decplaces": 0,
+        "decplaces": 7,
         "name": "GPS Latitude",
         "shortname": "GPSLat",
         "units": "deg"
     },
     "long": {
-        "id": 10003,
-        "datatype": 7,
+        "datatype": 5,
         "datasize": 4,
         "freq": 20,
         "shift": 0,
         "multiplier": 1,
         "scale": 1,
-        "decplaces": 0,
+        "decplaces": 7,
         "name": "GPS Longitude",
         "shortname": "GPSLong",
         "units": "deg"
     }
 }
+
+START_ID = 8000
+
+for (i, v) in enumerate(CHANNELS.values()):
+    v["id"] = START_ID + i
 
 def get_channel_definition(name, freq=None):
 
