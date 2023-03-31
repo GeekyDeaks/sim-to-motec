@@ -15,11 +15,14 @@ class AMS2Sampler(BaseSampler):
         self.shmem_name = shmem_name
         self.freq = freq
 
-        self.save_settings({
-            "freq": freq
-        })
+
 
     def run(self):
+
+        # you have to do this in the thread otherwise sqlite3 will complain when you try to save samples
+        self.save_settings({
+            "freq": self.freq
+        })
 
         self.running = True # this is set to False in BaseSampler when we are done
         wait = None

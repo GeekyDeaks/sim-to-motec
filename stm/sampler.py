@@ -11,40 +11,37 @@ class BaseSampler(Thread):
         super().__init__()
         self.samples = Queue()
         self.running = False
-        if rawfile:
-            l.info(f"writing raw samples to {rawfile}")
-            os.makedirs(os.path.dirname(rawfile), exist_ok=True)
-            self.con = sqlite3.connect(rawfile, isolation_level="IMMEDIATE")
-            self.cur = self.con.cursor()
-            self.cur.execute("CREATE TABLE samples(timestamp float, data blob)")
-            self.cur.execute("CREATE TABLE settings(name, value)")
-        else:
-            self.con = None
-            self.cur = None
+        self.rawfile = rawfile
+        self.cur = None
 
-    def save_settings(self, settings):
-        if not self.cur:
+    def execute_sql(self, sql, params):
+        if not self.rawfile:
             return
         
-        for setting in settings.items():
-            self.cur.execute("INSERT INTO settings(name, value) values (?, ?)", setting )
+        if not self.cur:
+            l.info(f"writing raw samples to {self.rawfile}")
+            os.makedirs(os.path.dirname(self.rawfile), exist_ok=True)
+            con = sqlite3.connect(self.rawfile, isolation_level="IMMEDIATE")
+            self.cur = con.cursor()
+            self.cur.execute("CREATE TABLE samples(timestamp float, data blob)")
+            self.cur.execute("CREATE TABLE settings(name, value)")
 
+        return self.cur.execute(sql, params)
+
+    def save_settings(self, settings):
+        for setting in settings.items():
+            self.execute_sql("INSERT INTO settings(name, value) values (?, ?)", setting )
 
     def get(self, timeout=None):
         return self.samples.get(timeout=timeout)
 
     def put(self, sample):
         self.samples.put(sample, block=False)
-        if self.cur:
-            self.cur.execute("INSERT INTO samples(timestamp, data) VALUES (?, ?)", sample)
-
+        self.execute_sql("INSERT INTO samples(timestamp, data) VALUES (?, ?)", sample)
 
     def stop(self):
         l.warn("stopping sampler")
         self.running = False
-        if self.con:
-            self.con.close()
-
 
 class RawSampler(Thread):
 
