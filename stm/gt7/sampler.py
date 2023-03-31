@@ -39,7 +39,7 @@ class GT7Sampler(BaseSampler):
 
                 self.put((ts, data))
 
-            except TimeoutError:
+            except socket.timeout:
                 self.send_hb()
 
     def send_hb(self):
