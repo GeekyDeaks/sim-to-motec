@@ -97,7 +97,7 @@ class GT7Logger(BaseLogger):
         # gear, throttle, brake, speed, z, x
         lat, long = gps.convert(x=p.positionX, z=-p.positionZ)
         self.add_samples([
-            p.gear & 0x0f,
+            p.gear,
             p.throttle * 100 / 255,
             p.brake * 100 / 255,
             p.speed * 2.23693629, # m/s to mph
@@ -112,7 +112,7 @@ class GT7Logger(BaseLogger):
             # pad the missing ticks
             for t in range(missing_ticks):
                 self.add_samples([
-                    p.gear & 0x0f,
+                    p.gear,
                     p.throttle * 100 / 255,
                     p.brake * 100 / 255,
                     p.speed * 2.23693629, # m/s to mph

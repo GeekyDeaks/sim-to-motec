@@ -4,49 +4,70 @@ except:
     from .pure_salsa20 import Salsa20_xor
 
 import struct
+from enum import Enum
+
+class Flags(Enum):
+    IN_RACE   = 0b0000000000000001
+    PAUSED    = 0b0000000000000010
+    LOADING   = 0b0000000000000100
+    IN_GEAR   = 0b0000000000001000
+    HAS_TURBO = 0b0000000000010000
+    REV_LIMIT = 0b0000000000100000
+    HANDBRAKE = 0b0000000001000000
+    LIGHTS    = 0b0000000010000000
+    LOWBEAM   = 0b0000000100000000
+    HIGHBEAM  = 0b0000001000000000
+    ASM       = 0b0000010000000000
+    TCS       = 0b0000100000000000
 
 class GT7DataPacket:
 
+    # https://www.gtplanet.net/forum/threads/gt7-is-compatible-with-motion-rig.410728/page-4#post-13799643
+
     fmt = struct.Struct(
         "<"
-        "4x" # MAGIC / i / 4x
-        "3f" # POSITION / 3f / 12x
-        "12x" # VELOCITY / 3f / 12x
-        "12x" # ROTATION / 3f / 12x
-        "4x" # ROTATION_NORTH / f / 4x
-        "12x" # VELOCITY_ANGULAR / 3f / 12x
-        "4x" # RIDE_HEIGHT / f / 4x
-        "f" # RPM / f / 4x
-        "8x" # IV / 8B / 8x
-        "4x" # UNKNOWN_0x48 / f / 4x
-        "f" # SPEED / f / 4x
-        "4x" # TURBO_BOOST / f / 4x
-        "4x" # OIL_PRESSURE / f / 4x
-        "4x" # UNKNOWN_0x58 / f / 4x
-        "4x" # UNKNOWN_0x5C / f / 4x
-        "16x" # TYRES_TEMP / 4f / 16x
-        "i" # TICK / i / 4x
-        "2h" # LAPS / 2H / 4x
-        "i" # BEST_LAPTIME / i / 4x
-        "i" # LAST_LAPTIME / i / 4x
-        "4x" # DAYTIME_PROGRESSION / i / 4x
-        "2h" # RACE_POSITION / 2H / 4x
-        "8x" # ALERTS / 4H / 8x
-        "B" # GEAR / B / x
-        "B" # THROTTLE / B / x
-        "B" # BRAKE / B / x
-        "x" # UNKNOWN_0x92 / B / x
-        "16x" # WHEELS_SPEED / 4f / 16x
-        "16x" # TYRES_RADIUS / 4f / 16x
-        "16x" # TYRE_SUSPENSION_TRAVEL / 4f / 16x
-        "16x" # UNKNOWN / 4f / 16x
-        "32x" # UNKNOWN_RESRVED / 32B / 32x
-        "4x" # CLUCH / f / 4x
-        "4x" # CLUCH_ENGAGEMENT / f / 4x
-        "4x" # CLUCH_RPM / f / 4x
-        "4x" # UNKNOWN_GEAR / f / 4x
-        "32x" # UNKNOWN_GEAR_RATIO / 8f / 32x
-        "I" # CAR_CODE / i / 4x
+        "4x"  # MAGIC                  / i   / 4x  / 0x0000
+        "3f"  # POSITION               / 3f  / 12x / 0x0004
+        "12x" # VELOCITY               / 3f  / 12x / 0x0010
+        "12x" # ROTATION               / 3f  / 12x / 0x001C
+        "4x"  # ROTATION_NORTH         / f   / 4x  / 0x0028
+        "12x" # VELOCITY_ANGULAR       / 3f  / 12x / 0x002C
+        "4x"  # RIDE_HEIGHT            / f   / 4x  / 0x0038
+        "f"   # RPM                    / f   / 4x  / 0x003C
+        "4x"  # IV                     / 4B  / 4x  / 0x0040
+        "4x"  # CURRENT_FUEL           / f   / 4x  / 0x0044
+        "4x"  # FUEL_CAPACITY          / f   / 4x  / 0x0048
+        "f"   # SPEED                  / f   / 4x  / 0x004C
+        "4x"  # TURBO_BOOST            / f   / 4x  / 0x0050
+        "4x"  # OIL_PRESSURE           / f   / 4x  / 0x0054
+        "4x"  # WATER_TEMP             / f   / 4x  / 0x0058
+        "4x"  # OIL_TEMP               / f   / 4x  / 0x005C
+        "16x" # TYRES_TEMP             / 4f  / 16x / 0x0060
+        "i"   # TICK                   / i   / 4x  / 0x0070
+        "2h"  # LAPS                   / 2h  / 4x  / 0x0074
+        "i"   # BEST_LAPTIME           / i   / 4x  / 0x0078
+        "i"   # LAST_LAPTIME           / i   / 4x  / 0x007C
+        "4x"  # DAYTIME_PROGRESSION    / i   / 4x  / 0x0080
+        "2h"  # RACE_POSITION          / 2h  / 4x  / 0x0084
+        "2x"  # REV_UPSHIFT            / h   / 2x  / 0x0088
+        "2x"  # REV_LIMIT              / h   / 2x  / 0x008A
+        "2x"  # MAX_SPEED              / h   / 2x  / 0x008C
+        "H"   # FLAGS                  / H   / 2x  / 0x008E
+        "B"   # GEAR                   / B   / x   / 0x0090 / Suggested:Current
+        "B"   # THROTTLE               / B   / x   / 0x0091
+        "B"   # BRAKE                  / B   / x   / 0x0092
+        "x"   # UNKNOWN                / B   / x   / 0x0093
+        "16x" # ROAD_PLANE             / 4f  / 16x / 0x0094
+        "16x" # WHEELS_SPEED           / 4f  / 16x / 0x00A4
+        "16x" # TYRES_RADIUS           / 4f  / 16x / 0x00B4
+        "16x" # TYRE_SUSPENSION_TRAVEL / 4f  / 16x / 0x00C4
+        "32x" # UNKNOWN_RESRVED        / 32B / 32x / 0x00D4
+        "4x"  # CLUCH                  / f   / 4x  / 0x00F4
+        "4x"  # CLUCH_ENGAGEMENT       / f   / 4x  / 0x00F8
+        "4x"  # CLUCH_RPM              / f   / 4x  / 0x00FC
+        "4x"  # TOP_SPEED              / f   / 4x  / 0x0100
+        "32x" # GEAR_RATIOS            / 8f  / 32x / 0x0104
+        "I"   # CAR_CODE               / i   / 4x  / 0x0124
     )
 
     size = fmt.size
@@ -69,12 +90,18 @@ class GT7DataPacket:
             self.last_laptime,
             self.race_position,
             self.opponents,
-            self.gear,
+            self.flags,
+            gear,
             self.throttle,
             self.brake,
             self.car_code
         )  = self.fmt.unpack(buf)
 
+        self.gear = gear & 0x0F
+        self.suggested_gear = (gear & 0xF0) >> 4
+
+        self.paused = bool(self.flags & Flags.PAUSED.value)
+        self.in_race = bool(self.flags & Flags.IN_RACE.value)
 
     @staticmethod
     def decrypt(dat):
