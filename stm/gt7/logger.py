@@ -10,7 +10,7 @@ l = getLogger(__name__)
 
 class GT7Logger(BaseLogger):
 
-    channels = ['beacon', 'lap', 'gear', 'throttle', 'brake', 'speed', 'lat', 'long']
+    channels = ['beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'speed', 'lat', 'long']
 
     def __init__(self, 
                 sampler=None,
@@ -127,6 +127,7 @@ class GT7Logger(BaseLogger):
         self.add_samples([
             beacon,
             currp.current_lap,
+            currp.rpm,
             currp.gear,
             currp.throttle * 100 / 255,
             currp.brake * 100 / 255,

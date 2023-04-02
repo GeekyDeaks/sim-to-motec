@@ -106,6 +106,18 @@ CHANNELS = {
         "name": "Lap Number",
         "shortname": "Lap",
         "units": ""
+    },
+    "rpm": {
+        "datatype": 3,
+        "datasize": 2,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 0,
+        "name": "Engine RPM",
+        "shortname": "RPM",
+        "units": "rpm"
     }
 }
 
