@@ -82,13 +82,38 @@ CHANNELS = {
         "name": "GPS Longitude",
         "shortname": "GPSLong",
         "units": "deg"
+    },
+    "beacon": {
+        "datatype": 0,
+        "datasize": 2,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 0,
+        "name": "Beacon",
+        "shortname": "Beacon",
+        "units": ""
+    },
+    "lap": {
+        "datatype": 3,
+        "datasize": 2,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 0,
+        "name": "Lap Number",
+        "shortname": "Lap",
+        "units": ""
     }
 }
 
 START_ID = 8000
 
 for (i, v) in enumerate(CHANNELS.values()):
-    v["id"] = START_ID + i
+    if "id" not in v:
+        v["id"] = START_ID + i
 
 def get_channel_definition(name, freq=None):
 
