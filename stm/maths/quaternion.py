@@ -1,4 +1,4 @@
-class Quarternion:
+class Quaternion:
 
     def __init__(self, w, x, y, z):
 
@@ -24,10 +24,10 @@ class Quarternion:
         x = w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2
         y = w1 * y2 + y1 * w2 + z1 * x2 - x1 * z2
         z = w1 * z2 + z1 * w2 + x1 * y2 - y1 * x2
-        return Quarternion(w, x, y, z)
+        return Quaternion(w, x, y, z)
     
     def conjugate(self):
-        return Quarternion(self.w, -self.x, -self.y, -self.z)
+        return Quaternion(self.w, -self.x, -self.y, -self.z)
 
 
     

@@ -1,4 +1,4 @@
-from .quarternion import Quarternion
+from .quaternion import Quaternion
 
 class Vector:
 
@@ -18,9 +18,9 @@ class Vector:
     
     def __mul__(self, v2):
 
-        if isinstance(v2, Quarternion):
-            # convert me to a Quarternion
-            q1 = Quarternion(0.0, *self)
+        if isinstance(v2, Quaternion):
+            # convert me to a Quaternion
+            q1 = Quaternion(0.0, *self)
             qr = v2 * q1 * v2.conjugate()
             return Vector(qr.x, qr.y, qr.z)
         else:

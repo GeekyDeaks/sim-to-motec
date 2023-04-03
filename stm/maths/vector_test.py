@@ -1,13 +1,13 @@
 import unittest
-from .quarternion import Quarternion
+from .quaternion import Quaternion
 from .vector import Vector
 
 class TestVector(unittest.TestCase):
 
-    def test_mult_quarternion(self):
+    def test_mult_Quaternion(self):
 
         v1 = Vector(1, 0, 0)
-        q1 = Quarternion(0.707, 0.0,  0.707, 0.0)
+        q1 = Quaternion(0.707, 0.0,  0.707, 0.0)
         vactual = v1 * q1
         vexpect = Vector(0, 0, -1)
 

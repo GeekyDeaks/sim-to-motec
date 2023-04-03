@@ -1,3 +1,3 @@
 
 from .vector import Vector
-from .quarternion import Quarternion
+from .quaternion import Quaternion

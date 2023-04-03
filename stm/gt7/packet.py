@@ -6,7 +6,7 @@ except:
 import struct
 from enum import Enum
 from collections import namedtuple
-from stm.maths import Vector, Quarternion
+from stm.maths import Vector, Quaternion
 
 Wheels = namedtuple("Wheels", ["fl", "fr", "rl", "rr"])
 
@@ -107,7 +107,7 @@ class GT7DataPacket:
 
         self.position = Vector(px, py, pz)
         self.velocity = Vector(vx, vy, vz)
-        self.rotation = Quarternion(rw, rx, ry, rz)
+        self.rotation = Quaternion(rw, rx, ry, rz)
 
         self.wheelspeed = Wheels(wsfl, wsfr, wsrl, wsrr)
         self.wheelradius = Wheels(wrfl, wrfr, wrrl, wrrr)
