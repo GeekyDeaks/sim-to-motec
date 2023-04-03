@@ -118,6 +118,78 @@ CHANNELS = {
         "name": "Engine RPM",
         "shortname": "RPM",
         "units": "rpm"
+    },
+    "velx": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 3,
+        "name": "Velocity X",
+        "shortname": "VELX",
+        "units": "m"
+    },
+    "vely": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 3,
+        "name": "Velocity Y",
+        "shortname": "VELY",
+        "units": "m"
+    },
+    "velz": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 3,
+        "name": "Velocity Z",
+        "shortname": "VELZ",
+        "units": "m"
+    },
+    "glat": {
+        "datatype": 3,
+        "datasize": 2,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 2,
+        "name": "G Force Lat",
+        "shortname": "G Lat",
+        "units": "G"
+    },
+    "gvert": {
+        "datatype": 3,
+        "datasize": 2,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 2,
+        "name": "G Force Vert",
+        "shortname": "G Vert",
+        "units": "G"
+    },
+    "glong": {
+        "datatype": 3,
+        "datasize": 2,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 2,
+        "name": "G Force Long",
+        "shortname": "G Long",
+        "units": "G"
     }
 }
 

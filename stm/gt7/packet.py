@@ -5,6 +5,7 @@ except:
 
 import struct
 from enum import Enum
+from stm.maths import Vector, Quarternion
 
 class Flags(Enum):
     IN_RACE   = 0b0000000000000001
@@ -28,9 +29,8 @@ class GT7DataPacket:
         "<"
         "4x"  # MAGIC                  / i   / 4x  / 0x0000
         "3f"  # POSITION               / 3f  / 12x / 0x0004
-        "12x" # VELOCITY               / 3f  / 12x / 0x0010
-        "12x" # ROTATION               / 3f  / 12x / 0x001C
-        "4x"  # ROTATION_NORTH         / f   / 4x  / 0x0028
+        "3f"  # VELOCITY               / 3f  / 12x / 0x0010
+        "4f"  # ROTATION               / 4f  / 12x / 0x001C
         "12x" # VELOCITY_ANGULAR       / 3f  / 12x / 0x002C
         "4x"  # RIDE_HEIGHT            / f   / 4x  / 0x0038
         "f"   # RPM                    / f   / 4x  / 0x003C
@@ -78,9 +78,9 @@ class GT7DataPacket:
             buf = self.decrypt(buf)
 
         (
-            self.positionX,
-            self.positionY,
-            self.positionZ,
+            px, py, pz,
+            vx, vy, vz,
+            rw, rx, ry, rz,
             self.rpm,
             self.speed,
             self.tick,
@@ -96,6 +96,10 @@ class GT7DataPacket:
             self.brake,
             self.car_code
         )  = self.fmt.unpack(buf)
+
+        self.position = Vector(px, py, pz)
+        self.velocity = Vector(vx, vy, vz)
+        self.rotation = Quarternion(rw, rx, ry, rz)
 
         self.gear = gear & 0x0F
         self.suggested_gear = (gear & 0xF0) >> 4

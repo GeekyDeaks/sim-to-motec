@@ -10,7 +10,8 @@ l = getLogger(__name__)
 
 class GT7Logger(BaseLogger):
 
-    channels = ['beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'speed', 'lat', 'long']
+    channels = ['beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'speed', 'lat', 'long',
+                'velx', 'vely', 'velz', 'glat', 'gvert', 'glong']
 
     def __init__(self, 
                 sampler=None,
@@ -120,10 +121,32 @@ class GT7Logger(BaseLogger):
             l.info(f"adding lap {lastp.current_lap}, laptime: {laptime:.3f}, samples: {self.lap_samples}, sampletime: {sampletime:.3f}")
             self.lap_samples = 0
 
+        if (currp.tick % 1000) == 0 or new_log:
+            l.info(
+                f"{timestamp:13.3f} tick: {currp.tick:6}"
+                f" {currp.current_lap:2}/{currp.laps:2}"
+                f" {currp.position.x:10.5f} {currp.position.y:10.5f} {currp.position.z:10.5f}"
+                f" {currp.best_laptime:6}/{currp.last_laptime:6}"
+                f" {currp.race_position:3}/{currp.opponents:3}"
+                f" {currp.gear} {currp.throttle:3} {currp.brake:3} {currp.speed:3.0f}"
+                f" {currp.car_code:5}"
+            )
+
         self.lap_samples += 1
         # do some conversions
         # gear, throttle, brake, speed, z, x
-        lat, long = gps.convert(x=currp.positionX, z=-currp.positionZ)
+        lat, long = gps.convert(x=currp.position.x, z=-currp.position.z)
+
+        # mult the world velocity with the rotation to get local velocity
+        # use the last rotation so we can work out the delta
+        localv = currp.velocity * lastp.rotation
+        lastv = lastp.velocity * lastp.rotation
+        deltav = localv - lastv
+
+        glat = deltav.x * self.freq / 9.8 # X
+        gvert = deltav.y * self.freq / 9.8 # Y
+        glong = deltav.z * self.freq / 9.8 # Z
+
         self.add_samples([
             beacon,
             currp.current_lap,
@@ -133,17 +156,14 @@ class GT7Logger(BaseLogger):
             currp.brake * 100 / 255,
             currp.speed * 2.23693629, # m/s to mph
             lat,
-            long
+            long,
+            localv.x,
+            localv.y,
+            -localv.z, # so we match the GPS long,
+            glat,
+            gvert,
+            -glong
         ])
 
-        if (currp.tick % 1000) == 0 or new_log:
-            l.info(
-                f"{timestamp:13.3f} tick: {currp.tick:6}"
-                f" {currp.current_lap:2}/{currp.laps:2}"
-                f" {currp.positionX:10.5f} {currp.positionY:10.5f} {currp.positionZ:10.5f}"
-                f" {currp.best_laptime:6}/{currp.last_laptime:6}"
-                f" {currp.race_position:3}/{currp.opponents:3}"
-                f" {currp.gear} {currp.throttle:3} {currp.brake:3} {currp.speed:3.0f}"
-                f" {currp.car_code:5}"
-            )
+
 

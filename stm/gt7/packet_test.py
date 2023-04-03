@@ -11,7 +11,7 @@ class TestGT7Packet(unittest.TestCase):
         with open(os.path.join(PATH, "test", "gt7_idle.bin"), "rb") as fin:
 
             pkt = GT7DataPacket(fin.read())
-            self.assertEqual(pkt.positionX, 0)
+            self.assertEqual(pkt.position.x, 0)
 
     def test_car_code(self):
         with open(os.path.join(PATH, "test", "barcelonagp911.bin"), "rb") as fin:
