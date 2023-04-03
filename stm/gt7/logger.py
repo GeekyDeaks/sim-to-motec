@@ -11,7 +11,8 @@ l = getLogger(__name__)
 class GT7Logger(BaseLogger):
 
     channels = ['beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'speed', 'lat', 'long',
-                'velx', 'vely', 'velz', 'glat', 'gvert', 'glong']
+                'velx', 'vely', 'velz', 'glat', 'gvert', 'glong', 
+                'dposfl', 'dposfr', 'dposrl', 'dposrr']
 
     def __init__(self, 
                 sampler=None,
@@ -159,7 +160,8 @@ class GT7Logger(BaseLogger):
             -deltav.z, # so we match the GPS long,
             glat,
             gvert,
-            -glong
+            -glong,
+            *currp.suspension
         ])
 
 

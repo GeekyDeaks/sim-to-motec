@@ -190,6 +190,102 @@ CHANNELS = {
         "name": "G Force Long",
         "shortname": "G Long",
         "units": "G"
+    },
+    "wspdfl": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 1,
+        "name": "Wheel Speed FL",
+        "shortname": "WSpd FL",
+        "units": "mph"
+    },
+    "wspdfr": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 1,
+        "name": "Wheel Speed FR",
+        "shortname": "WSpd FR",
+        "units": "mph"
+    },
+    "wspdrl": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 1,
+        "name": "Wheel Speed RL",
+        "shortname": "WSpd RL",
+        "units": "mph"
+    },
+    "wspdrr": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 1,
+        "name": "Wheel Speed RR",
+        "shortname": "WSpd RR",
+        "units": "mph"
+    },
+    "dposfl": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 3,
+        "name": "Damper Pos FL",
+        "shortname": "DPosHFL",
+        "units": "m"
+    },
+    "dposfr": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 3,
+        "name": "Damper Pos FR",
+        "shortname": "DPosHFR",
+        "units": "m"
+    },
+    "dposrl": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 3,
+        "name": "Damper Pos RL",
+        "shortname": "DPosHRL",
+        "units": "m"
+    },
+    "dposrr": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 3,
+        "name": "Damper Pos RR",
+        "shortname": "DPosHRR",
+        "units": "m"
     }
 }
 

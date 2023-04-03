@@ -5,7 +5,10 @@ except:
 
 import struct
 from enum import Enum
+from collections import namedtuple
 from stm.maths import Vector, Quarternion
+
+Wheels = namedtuple("Wheels", ["fl", "fr", "rl", "rr"])
 
 class Flags(Enum):
     IN_RACE   = 0b0000000000000001
@@ -49,8 +52,8 @@ class GT7DataPacket:
         "i"   # LAST_LAPTIME           / i   / 4x  / 0x007C
         "4x"  # DAYTIME_PROGRESSION    / i   / 4x  / 0x0080
         "2h"  # RACE_POSITION          / 2h  / 4x  / 0x0084
-        "2x"  # REV_UPSHIFT            / h   / 2x  / 0x0088
-        "2x"  # REV_LIMIT              / h   / 2x  / 0x008A
+        "h"   # REV_UPSHIFT            / h   / 2x  / 0x0088
+        "h"   # REV_LIMIT              / h   / 2x  / 0x008A
         "2x"  # MAX_SPEED              / h   / 2x  / 0x008C
         "H"   # FLAGS                  / H   / 2x  / 0x008E
         "B"   # GEAR                   / B   / x   / 0x0090 / Suggested:Current
@@ -58,9 +61,9 @@ class GT7DataPacket:
         "B"   # BRAKE                  / B   / x   / 0x0092
         "x"   # UNKNOWN                / B   / x   / 0x0093
         "16x" # ROAD_PLANE             / 4f  / 16x / 0x0094
-        "16x" # WHEELS_SPEED           / 4f  / 16x / 0x00A4
-        "16x" # TYRES_RADIUS           / 4f  / 16x / 0x00B4
-        "16x" # TYRE_SUSPENSION_TRAVEL / 4f  / 16x / 0x00C4
+        "4f"  # WHEELS_SPEED           / 4f  / 16x / 0x00A4
+        "4f"  # TYRES_RADIUS           / 4f  / 16x / 0x00B4
+        "4f"  # TYRE_SUSPENSION_TRAVEL / 4f  / 16x / 0x00C4
         "32x" # UNKNOWN_RESRVED        / 32B / 32x / 0x00D4
         "4x"  # CLUCH                  / f   / 4x  / 0x00F4
         "4x"  # CLUCH_ENGAGEMENT       / f   / 4x  / 0x00F8
@@ -89,17 +92,26 @@ class GT7DataPacket:
             self.best_laptime,
             self.last_laptime,
             self.race_position,
+            self.rev_upshift,
+            self.rev_limit,
             self.opponents,
             self.flags,
             gear,
             self.throttle,
             self.brake,
+            wsfl, wsfr, wsrl, wsrr,
+            wrfl, wrfr, wrrl, wrrr,
+            susfl, susfr, susrl, susrr,
             self.car_code
         )  = self.fmt.unpack(buf)
 
         self.position = Vector(px, py, pz)
         self.velocity = Vector(vx, vy, vz)
         self.rotation = Quarternion(rw, rx, ry, rz)
+
+        self.wheelspeed = Wheels(wsfl, wsfr, wsrl, wsrr)
+        self.wheelradius = Wheels(wrfl, wrfr, wrrl, wrrr)
+        self.suspension = Wheels(susfl, susfr, susrl, susrr)
 
         self.gear = gear & 0x0F
         self.suggested_gear = (gear & 0xF0) >> 4
