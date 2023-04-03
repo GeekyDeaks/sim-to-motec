@@ -156,8 +156,8 @@ CHANNELS = {
         "units": "m"
     },
     "glat": {
-        "datatype": 3,
-        "datasize": 2,
+        "datatype": 5,
+        "datasize": 4,
         "freq": 20,
         "shift": 0,
         "multiplier": 1,
@@ -168,8 +168,8 @@ CHANNELS = {
         "units": "G"
     },
     "gvert": {
-        "datatype": 3,
-        "datasize": 2,
+        "datatype": 5,
+        "datasize": 4,
         "freq": 20,
         "shift": 0,
         "multiplier": 1,
@@ -180,8 +180,8 @@ CHANNELS = {
         "units": "G"
     },
     "glong": {
-        "datatype": 3,
-        "datasize": 2,
+        "datatype": 5,
+        "datasize": 4,
         "freq": 20,
         "shift": 0,
         "multiplier": 1,

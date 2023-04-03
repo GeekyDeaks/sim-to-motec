@@ -137,11 +137,8 @@ class GT7Logger(BaseLogger):
         # gear, throttle, brake, speed, z, x
         lat, long = gps.convert(x=currp.position.x, z=-currp.position.z)
 
-        # mult the world velocity with the rotation to get local velocity
-        # use the last rotation so we can work out the delta
-        localv = currp.velocity * lastp.rotation
-        lastv = lastp.velocity * lastp.rotation
-        deltav = localv - lastv
+        # mult the world deltav with the rotation to get local deltav
+        deltav = (currp.velocity - lastp.velocity) * currp.rotation
 
         glat = deltav.x * self.freq / 9.8 # X
         gvert = deltav.y * self.freq / 9.8 # Y
@@ -157,9 +154,9 @@ class GT7Logger(BaseLogger):
             currp.speed * 2.23693629, # m/s to mph
             lat,
             long,
-            localv.x,
-            localv.y,
-            -localv.z, # so we match the GPS long,
+            deltav.x,
+            deltav.y,
+            -deltav.z, # so we match the GPS long,
             glat,
             gvert,
             -glong
