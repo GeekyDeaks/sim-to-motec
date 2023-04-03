@@ -12,7 +12,8 @@ class GT7Logger(BaseLogger):
 
     channels = ['beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'speed', 'lat', 'long',
                 'velx', 'vely', 'velz', 'glat', 'gvert', 'glong', 
-                'dposfl', 'dposfr', 'dposrl', 'dposrr']
+                'dposfl', 'dposfr', 'dposrl', 'dposrr',
+                'wspdfl', 'wspdfr', 'wspdrl', 'wspdrr']
 
     def __init__(self, 
                 sampler=None,
@@ -145,6 +146,9 @@ class GT7Logger(BaseLogger):
         gvert = deltav.y * self.freq / 9.8 # Y
         glong = deltav.z * self.freq / 9.8 # Z
 
+        # calculate wheel speed (needs to be inverted)
+        wheelspeed = [ r * s * -2.23693629 for r,s in zip(currp.wheelradius, currp.wheelspeed) ]
+
         self.add_samples([
             beacon,
             currp.current_lap,
@@ -161,7 +165,8 @@ class GT7Logger(BaseLogger):
             glat,
             gvert,
             -glong,
-            *currp.suspension
+            *currp.suspension,
+            *wheelspeed
         ])
 
 
