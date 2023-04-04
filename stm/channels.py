@@ -95,6 +95,18 @@ CHANNELS = {
         "shortname": "Beacon",
         "units": ""
     },
+    "br2": {
+        "datatype": 3,
+        "datasize": 2,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 0,
+        "name": "BR2 Beacon Number",
+        "shortname": "BR2 Num",
+        "units": ""
+    },
     "lap": {
         "datatype": 3,
         "datasize": 2,
@@ -286,6 +298,18 @@ CHANNELS = {
         "name": "Susp Pos RR",
         "shortname": "SuspRR",
         "units": "m"
+    },
+    "debug1": {
+        "datatype": 5,
+        "datasize": 4,
+        "freq": 20,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 2,
+        "name": "Debug 1",
+        "shortname": "Debug1",
+        "units": ""
     }
 }
 

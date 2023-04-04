@@ -8,8 +8,9 @@ l = getLogger(__name__)
 
 class AMS2Logger(BaseLogger):
 
-    channels = ['beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'steer', 'speed', 'lat', 'long',
-                'glat', 'gvert', 'glong']
+    channels = ['beacon', 'br2', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'steer', 'speed', 'lat', 'long',
+                'glat', 'gvert', 'glong'
+                ]
 
     def __init__(self,
                 rawfile=None,
@@ -32,9 +33,8 @@ class AMS2Logger(BaseLogger):
 
     def process_packet(self, timestamp, p, lastp):
 
-        new_log = False
         freq = self.sampler.freq
-        beacon = 0
+        br2 = 0
 
         # check we are playing
         if AMS2GameState(p.mGameState) != AMS2GameState.INGAME_PLAYING:
@@ -77,10 +77,10 @@ class AMS2Logger(BaseLogger):
             self.add_lap(laptime)
             l.info(f"adding lap {self.last_lap}, laptime: {laptime:.3f}, samples: {self.lap_samples}")
             self.lap_samples = 0
-            beacon = 1
 
         if p.driver.mCurrentSector >= 0 and p.driver.mCurrentSector != lastp.driver.mCurrentSector:
-            beacon = p.driver.mCurrentSector + 1
+            br2 = p.driver.mCurrentSector + 1
+            l.info(f"{self.lap_samples}, setting beacon {br2} as moving from sector {lastp.driver.mCurrentSector} to {p.driver.mCurrentSector}")
             
         self.lap_samples += 1
 
@@ -92,7 +92,8 @@ class AMS2Logger(BaseLogger):
 
         glat, gvert, glong = [ a / 9.8 for a in p.mLocalAcceleration]
         self.add_samples([
-            beacon,
+            1 if br2 > 0 else 0,
+            br2,
             p.driver.mCurrentLap,
             p.mRpm,
             p.mGear,
