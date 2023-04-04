@@ -1,5 +1,6 @@
 from struct import Struct
 from enum import Enum
+from stm.maths import Vector
 
 class AMS2GameState(Enum):
     EXITED = 0
@@ -49,9 +50,7 @@ class AMS2ParticipantInfo:
         (
             self.mIsActive, 
             mName,
-            self.mWorldPositionX,
-            self.mWorldPositionY,
-            self.mWorldPositionZ,
+            x, y, z,
             self.mCurrentLapDistance,
             self.mRacePosition,
             self.mLapsCompleted,
@@ -60,6 +59,7 @@ class AMS2ParticipantInfo:
 
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
+        self.mWorldPosition = Vector(x, y, z)
         self.mName = mName.decode('latin-1').rstrip('\0')
 
     @property
@@ -71,40 +71,54 @@ class AMS2SharedMemory:
 
     fmt = Struct(
         "<"
-        "I" # mVersion
-        "I" # mBuildVersionNumber
-        "I" # mGameState
-        "I" # mSessionState
-        "I" # mRaceState
-        "i" # mViewedParticipantIndex
-        "i" # mNumParticipants
-        # STORED_PARTICIPANTS_MAX * AMS2ParticipantInfo.size
-        "6400s" # mParticipantInfo
-        "f" # mUnfilteredThrottle
-        "f" # mUnfilteredBrake
-        "f" # mUnfilteredSteering
-        "f" # mUnfilteredClutch
-        "64s" # mCarName
-        "64s" # mCarClassName
-        "I" # mLapsInEvent
-        "64s" # mTrackLocation
-        "64s" # mTrackVariation
-        "f" # mTrackLength
-        "i" # mNumSectors
-        "?" # mLapInvalidated
-        "3x" # alignment padding
-        "f" # mBestLapTime
-        "f" # mLastLapTime
-        "f" # mCurrentTime
-        "120x" # skip a load of stuff we are not currently interested in
-        "f" # mSpeed
-        "f" # mRpm
-        "f" # mMaxRPM
-        "f" # mBrake
-        "f" # mThrottle
-        "f" # mClutch
-        "f" # mSteering
-        "i" # mGear
+        "I"     # mVersion
+        "I"     # mBuildVersionNumber
+        "I"     # mGameState
+        "I"     # mSessionState
+        "I"     # mRaceState
+        "i"     # mViewedParticipantIndex
+        "i"     # mNumParticipants
+        "6400s" # mParticipantInfo ( STORED_PARTICIPANTS_MAX * AMS2ParticipantInfo.size )
+        "f"     # mUnfilteredThrottle
+        "f"     # mUnfilteredBrake
+        "f"     # mUnfilteredSteering
+        "f"     # mUnfilteredClutch
+        "64s"   # mCarName
+        "64s"   # mCarClassName
+        "I"     # mLapsInEvent
+        "64s"   # mTrackLocation
+        "64s"   # mTrackVariation
+        "f"     # mTrackLength
+        "i"     # mNumSectors
+        "?"     # mLapInvalidated
+        "3x"    # alignment padding
+        "f"     # mBestLapTime
+        "f"     # mLastLapTime
+        "f"     # mCurrentTime
+        "120x"  # skip a load of stuff we are not currently interested in
+        "f"     # mSpeed
+        "f"     # mRpm
+        "f"     # mMaxRPM
+        "f"     # mBrake
+        "f"     # mThrottle
+        "f"     # mClutch
+        "f"     # mSteering
+        "i"     # mGear
+        "i"     # mNumGears
+        "f"     # mOdometerKM
+        "?"     # mAntiLockActive
+        "3x"    # alignment padding
+        "4x"    # mLastOpponentCollisionIndex
+        "4x"    # mLastOpponentCollisionMagnitude
+        "?"     # mBoostActive
+        "3x"    # alignment padding
+        "f"     # mBoostAmount
+        "3f"    # mOrientation
+        "3f"    # mLocalVelocity
+        "3f"    # mWorldVelocity
+        "3f"    # mAngularVelocity
+        "3f"    # mLocalAcceleration
+
     )
 
     def __init__(self, buf):
@@ -140,13 +154,25 @@ class AMS2SharedMemory:
             self.mThrottle,
             self.mClutch,
             self.mSteering,
-            self.mGear
+            self.mGear,
+            self.mNumGears,
+            self.mOdometerKM,
+            self.mAntiLockActive,
+            self.mBoostActive,
+            self.mBoostAmount,
+            ox, oy, oz, # mOrientation
+            lvx, lvy, lvz, # mLocalVelocity
+            wvx, wvy, wvz, # mWorldVelocity
+            avx, avy, avz, # mAngularVelocity
+            lax, lay, laz # mLocalAcceleration
+
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
         self.mCarName = mCarName.decode('utf-8').rstrip('\0')
         self.mCarClassName = mCarClassName.decode('utf-8').rstrip('\0')
         self.mTrackLocation = mTrackLocation.decode('utf-8').rstrip('\0')
         self.mTrackVariation = mTrackVariation.decode('utf-8').rstrip('\0')
+        self.mLocalAcceleration = Vector(lax, lay, laz)
 
         self.participants = []
         #  unpack the participants
@@ -159,6 +185,10 @@ class AMS2SharedMemory:
                 participant = AMS2ParticipantInfo(pdata)
                 self.participants.append(participant)
                 start = end
+
+            self.driver = self.participants[0]
+        else:
+            self.driver = None
 
 
 

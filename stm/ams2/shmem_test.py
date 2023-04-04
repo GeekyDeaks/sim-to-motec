@@ -34,6 +34,14 @@ class TestAMS2SharedMemory(unittest.TestCase):
             self.assertEqual(sm.participants[0].mName , "Scott Deakin")
             self.assertEqual(sm.participants[20].mName , "Bill Elliott")
 
+
+    def test_inrace_driver_x(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+
+            sm = AMS2SharedMemory(fin.read())
+            self.assertEqual(sm.mVersion, 13)
+            self.assertEqual(sm.driver.mWorldPosition.x , 1406.681396484375)
+
     def test_inrace_controls(self):
         with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
 
@@ -43,6 +51,12 @@ class TestAMS2SharedMemory(unittest.TestCase):
             self.assertEqual(sm.mThrottle, 0.0)
             self.assertEqual(sm.mBrake, 1.0)
 
+
+    def test_local_accel(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+
+            sm = AMS2SharedMemory(fin.read())
+            self.assertAlmostEqual(sm.mLocalAcceleration.x, -0.0003, places=4)
 
 if __name__ == '__main__':
     unittest.main()
