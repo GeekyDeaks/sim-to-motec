@@ -36,17 +36,17 @@ def main():
     if args.loadraw:
         sampler = RawSampler(rawfile=args.addr)
     else:
-        sampler = GT7Sampler(addr=args.addr, rawfile=rawfile)
+        sampler = GT7Sampler(addr=args.addr, freq=args.freq)
 
     logger = GT7Logger(
+        rawfile=rawfile,
         sampler=sampler,
         filetemplate=filetemplate,
         name=args.name, 
         driver=args.driver,
         session=args.session,
         vehicle=args.vehicle,
-        venue=args.venue,
-        freq=args.freq
+        venue=args.venue
     )
 
     logger.start()

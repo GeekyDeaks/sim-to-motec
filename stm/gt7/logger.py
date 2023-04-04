@@ -15,7 +15,8 @@ class GT7Logger(BaseLogger):
                 'suspfl', 'suspfr', 'susprl', 'susprr',
                 'wspdfl', 'wspdfr', 'wspdrl', 'wspdrr']
 
-    def __init__(self, 
+    def __init__(self,
+                rawfile=None,
                 sampler=None,
                 filetemplate=None,
                 name="",
@@ -24,9 +25,8 @@ class GT7Logger(BaseLogger):
                 driver="",
                 venue="", 
                 comment="",
-                shortcomment="",
-                freq=None ):
-        super().__init__(sampler=sampler, filetemplate=filetemplate, freq=60) # fixed freq for now
+                shortcomment=""):
+        super().__init__(rawfile=rawfile, sampler=sampler, filetemplate=filetemplate)
 
         self.event = STMEvent(
             name=name,
@@ -71,6 +71,8 @@ class GT7Logger(BaseLogger):
         lastp = self.last_packet
         currp = packet
 
+        freq = self.sampler.freq
+
         if currp.paused:
             return
 
@@ -112,7 +114,7 @@ class GT7Logger(BaseLogger):
         if currp.current_lap > lastp.current_lap:
             # figure out the laptimes
             beacon = 1
-            sampletime = self.lap_samples / self.freq
+            sampletime = self.lap_samples / freq
             if currp.last_laptime > 0:
                 laptime = currp.last_laptime / 1000.0
             else:
@@ -142,9 +144,9 @@ class GT7Logger(BaseLogger):
         # mult the world deltav with the rotation to get local deltav
         deltav = (currp.velocity - lastp.velocity) * currp.rotation
 
-        glat = deltav.x * self.freq / 9.8 # X
-        gvert = deltav.y * self.freq / 9.8 # Y
-        glong = deltav.z * self.freq / 9.8 # Z
+        glat = deltav.x * freq / 9.8 # X
+        gvert = deltav.y * freq / 9.8 # Y
+        glong = deltav.z * freq / 9.8 # Z
 
         # calculate wheel speed (needs to be inverted)
         wheelspeed = [ r * s * -2.23693629 for r,s in zip(currp.wheelradius, currp.wheelspeed) ]

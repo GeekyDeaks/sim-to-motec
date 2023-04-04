@@ -10,11 +10,12 @@ class AMS2Logger(BaseLogger):
 
     channels = ['gear', 'throttle', 'brake', 'steer', 'speed', 'lat', 'long']
 
-    def __init__(self, 
+    def __init__(self,
+                rawfile=None,
                 sampler=None,
                 filetemplate=None):
         
-        super().__init__(sampler=sampler, filetemplate=filetemplate, freq=sampler.freq)
+        super().__init__(rawfile=rawfile, sampler=sampler, filetemplate=filetemplate)
 
         self.last_lap = None
         self.last_session = None
@@ -23,6 +24,7 @@ class AMS2Logger(BaseLogger):
     def process_sample(self, timestamp, sample):
 
         new_log = False
+        freq = self.sampler.freq
 
         p = AMS2SharedMemory(sample)
 
@@ -74,7 +76,7 @@ class AMS2Logger(BaseLogger):
                 laptime = p.mLastLapTime
             else:
                 # guess it from the number of samples
-                laptime = self.lap_samples / self.freq
+                laptime = self.lap_samples / freq
 
             self.add_lap(laptime)
             l.info(f"adding lap {self.last_lap}, laptime: {laptime:.3f}, samples: {self.lap_samples}")

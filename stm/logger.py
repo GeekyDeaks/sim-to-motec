@@ -3,20 +3,36 @@ from .motec import MotecLog, MotecLogExtra, MotecEvent
 from .channels import get_channel_definition
 import os
 import re
+import sqlite3
 from logging import getLogger
 l = getLogger(__name__)
 
 class BaseLogger:
 
-    def __init__(self, sampler=None, filetemplate=None, freq=None):
+    def __init__(self, sampler=None, filetemplate=None, rawfile=None):
         self.sampler = sampler
         self.filetemplate = filetemplate
         self.log = None
-        self.freq = freq
+        self.rawfile = rawfile
 
     def start(self):
 
         l.info("starting logger")
+
+        cur = None
+        con = None
+
+        # sort out the raw db
+        if self.rawfile:
+            l.info(f"writing raw samples to {self.rawfile}")
+            os.makedirs(os.path.dirname(self.rawfile), exist_ok=True)
+            con = sqlite3.connect(self.rawfile, isolation_level="IMMEDIATE")
+            cur = con.cursor()
+            cur.execute("CREATE TABLE samples(timestamp float, data blob)")
+            cur.execute("CREATE TABLE settings(name, value)")
+            cur.execute("INSERT INTO settings(name, value) values (?, ?)", ("freq", self.sampler.freq) )
+            con.commit()
+
         # start the sampler
         self.sampler.start()
 
@@ -25,6 +41,8 @@ class BaseLogger:
             # wait for new samples
             try:
                 timestamp, sample = self.sampler.get(timeout = 1 ) # to allow windows to use CTRL+C
+                if cur:
+                    cur.execute("INSERT INTO samples(timestamp, data) VALUES (?, ?)", ( timestamp, sample ))
                 self.process_sample(timestamp, sample)
 
             except Empty:
@@ -34,6 +52,17 @@ class BaseLogger:
                 l.warn("stopping")
                 break
 
+            except Exception as e:
+                # might have been something in the processing that triggered the exception
+                # so let's see if we can save it for later
+                if con:
+                    con.commit()
+                
+                # keep going?
+                l.error(e)
+
+        if con:
+            con.commit()
         self.save_log()
         self.sampler.stop()
         self.sampler.join()
@@ -80,7 +109,7 @@ class BaseLogger:
         # add the channels
 
         for channel in channels:
-            cd = get_channel_definition(channel, self.freq)
+            cd = get_channel_definition(channel, self.sampler.freq)
             self.log.add_channel(cd)
 
     def add_samples(self, samples):

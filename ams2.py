@@ -30,9 +30,10 @@ def main():
     if args.loadraw:
         sampler = RawSampler(rawfile=args.loadraw)
     else:
-        sampler = AMS2Sampler(freq=args.freq, rawfile=rawfile)
+        sampler = AMS2Sampler(freq=args.freq)
 
     logger = AMS2Logger(
+        rawfile=rawfile,
         sampler=sampler,
         filetemplate=filetemplate
     )

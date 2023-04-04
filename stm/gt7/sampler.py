@@ -8,8 +8,8 @@ PACKETSIZE = 1500
 
 class GT7Sampler(BaseSampler):
 
-    def __init__(self, addr=None, port=DEFAULT_PORT, hb_port=DEFAULT_HEARTBEAT_PORT, rawfile=None):
-        super().__init__(rawfile=rawfile)
+    def __init__(self, addr=None, port=DEFAULT_PORT, hb_port=DEFAULT_HEARTBEAT_PORT, freq=None):
+        super().__init__(freq=freq)
         self.hb_addr = (addr, hb_port)
 
         # Create a UDP socket for the inbound packets

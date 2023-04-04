@@ -9,20 +9,15 @@ DEFAULT_FREQ=20 # Hz
 
 class AMS2Sampler(BaseSampler):
 
-    def __init__(self, shmem_name=SHAREDMEM_NAME, rawfile=None, freq=DEFAULT_FREQ):
-        super().__init__(rawfile=rawfile)
+    def __init__(self, shmem_name=SHAREDMEM_NAME, freq=None):
+        super().__init__()
         self.running = False
         self.shmem_name = shmem_name
+        if not freq:
+            freq = DEFAULT_FREQ
         self.freq = freq
 
-
-
     def run(self):
-
-        # you have to do this in the thread otherwise sqlite3 will complain when you try to save samples
-        self.save_settings({
-            "freq": self.freq
-        })
 
         self.running = True # this is set to False in BaseSampler when we are done
         wait = None
