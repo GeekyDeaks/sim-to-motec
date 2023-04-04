@@ -15,7 +15,7 @@ from stm.ams2 import AMS2Sampler, AMS2Logger
 def main():
 
     parser = argparse.ArgumentParser(description="Log AMS2 samples to MoTeC")
-    parser.add_argument("--freq", type=int, default=20)
+    parser.add_argument("--freq", type=int, default=20, help="frequency (Hz) to collect samples")
     parser.add_argument("--saveraw", help="save raw samples", action="store_true")
     parser.add_argument("--loadraw", help="load raw samples", default="")
     args = parser.parse_args()
