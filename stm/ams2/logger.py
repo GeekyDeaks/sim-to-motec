@@ -14,6 +14,8 @@ class AMS2Logger(BaseLogger):
                 'lat', 'long',
                 'glat', 'gvert', 'glong',
                 'suspfl', 'suspfr', 'susprl', 'susprr',
+                'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr',
+                'braketempfl', 'braketempfr', 'braketemprl', 'braketemprr'
                 ]
 
     def __init__(self,
@@ -110,7 +112,9 @@ class AMS2Logger(BaseLogger):
             glat,
             gvert,
             -glong,
-            *p.mSuspensionTravel
+            *p.mSuspensionTravel,
+            *p.mTyreTemp,
+            *p.mBrakeTempCelsius
         ])
 
 

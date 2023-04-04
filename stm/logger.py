@@ -59,7 +59,8 @@ class BaseLogger:
                     con.commit()
                 
                 # keep going?
-                l.error(e)
+                raise e
+                #l.error(e)
 
         if con:
             con.commit()
