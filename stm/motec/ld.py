@@ -260,6 +260,7 @@ class MotecLog(MotecBase):
         self.type = getattr(self, "type", "ADL")
         self.version = getattr(self, "version", 420)
         self.serial = getattr(self, "serial", 12007)
+        self.pad23 = getattr(self, "pad23", b"2208d200")
 
     def add_channel(self, channel):
         if not isinstance(channel, MotecChannel):

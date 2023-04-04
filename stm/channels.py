@@ -239,7 +239,7 @@ CHANNELS = {
         "shortname": "WSpd RR",
         "units": "mph"
     },
-    "dposfl": {
+    "suspfl": {
         "datatype": 5,
         "datasize": 4,
         "freq": 20,
@@ -247,11 +247,11 @@ CHANNELS = {
         "multiplier": 1,
         "scale": 1,
         "decplaces": 3,
-        "name": "Damper Pos FL",
-        "shortname": "DPosHFL",
+        "name": "Susp Pos FL",
+        "shortname": "SuspFL",
         "units": "m"
     },
-    "dposfr": {
+    "suspfr": {
         "datatype": 5,
         "datasize": 4,
         "freq": 20,
@@ -259,11 +259,11 @@ CHANNELS = {
         "multiplier": 1,
         "scale": 1,
         "decplaces": 3,
-        "name": "Damper Pos FR",
-        "shortname": "DPosHFR",
+        "name": "Susp Pos FR",
+        "shortname": "SuspFR",
         "units": "m"
     },
-    "dposrl": {
+    "susprl": {
         "datatype": 5,
         "datasize": 4,
         "freq": 20,
@@ -271,11 +271,11 @@ CHANNELS = {
         "multiplier": 1,
         "scale": 1,
         "decplaces": 3,
-        "name": "Damper Pos RL",
-        "shortname": "DPosHRL",
+        "name": "Susp Pos RL",
+        "shortname": "SuspHRL",
         "units": "m"
     },
-    "dposrr": {
+    "susprr": {
         "datatype": 5,
         "datasize": 4,
         "freq": 20,
@@ -283,8 +283,8 @@ CHANNELS = {
         "multiplier": 1,
         "scale": 1,
         "decplaces": 3,
-        "name": "Damper Pos RR",
-        "shortname": "DPosHRR",
+        "name": "Susp Pos RR",
+        "shortname": "SuspRR",
         "units": "m"
     }
 }

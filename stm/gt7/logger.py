@@ -12,7 +12,7 @@ class GT7Logger(BaseLogger):
 
     channels = ['beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'speed', 'lat', 'long',
                 'velx', 'vely', 'velz', 'glat', 'gvert', 'glong', 
-                'dposfl', 'dposfr', 'dposrl', 'dposrr',
+                'suspfl', 'suspfr', 'susprl', 'susprr',
                 'wspdfl', 'wspdfr', 'wspdrl', 'wspdrr']
 
     def __init__(self, 
