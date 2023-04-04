@@ -2,11 +2,6 @@ CHANNELS = {
     "gear": {
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
-        "decplaces": 0,
         "name": "Gear",
         "shortname": "Gear",
         "units": ""
@@ -14,11 +9,6 @@ CHANNELS = {
     "throttle": {
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
-        "decplaces": 0,
         "name": "Throttle Pos",
         "shortname": "Thr Pos",
         "units": "%"
@@ -26,11 +16,6 @@ CHANNELS = {
     "brake": {
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
-        "decplaces": 0,
         "name": "Brake Pos",
         "shortname": "Brk Pos",
         "units": "%"
@@ -38,10 +23,6 @@ CHANNELS = {
     "steer": {
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 2,
         "name": "Steered Angle",
         "shortname": "Str Ang",
@@ -50,22 +31,12 @@ CHANNELS = {
     "speed": {
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
-        "decplaces": 0,
         "name": "Ground Speed",
         "shortname": "Gnd Spd",
         "units": "mph"
     },
     "lat": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 7,
         "name": "GPS Latitude",
         "shortname": "GPSLat",
@@ -73,11 +44,6 @@ CHANNELS = {
     },
     "long": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 7,
         "name": "GPS Longitude",
         "shortname": "GPSLong",
@@ -86,11 +52,6 @@ CHANNELS = {
     "beacon": {
         "datatype": 0,
         "datasize": 2,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
-        "decplaces": 0,
         "name": "Beacon",
         "shortname": "Beacon",
         "units": ""
@@ -98,11 +59,6 @@ CHANNELS = {
     "br2": {
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
-        "decplaces": 0,
         "name": "BR2 Beacon Number",
         "shortname": "BR2 Num",
         "units": ""
@@ -110,11 +66,6 @@ CHANNELS = {
     "lap": {
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
-        "decplaces": 0,
         "name": "Lap Number",
         "shortname": "Lap",
         "units": ""
@@ -122,22 +73,12 @@ CHANNELS = {
     "rpm": {
         "datatype": 3,
         "datasize": 2,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
-        "decplaces": 0,
         "name": "Engine RPM",
         "shortname": "RPM",
         "units": "rpm"
     },
     "velx": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 3,
         "name": "Velocity X",
         "shortname": "VELX",
@@ -145,11 +86,6 @@ CHANNELS = {
     },
     "vely": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 3,
         "name": "Velocity Y",
         "shortname": "VELY",
@@ -157,11 +93,6 @@ CHANNELS = {
     },
     "velz": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 3,
         "name": "Velocity Z",
         "shortname": "VELZ",
@@ -169,11 +100,6 @@ CHANNELS = {
     },
     "glat": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 2,
         "name": "G Force Lat",
         "shortname": "G Lat",
@@ -181,11 +107,6 @@ CHANNELS = {
     },
     "gvert": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 2,
         "name": "G Force Vert",
         "shortname": "G Vert",
@@ -193,11 +114,6 @@ CHANNELS = {
     },
     "glong": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 2,
         "name": "G Force Long",
         "shortname": "G Long",
@@ -205,11 +121,6 @@ CHANNELS = {
     },
     "wspdfl": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 1,
         "name": "Wheel Speed FL",
         "shortname": "WSpd FL",
@@ -217,11 +128,6 @@ CHANNELS = {
     },
     "wspdfr": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 1,
         "name": "Wheel Speed FR",
         "shortname": "WSpd FR",
@@ -229,11 +135,6 @@ CHANNELS = {
     },
     "wspdrl": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 1,
         "name": "Wheel Speed RL",
         "shortname": "WSpd RL",
@@ -241,11 +142,6 @@ CHANNELS = {
     },
     "wspdrr": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 1,
         "name": "Wheel Speed RR",
         "shortname": "WSpd RR",
@@ -253,11 +149,6 @@ CHANNELS = {
     },
     "suspfl": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 3,
         "name": "Susp Pos FL",
         "shortname": "SuspFL",
@@ -265,11 +156,6 @@ CHANNELS = {
     },
     "suspfr": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 3,
         "name": "Susp Pos FR",
         "shortname": "SuspFR",
@@ -277,11 +163,6 @@ CHANNELS = {
     },
     "susprl": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 3,
         "name": "Susp Pos RL",
         "shortname": "SuspHRL",
@@ -289,23 +170,69 @@ CHANNELS = {
     },
     "susprr": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 3,
         "name": "Susp Pos RR",
         "shortname": "SuspRR",
         "units": "m"
     },
+    "tyretempfl": {
+        "datatype": 5,
+        "decplaces": 3,
+        "name": "Tyre Temp FL",
+        "shortname": "TTempFL",
+        "units": "C"
+    },
+    "tyretempfr": {
+        "datatype": 5,
+        "decplaces": 3,
+        "name": "Tyre Temp FR",
+        "shortname": "TTempFR",
+        "units": "C"
+    },
+    "tyretemprl": {
+        "datatype": 5,
+        "decplaces": 3,
+        "name": "Tyre Temp RL",
+        "shortname": "TTempRL",
+        "units": "C"
+    },
+    "tyretemprr": {
+        "datatype": 5,
+        "decplaces": 3,
+        "name": "Tyre Temp RR",
+        "shortname": "TTempRR",
+        "units": "C"
+    },
+    "braketempfl": {
+        "datatype": 5,
+        "decplaces": 3,
+        "name": "Brake Temp FL",
+        "shortname": "BTempFL",
+        "units": "C"
+    },
+    "braketempfr": {
+        "datatype": 5,
+        "decplaces": 3,
+        "name": "Brake Temp FR",
+        "shortname": "BTempFR",
+        "units": "C"
+    },
+    "braketemprl": {
+        "datatype": 5,
+        "decplaces": 3,
+        "name": "Brake Temp RL",
+        "shortname": "BTempRL",
+        "units": "C"
+    },
+    "braketemprr": {
+        "datatype": 5,
+        "decplaces": 3,
+        "name": "Brake Temp RR",
+        "shortname": "BTempRR",
+        "units": "C"
+    },
     "debug1": {
         "datatype": 5,
-        "datasize": 4,
-        "freq": 20,
-        "shift": 0,
-        "multiplier": 1,
-        "scale": 1,
         "decplaces": 2,
         "name": "Debug 1",
         "shortname": "Debug1",
@@ -324,6 +251,15 @@ def get_channel_definition(name, freq=None):
     if freq is None:
         freq = 20
 
-    cd = dict(CHANNELS[name])
-    cd["freq"] = freq
+    # get some defaults
+    cd = {
+        "datasize": 4,
+        "freq": freq,
+        "shift": 0,
+        "multiplier": 1,
+        "scale": 1,
+        "decplaces": 0
+    }
+
+    cd.update(dict(CHANNELS[name]))
     return cd
