@@ -8,8 +8,12 @@ l = getLogger(__name__)
 
 class AMS2Logger(BaseLogger):
 
-    channels = ['beacon', 'br2', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'steer', 'speed', 'lat', 'long',
-                'glat', 'gvert', 'glong'
+    channels = [
+                'beacon', 'br2', 'lap', 'rpm', 'gear', 
+                'throttle', 'brake', 'steer', 'speed', 
+                'lat', 'long',
+                'glat', 'gvert', 'glong',
+                'suspfl', 'suspfr', 'susprl', 'susprr',
                 ]
 
     def __init__(self,
@@ -99,13 +103,14 @@ class AMS2Logger(BaseLogger):
             p.mGear,
             p.mThrottle * 100,
             p.mBrake * 100,
-            p.mSteering * 50,
+            p.mSteering * 50, # arbitratry scale based on some testing
             p.mSpeed * 2.23693629, # m/s to mph
             lat,
             long,
             glat,
             gvert,
-            -glong
+            -glong,
+            *p.mSuspensionTravel
         ])
 
 

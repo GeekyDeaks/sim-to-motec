@@ -1,5 +1,6 @@
 import unittest
 import os
+from stm.ams2.shmem import Wheels
 
 PATH=os.path.dirname(__file__)
 
@@ -57,6 +58,22 @@ class TestAMS2SharedMemory(unittest.TestCase):
 
             sm = AMS2SharedMemory(fin.read())
             self.assertAlmostEqual(sm.mLocalAcceleration.x, -0.0003, places=4)
+
+    def test_inrace_suspension(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+
+            sm = AMS2SharedMemory(fin.read())
+            expected  = Wheels(0.07931163161993027, 0.08020654320716858, 
+                               0.08346261084079742, 0.08160709589719772)
+            self.assertEqual(sm.mSuspensionTravel, expected)
+
+    def test_inrace_braketemp(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+
+            sm = AMS2SharedMemory(fin.read())
+            expected  = Wheels(121.34285736083984, 121.34252166748047, 
+                               121.5243148803711, 121.5244140625)
+            self.assertEqual(sm.mBrakeTempCelsius, expected)
 
 if __name__ == '__main__':
     unittest.main()

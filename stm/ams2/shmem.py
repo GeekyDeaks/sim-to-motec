@@ -1,6 +1,9 @@
 from struct import Struct
 from enum import Enum
+from collections import namedtuple
 from stm.maths import Vector
+
+Wheels = namedtuple("Wheels", ["fl", "fr", "rl", "rr"])
 
 class AMS2GameState(Enum):
     EXITED = 0
@@ -118,6 +121,39 @@ class AMS2SharedMemory:
         "3f"    # mWorldVelocity
         "3f"    # mAngularVelocity
         "3f"    # mLocalAcceleration
+        "12x"   # mWorldAcceleration
+        "12x"   # mExtentsCentre
+        "16x"   # mTyreFlags
+        "16x"   # mTerrain
+        "16x"   # mTyreY
+        "16x"   # mTyreRPS
+        "16x"   # mTyreSlipSpeed
+        "4f"    # mTyreTemp
+        "16x"   # mTyreGrip
+        "16x"   # mTyreHeightAboveGround
+        "16x"   # mTyreLateralStiffness
+        "16x"   # mTyreWear
+        "16x"   # mBrakeDamage
+        "16x"   # mSuspensionDamage
+        "4f"    # mBrakeTempCelsius
+        "16x"   # mTyreTreadTemp
+        "16x"   # mTyreLayerTemp
+        "16x"   # mTyreCarcassTemp
+        "16x"   # mTyreRimTemp
+        "16x"   # mTyreInternalAirTemp
+        "4x"    # mCrashState / I / 4x
+        "4x"    # mAeroDamage
+        "4x"    # mEngineDamage
+        "4x"    # mAmbientTemperature
+        "4x"    # mTrackTemperature
+        "4x"    # mRainDensity 
+        "4x"    # mWindSpeed
+        "4x"    # mWindDirectionX
+        "4x"    # mWindDirectionY
+        "4x"    # mCloudBrightness
+        "4x"    # mSequenceNumber
+        "16x"   # mWheelLocalPositionY      
+        "4f"    # mSuspensionTravel
 
     )
 
@@ -164,7 +200,10 @@ class AMS2SharedMemory:
             lvx, lvy, lvz, # mLocalVelocity
             wvx, wvy, wvz, # mWorldVelocity
             avx, avy, avz, # mAngularVelocity
-            lax, lay, laz # mLocalAcceleration
+            lax, lay, laz, # mLocalAcceleration
+            ttfl, ttfr, ttrl, ttrr, # mTyreTemp
+            btfl, btfr, btrl, btrr, # mBrakeTempCelsius
+            stfl, stfr, strl, sttrr # mSuspensionTravel
 
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
@@ -173,6 +212,9 @@ class AMS2SharedMemory:
         self.mTrackLocation = mTrackLocation.decode('utf-8').rstrip('\0')
         self.mTrackVariation = mTrackVariation.decode('utf-8').rstrip('\0')
         self.mLocalAcceleration = Vector(lax, lay, laz)
+        self.mTyreTemp = Wheels(ttfl, ttfr, ttrl, ttrr)
+        self.mBrakeTempCelsius = Wheels(btfl, btfr, btrl, btrr)
+        self.mSuspensionTravel = Wheels(stfl, stfr, strl, sttrr)
 
         self.participants = []
         #  unpack the participants
