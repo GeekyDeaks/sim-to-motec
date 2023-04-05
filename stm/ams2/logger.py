@@ -15,7 +15,8 @@ class AMS2Logger(BaseLogger):
                 'glat', 'gvert', 'glong',
                 'suspfl', 'suspfr', 'susprl', 'susprr',
                 'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr',
-                'braketempfl', 'braketempfr', 'braketemprl', 'braketemprr'
+                'braketempfl', 'braketempfr', 'braketemprl', 'braketemprr',
+                'lap', 'laptime'
                 ]
 
     def __init__(self,
@@ -73,15 +74,7 @@ class AMS2Logger(BaseLogger):
             self.new_log(event=event, channels=self.channels)
 
         if p.driver.mCurrentLap > lastp.driver.mCurrentLap:
-            # figure out the laptimes
-            if p.mLastLapTime > 0:
-                laptime = p.mLastLapTime
-            else:
-                # guess it from the number of samples
-                laptime = self.lap_samples / freq
-
-            self.add_lap(laptime)
-            l.info(f"adding lap {self.last_lap}, laptime: {laptime:.3f}, samples: {self.lap_samples}")
+            self.add_lap(laptime=p.mLastLapTime, lap_num=self.last_lap, samples=self.lap_samples, freq=freq)
             self.lap_samples = 0
 
         if p.driver.mCurrentSector >= 0 and p.driver.mCurrentSector != lastp.driver.mCurrentSector:
@@ -114,7 +107,9 @@ class AMS2Logger(BaseLogger):
             -glong,
             *p.mSuspensionTravel,
             *p.mTyreTemp,
-            *p.mBrakeTempCelsius
+            *p.mBrakeTempCelsius,
+            p.driver.mCurrentLap,
+            p.mCurrentTime
         ])
 
 

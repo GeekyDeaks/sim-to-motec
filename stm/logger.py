@@ -116,7 +116,21 @@ class BaseLogger:
     def add_samples(self, samples):
         self.log.add_samples(samples)
 
-    def add_lap(self, laptime):
+    def add_lap(self, laptime=None, lap_num=None, samples=None, freq=None):
+        # sanity check the lap vs samples
+        if samples and freq:
+            sample_time = samples / freq
+            # check we have a sensible laptime for the number of samples
+            if not laptime:
+                laptime = sample_time
+            elif laptime > 0 and abs(sample_time - laptime) > (2 / freq):
+                # just use the sample_time
+                l.warning(f"lap {lap_num}, ignoring time {laptime:.3f} as too far from sample period {sample_time:.3f}")
+                laptime = sample_time
+
+            l.info(f"adding lap {lap_num}, laptime: {laptime:.3f},"
+                    f" samples: {samples}, sample_time: {sample_time:.3f}")
+
         self.logx.add_lap(laptime)
 
     def save_log(self):

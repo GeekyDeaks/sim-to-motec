@@ -177,66 +177,76 @@ CHANNELS = {
     },
     "tyretempfl": {
         "datatype": 5,
-        "decplaces": 3,
+        "decplaces": 2,
         "name": "Tyre Temp FL",
         "shortname": "TTempFL",
         "units": "C"
     },
     "tyretempfr": {
         "datatype": 5,
-        "decplaces": 3,
+        "decplaces": 2,
         "name": "Tyre Temp FR",
         "shortname": "TTempFR",
         "units": "C"
     },
     "tyretemprl": {
         "datatype": 5,
-        "decplaces": 3,
+        "decplaces": 2,
         "name": "Tyre Temp RL",
         "shortname": "TTempRL",
         "units": "C"
     },
     "tyretemprr": {
         "datatype": 5,
-        "decplaces": 3,
+        "decplaces": 2,
         "name": "Tyre Temp RR",
         "shortname": "TTempRR",
         "units": "C"
     },
     "braketempfl": {
         "datatype": 5,
-        "decplaces": 3,
+        "decplaces": 2,
         "name": "Brake Temp FL",
         "shortname": "BTempFL",
         "units": "C"
     },
     "braketempfr": {
         "datatype": 5,
-        "decplaces": 3,
+        "decplaces": 2,
         "name": "Brake Temp FR",
         "shortname": "BTempFR",
         "units": "C"
     },
     "braketemprl": {
         "datatype": 5,
-        "decplaces": 3,
+        "decplaces": 2,
         "name": "Brake Temp RL",
         "shortname": "BTempRL",
         "units": "C"
     },
     "braketemprr": {
         "datatype": 5,
-        "decplaces": 3,
+        "decplaces": 2,
         "name": "Brake Temp RR",
         "shortname": "BTempRR",
         "units": "C"
     },
+    "lap": {
+        "datatype": 3,
+        "datasize": 2,
+        "name": "Lap Number",
+        "shortname": "Lap",
+    },
+    "laptime": {
+        "decplaces": 3,
+        "name": "Lap Time",
+        "shortname": "LapTime",
+        "units": "s"
+    },
     "debug1": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Debug 1",
         "shortname": "Debug1",
-        "units": ""
     }
 }
 
@@ -253,12 +263,14 @@ def get_channel_definition(name, freq=None):
 
     # get some defaults
     cd = {
+        "datatype": 5,
         "datasize": 4,
         "freq": freq,
         "shift": 0,
         "multiplier": 1,
         "scale": 1,
-        "decplaces": 0
+        "decplaces": 0,
+        "units": ""
     }
 
     cd.update(dict(CHANNELS[name]))
