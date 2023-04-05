@@ -39,9 +39,7 @@ class GT7Logger(BaseLogger):
         )
 
         self.last_packet = None
-        self.lap_samples = 0
         self.skip_samples = 0
-        self.last_tick = None
 
     def process_sample(self, timestamp, sample):
 
@@ -82,7 +80,6 @@ class GT7Logger(BaseLogger):
 
         if not self.log:
             new_log = True
-            self.lap_samples = 0
             self.skip_samples = 3
             then = datetime.fromtimestamp(timestamp)
             if self.event.vehicle:
@@ -115,8 +112,7 @@ class GT7Logger(BaseLogger):
             # figure out the laptimes
             beacon = 1
             laptime = currp.last_laptime / 1000.0
-            self.add_lap(laptime=laptime, lap_num=lastp.current_lap, samples=self.lap_samples, freq=freq)
-            self.lap_samples = 0
+            self.add_lap(laptime=laptime, lap=lastp.current_lap)
 
         if (currp.tick % 1000) == 0 or new_log:
             l.info(
@@ -129,7 +125,6 @@ class GT7Logger(BaseLogger):
                 f" {currp.car_code:5}"
             )
 
-        self.lap_samples += 1
         # do some conversions
         # gear, throttle, brake, speed, z, x
         lat, long = gps.convert(x=currp.position.x, z=-currp.position.z)

@@ -27,7 +27,6 @@ class AMS2Logger(BaseLogger):
         super().__init__(rawfile=rawfile, sampler=sampler, filetemplate=filetemplate)
 
         self.last_packet = None
-        self.lap_samples = 0
 
     def process_sample(self, timestamp, sample):
 
@@ -74,14 +73,11 @@ class AMS2Logger(BaseLogger):
             self.new_log(event=event, channels=self.channels)
 
         if p.driver.mCurrentLap > lastp.driver.mCurrentLap:
-            self.add_lap(laptime=p.mLastLapTime, lap_num=self.last_lap, samples=self.lap_samples, freq=freq)
-            self.lap_samples = 0
+            self.add_lap(laptime=p.mLastLapTime, lap=self.last_lap)
 
         if p.driver.mCurrentSector >= 0 and p.driver.mCurrentSector != lastp.driver.mCurrentSector:
             br2 = p.driver.mCurrentSector + 1
             l.info(f"{self.lap_samples}, setting beacon {br2} as moving from sector {lastp.driver.mCurrentSector} to {p.driver.mCurrentSector}")
-            
-        self.lap_samples += 1
 
         self.last_lap = p.driver.mCurrentLap
         self.last_session = p.mSessionState
