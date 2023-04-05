@@ -114,15 +114,8 @@ class GT7Logger(BaseLogger):
         if currp.current_lap > lastp.current_lap:
             # figure out the laptimes
             beacon = 1
-            sampletime = self.lap_samples / freq
-            if currp.last_laptime > 0:
-                laptime = currp.last_laptime / 1000.0
-            else:
-                # guess it from the number of samples
-                laptime = sampletime
-
-            self.add_lap(laptime)
-            l.info(f"adding lap {lastp.current_lap}, laptime: {laptime:.3f}, samples: {self.lap_samples}, sampletime: {sampletime:.3f}")
+            laptime = currp.last_laptime / 1000.0
+            self.add_lap(laptime=laptime, lap_num=lastp.current_lap, samples=self.lap_samples, freq=freq)
             self.lap_samples = 0
 
         if (currp.tick % 1000) == 0 or new_log:
