@@ -45,7 +45,7 @@ class GT7DataPacket:
         "4x"  # OIL_PRESSURE           / f   / 4x  / 0x0054
         "4x"  # WATER_TEMP             / f   / 4x  / 0x0058
         "4x"  # OIL_TEMP               / f   / 4x  / 0x005C
-        "16x" # TYRES_TEMP             / 4f  / 16x / 0x0060
+        "4f"  # TYRES_TEMP             / 4f  / 16x / 0x0060
         "i"   # TICK                   / i   / 4x  / 0x0070
         "2h"  # LAPS                   / 2h  / 4x  / 0x0074
         "i"   # BEST_LAPTIME           / i   / 4x  / 0x0078
@@ -86,6 +86,7 @@ class GT7DataPacket:
             rw, rx, ry, rz,
             self.rpm,
             self.speed,
+            ttfl, ttfr, ttrl, ttrr,
             self.tick,
             self.current_lap,
             self.laps,
@@ -109,6 +110,7 @@ class GT7DataPacket:
         self.velocity = Vector(vx, vy, vz)
         self.rotation = Quaternion(rw, rx, ry, rz)
 
+        self.tyretemp = Wheels(ttfl, ttfr, ttrl, ttrr)
         self.wheelspeed = Wheels(wsfl, wsfr, wsrl, wsrr)
         self.wheelradius = Wheels(wrfl, wrfr, wrrl, wrrr)
         self.suspension = Wheels(susfl, susfr, susrl, susrr)
