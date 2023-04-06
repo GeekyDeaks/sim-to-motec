@@ -14,7 +14,9 @@ class GT7Logger(BaseLogger):
     channels = ['beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'speed', 'lat', 'long',
                 'velx', 'vely', 'velz', 'glat', 'gvert', 'glong', 
                 'suspfl', 'suspfr', 'susprl', 'susprr',
-                'wspdfl', 'wspdfr', 'wspdrl', 'wspdrr']
+                'wspdfl', 'wspdfr', 'wspdrl', 'wspdrr',
+                'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr',
+                ]
 
     def __init__(self,
                 rawfile=None,
@@ -38,6 +40,8 @@ class GT7Logger(BaseLogger):
             comment=comment,
             shortcomment=shortcomment
         )
+
+        self.current_event = None
 
         self.last_packet = None
         self.skip_samples = 0
@@ -91,17 +95,10 @@ class GT7Logger(BaseLogger):
             else:
                 vehicle = lookup_car_name(currp.car_code)
 
-            event = STMEvent(
-                name=self.event.name,
-                session=self.event.session,
-                vehicle=vehicle,
-                driver=self.event.driver,
-                venue=self.event.venue,
-                comment=self.event.comment,
-                shortcomment=self.event.shortcomment,
-                date = then.strftime('%d/%m/%Y'),
-                time = then.strftime('%H:%M:%S')
-            )
+            event = copy(self.event)
+            event.datetime = then.strftime("%Y-%m-%dT%H:%M:%S")
+            event.vehicle = vehicle
+            self.current_event = event
             self.new_log(channels=self.channels, event=event)
 
         if self.skip_samples > 0:
@@ -117,12 +114,14 @@ class GT7Logger(BaseLogger):
             beacon = 1
             laptime = currp.last_laptime / 1000.0
             self.add_lap(laptime=laptime, lap=lastp.current_lap)
-            self.track_detector.guess(lastp.position.x, lastp.position.z, currp.position.x, currp.position.z)
 
-            if self.track_detector.track_name:
-                event = copy(self.event)
-                event.venue = self.track_detector.track_name
-                self.update_event(event)
+            if not self.current_event.venue or self.track_detector.probability < .9:
+                # try and guess the track
+                self.track_detector.guess(lastp.position.x, lastp.position.z, currp.position.x, currp.position.z)
+
+                if self.track_detector.track_name:
+                    self.current_event.venue = self.track_detector.track_name
+                    self.update_event(event=self.current_event)
 
         else:
             self.track_detector.update(currp.position.x, currp.position.z)
@@ -169,7 +168,8 @@ class GT7Logger(BaseLogger):
             gvert,
             -glong,
             *currp.suspension,
-            *wheelspeed
+            *wheelspeed,
+            *currp.tyretemp
         ])
 
 

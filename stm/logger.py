@@ -4,6 +4,7 @@ from .channels import get_channel_definition
 import os
 import re
 import sqlite3
+from datetime import datetime
 from logging import getLogger
 l = getLogger(__name__)
 
@@ -92,8 +93,12 @@ class BaseLogger:
         if not event or not self.log:
             return
         
-        self.log.date = event.date
-        self.log.time = event.time
+        # convert the event datetime to MoTeC format
+        dt = datetime.fromisoformat(event.datetime)
+        self.log.date = dt.strftime('%d/%m/%Y')
+        self.log.time = dt.strftime('%H:%M:%S')
+        
+        self.log.datetime = event.datetime
         self.log.driver = event.driver
         self.log.vehicle = event.vehicle
         self.log.venue = event.venue

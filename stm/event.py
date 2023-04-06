@@ -1,11 +1,10 @@
-from datetime import datetime
+from datetime import datetime as dt
 
 class STMEvent:
 
     def __init__(self, 
                 name = "",
-                date = "",
-                time = "",
+                datetime = None,
                 driver = "",
                 vehicle = "",
                 venue = "",
@@ -13,20 +12,14 @@ class STMEvent:
                 session = "",
                 comment = "" ):
         
-        now = datetime.now()
+        if datetime is None:
+            datetime = dt.now().strftime("%Y-%m-%dT%H:%M:%S")
 
         if not comment and not shortcomment:
-            dt = now.strftime("%Y-%m-%d %H:%M:%S")
-            shortcomment = f"converted by sim-to-motec at {dt}"
+            shortcomment = f"converted by sim-to-motec at {datetime}"
 
-        if not date and not time:
-            date = now.strftime('%d/%m/%Y')
-            time = now.strftime('%H:%M:%S')
-
-        self.datetime = datetime.strptime(date, "%d/%m/%Y").strftime("%Y-%m-%d") + "T" + time
+        self.datetime = datetime
         self.name = name
-        self.date = date
-        self.time = time
         self.driver = driver
         self.vehicle = vehicle
         self.venue = venue

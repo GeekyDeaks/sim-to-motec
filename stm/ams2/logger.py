@@ -63,8 +63,7 @@ class AMS2Logger(BaseLogger):
         if not self.log:
             then = datetime.fromtimestamp(timestamp)
             event = STMEvent(
-                date=then.strftime('%d/%m/%Y'),
-                time=then.strftime('%H:%M:%S'),
+                datetime=then.strftime("%Y-%m-%dT%H:%M:%S"),
                 session=AMS2SessionState(p.mSessionState).name.title(),
                 vehicle=p.mCarName,
                 driver=p.driver.mName,
