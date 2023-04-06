@@ -16,7 +16,8 @@ class AMS2Logger(BaseLogger):
                 'suspfl', 'suspfr', 'susprl', 'susprr',
                 'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr',
                 'braketempfl', 'braketempfr', 'braketemprl', 'braketemprr',
-                'lap', 'laptime'
+                'lap', 'laptime',
+                'racestate'
                 ]
 
     def __init__(self,
@@ -46,11 +47,6 @@ class AMS2Logger(BaseLogger):
         if AMS2GameState(p.mGameState) != AMS2GameState.INGAME_PLAYING:
             self.save_log()
             return
-        
-        # check if we are on the track
-        if AMS2RaceState(p.mRaceState) != AMS2RaceState.RACING:
-            self.save_log()
-            return
 
         # get the first participant (us)
         if not len(p.participants):
@@ -71,7 +67,7 @@ class AMS2Logger(BaseLogger):
             )
             self.new_log(event=event, channels=self.channels)
 
-        if p.driver.mCurrentLap > lastp.driver.mCurrentLap:
+        if p.driver.mCurrentLap > lastp.driver.mCurrentLap or p.driver.mCurrentSector < lastp.driver.mCurrentSector:
             self.add_lap(laptime=p.mLastLapTime, lap=self.last_lap)
 
         if p.driver.mCurrentSector >= 0 and p.driver.mCurrentSector != lastp.driver.mCurrentSector:
@@ -104,7 +100,8 @@ class AMS2Logger(BaseLogger):
             *p.mTyreTemp,
             *p.mBrakeTempCelsius,
             p.driver.mCurrentLap,
-            p.mCurrentTime
+            p.mCurrentTime,
+            p.mRaceState
         ])
 
 

@@ -243,6 +243,12 @@ CHANNELS = {
         "shortname": "LapTime",
         "units": "s"
     },
+    "racestate": {
+        "datatype": 3,
+        "datasize": 2,
+        "name": "Race Status",
+        "shortname": "RState",
+    },
     "debug1": {
         "decplaces": 2,
         "name": "Debug 1",
