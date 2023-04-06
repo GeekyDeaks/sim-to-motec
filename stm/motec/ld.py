@@ -247,7 +247,7 @@ class MotecLog(MotecBase):
         ( "126s", None)
     ])
 
-    def __init__(self, state):
+    def __init__(self, state = None):
         super().__init__(state)
         if not getattr(self, "channels", None):
             self.channels = []

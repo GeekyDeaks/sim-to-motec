@@ -16,7 +16,7 @@ def main():
 
     parser = argparse.ArgumentParser(description="Log GT7 samples to MoTeC")
     parser.add_argument("addr", type=str, help="ip address of playstation or raw file")
-    parser.add_argument("--name", default="test-motec", help="name of the file (used for filename prefix)")
+    parser.add_argument("--name", default="", help="name of the file (used for filename prefix)")
     parser.add_argument("--driver", type=str, default="", help="Driver name")
     parser.add_argument("--session", type=str, default="", help="Session e.g. Practice, Qualify, Race")
     parser.add_argument("--vehicle", type=str, default="", help="Override name of vehicle")

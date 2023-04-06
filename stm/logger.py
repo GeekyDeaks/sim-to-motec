@@ -76,6 +76,35 @@ class BaseLogger:
         if self.log:
             self.save_log()
 
+        self.log = MotecLog()
+        self.update_event(event)
+
+        l.info(f"starting new log {self.filename}")
+
+        self.logx = MotecLogExtra()
+        # add the channels
+
+        for channel in channels:
+            cd = get_channel_definition(channel, self.sampler.freq)
+            self.log.add_channel(cd)
+
+    def update_event(self, event=None):
+        if not event or not self.log:
+            return
+        
+        self.log.date = event.date
+        self.log.time = event.time
+        self.log.driver = event.driver
+        self.log.vehicle = event.vehicle
+        self.log.venue = event.venue
+        self.log.comment = event.shortcomment
+        self.log.event = MotecEvent({
+            "name": event.name,
+            "session": event.session,
+            "comment": event.comment,
+            "venuepos": 0
+        })
+
         template_vars = {}
         for k, v in vars(event).items():
             if v is not None:
@@ -89,30 +118,6 @@ class BaseLogger:
         filename = self.filetemplate.format(**template_vars)
         filename = re.sub(r'_+', '_', filename)
         self.filename = re.sub(r'/_', '/', filename)
-
-        l.info(f"starting new log {self.filename}")
-
-        self.log = MotecLog({
-            "date": event.date,
-            "time": event.time,
-            "driver": event.driver,
-            "vehicle": event.vehicle,
-            "venue": event.venue,
-            "comment":event.shortcomment,
-            "event": MotecEvent({
-                "name": event.name,
-                "session": event.session,
-                "comment": event.comment,
-                "venuepos": 0
-            })
-        })
-
-        self.logx = MotecLogExtra()
-        # add the channels
-
-        for channel in channels:
-            cd = get_channel_definition(channel, self.sampler.freq)
-            self.log.add_channel(cd)
 
     def add_samples(self, samples):
         self.log.add_samples(samples)

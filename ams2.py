@@ -16,8 +16,9 @@ def main():
 
     parser = argparse.ArgumentParser(description="Log AMS2 samples to MoTeC")
     parser.add_argument("--freq", type=int, default=20, help="frequency (Hz) to collect samples")
-    parser.add_argument("--saveraw", help="save raw samples", action="store_true")
-    parser.add_argument("--loadraw", help="load raw samples", default="")
+    parser.add_argument("--saveraw", help="save raw samples to an sqlite3 db for later analysis", action="store_true")
+    parser.add_argument("--loadraw", help="load raw samples from an sqlite3 db", default="")
+
     args = parser.parse_args()
 
     filetemplate = os.path.join("logs", "ams2", "{name}_{driver}_{venue}_{vehicle}_{datetime}_{session}")

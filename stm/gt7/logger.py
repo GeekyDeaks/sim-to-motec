@@ -5,6 +5,7 @@ from datetime import datetime
 from copy import copy
 from .packet import GT7DataPacket
 from .db.cars import lookup_car_name
+from .db.tracks import GT7TrackDetector
 from logging import getLogger
 l = getLogger(__name__)
 
@@ -40,6 +41,8 @@ class GT7Logger(BaseLogger):
 
         self.last_packet = None
         self.skip_samples = 0
+        self.track = None
+        self.track_detector = None
 
     def process_sample(self, timestamp, sample):
 
@@ -79,6 +82,7 @@ class GT7Logger(BaseLogger):
             return
 
         if not self.log:
+            self.track_detector = GT7TrackDetector()
             new_log = True
             self.skip_samples = 3
             then = datetime.fromtimestamp(timestamp)
@@ -113,6 +117,15 @@ class GT7Logger(BaseLogger):
             beacon = 1
             laptime = currp.last_laptime / 1000.0
             self.add_lap(laptime=laptime, lap=lastp.current_lap)
+            self.track_detector.guess(lastp.position.x, lastp.position.z, currp.position.x, currp.position.z)
+
+            if self.track_detector.track_name:
+                event = copy(self.event)
+                event.venue = self.track_detector.track_name
+                self.update_event(event)
+
+        else:
+            self.track_detector.update(currp.position.x, currp.position.z)
 
         if (currp.tick % 1000) == 0 or new_log:
             l.info(

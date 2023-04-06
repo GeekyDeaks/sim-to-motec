@@ -14,7 +14,7 @@ Currently supports AMS2 and GT7
 
 # GT7
 
-Convert UDP packets from the GT7 telemetry to a MoTeC i2 log file.  Currently can determine the car, but not the venue/track 
+Convert UDP packets from the GT7 telemetry to a MoTeC i2 log file.  Currently can determine the car, and potentially the venue/track 
 which is required for MoTeC to generate a track map from the fake GPS. Expects UDP samples to arrive at 60Hz and will pad
 missing samples, so unlikely to work correctly with 120Hz or VRR without changes to the sampling or logging logic.
 
@@ -22,7 +22,7 @@ A new i2 log file will be created each time the logic detects a session change, 
 
 Example:
 
-    python gt7.py 192.168.1.101 --driver "Wilma Cargo" --venue "Brands Hatch"
+    python gt7.py 192.168.1.101 --driver "Wilma Cargo"
 
 Usage:
 
@@ -37,7 +37,7 @@ Usage:
         --driver DRIVER    Driver name
         --session SESSION  Session e.g. Practice, Qualify, Race
         --vehicle VEHICLE  Override name of vehicle
-        --venue VENUE      Venue/Track name, MoTeC will not generate a track map without this
+        --venue VENUE      Override Venue/Track name
         --freq FREQ        frequency to collect samples, currently ignored
         --saveraw          save raw samples to an sqlite3 db for later analysis
         --loadraw          load raw samples from an sqlite3 db
@@ -45,7 +45,11 @@ Usage:
 
 The CSV file containing the car IDs used to determine the vehicle name can be updated via the following command:
 
-    curl https://raw.githubusercontent.com/ddm999/gt7info/web-new/_data/db/cars.csv -o stm/gt7/cars.csv
+    curl https://raw.githubusercontent.com/ddm999/gt7info/web-new/_data/db/cars.csv -o stm/gt7/db/cars.csv
+
+Same for the Track IDs for the detection logic:
+
+    curl https://raw.githubusercontent.com/ddm999/gt7info/web-new/_data/db/course.csv -o stm/gt7/db/course.csv
 
 # AMS2
 
@@ -62,8 +66,8 @@ Usage:
     options:
         -h, --help         show this help message and exit
         --freq FREQ        frequency (Hz) to collect samples
-        --saveraw          save raw samples
-        --loadraw LOADRAW  load raw samples
+        --saveraw          save raw samples to an sqlite3 db for later analysis
+        --loadraw LOADRAW  load raw samples from an sqlite3 db
 
 # Raw samples
 
@@ -97,3 +101,4 @@ saving a log file and starting a new one
 - GT7 telemetry decode https://github.com/snipem/gt7dashboard 
 - Salsa20 https://github.com/oconnor663/pure_python_salsa_chacha
 - GT7 DB Files: https://github.com/ddm999/gt7info
+- GT7 track detection https://github.com/Bornhall/gt7telemetry/
