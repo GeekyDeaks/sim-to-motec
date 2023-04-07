@@ -4,3 +4,4 @@ __pycache__
 /.vscode
 .DS_Store
 /logs
+shm_info
