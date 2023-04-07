@@ -6,6 +6,7 @@ l = getLogger(__name__)
 
 SHAREDMEM_NAME="$pcars2$"
 DEFAULT_FREQ=20 # Hz
+MSEQ_OFFSET = 7320 # get this from shm_info
 
 class AMS2Sampler(BaseSampler):
 
@@ -38,7 +39,20 @@ class AMS2Sampler(BaseSampler):
                     l.info("connected to AMS2 shared memory")
                     next_sample = now
 
-                self.put(( now, shm_b.buf ))
+                # try and get a consistent sample
+                while True:
+                    seq = int.from_bytes(shm_b.buf[MSEQ_OFFSET:MSEQ_OFFSET + 4], byteorder="little", signed=False)
+                    if seq & 1:
+                        continue
+
+                    # copy the buffer
+                    sample = bytes(shm_b.buf)
+                    eseq = int.from_bytes(shm_b.buf[MSEQ_OFFSET:MSEQ_OFFSET + 4], byteorder="little", signed=False)
+                    # check we didn't update in the process
+                    if eseq == seq:
+                        break
+
+                self.put(( now, sample ))
 
                 # work out when the next sample will be
                 now = time.time()
