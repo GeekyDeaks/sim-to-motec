@@ -46,7 +46,7 @@ class AMS2Sampler(BaseSampler):
                         continue
 
                     # copy the buffer
-                    sample = shm_b.buf.copy()
+                    sample = bytes(shm_b.buf)
                     eseq = int.from_bytes(shm_b.buf[MSEQ_OFFSET:MSEQ_OFFSET + 4], byteorder="little", signed=False)
                     # check we didn't update in the process
                     if eseq == seq:
