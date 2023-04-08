@@ -38,14 +38,18 @@ class BaseLogger:
         # start the sampler
         self.sampler.start()
 
+        last_sample = b''
+
         while self.sampler.is_alive():
 
             # wait for new samples
             try:
                 timestamp, sample = self.sampler.get(timeout = 1 ) # to allow windows to use CTRL+C
                 if cur:
-                    cur.execute("INSERT INTO samples(timestamp, data) VALUES (?, ?)", ( timestamp, sample ))
+                    to_save = sample if sample != last_sample else None
+                    cur.execute("INSERT INTO samples(timestamp, data) VALUES (?, ?)", ( timestamp, to_save ))
                 self.process_sample(timestamp, sample)
+                last_sample = sample
 
             except Empty:
                 pass
