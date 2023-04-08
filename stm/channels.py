@@ -249,6 +249,48 @@ CHANNELS = {
         "name": "Race Status",
         "shortname": "RState",
     },
+    "tyretempflo": {
+        "datatype": 5,
+        "decplaces": 2,
+        "name": "Tyre Temp FL Outer",
+        "shortname": "TTempFLO",
+        "units": "C"
+    },
+    "tyretempfro": {
+        "datatype": 5,
+        "decplaces": 2,
+        "name": "Tyre Temp FR Outer",
+        "shortname": "TTempFRO",
+        "units": "C"
+    },
+    "tyretempflc": {
+        "datatype": 5,
+        "decplaces": 2,
+        "name": "Tyre Temp FL Centre",
+        "shortname": "TTempFLC",
+        "units": "C"
+    },
+    "tyretempfrc": {
+        "datatype": 5,
+        "decplaces": 2,
+        "name": "Tyre Temp FR Centre",
+        "shortname": "TTempFRC",
+        "units": "C"
+    },
+    "tyretempfli": {
+        "datatype": 5,
+        "decplaces": 2,
+        "name": "Tyre Temp FL Inner",
+        "shortname": "TTempFLI",
+        "units": "C"
+    },
+    "tyretempfri": {
+        "datatype": 5,
+        "decplaces": 2,
+        "name": "Tyre Temp FR Inner",
+        "shortname": "TTempFRI",
+        "units": "C"
+    },
     "debug1": {
         "decplaces": 2,
         "name": "Debug 1",

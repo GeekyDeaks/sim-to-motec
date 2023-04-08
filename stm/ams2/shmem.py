@@ -154,7 +154,43 @@ class AMS2SharedMemory:
         "4x"    # mSequenceNumber
         "16x"   # mWheelLocalPositionY      
         "4f"    # mSuspensionTravel
-
+        "16x"   # mSuspensionVelocity
+        "4f"    # mAirPressure
+        "4x"    # mEngineSpeed
+        "4x"    # mEngineTorque
+        "8x"    # mWings
+        "4x"    # mHandBrake
+        "256x"  # mCurrentSector1Times
+        "256x"  # mCurrentSector2Times
+        "256x"  # mCurrentSector3Times
+        "256x"  # mFastestSector1Times
+        "256x"  # mFastestSector2Times
+        "256x"  # mFastestSector3Times
+        "256x"  # mFastestLapTimes
+        "256x"  # mLastLapTimes
+        "64x"   # mLapsInvalidated
+        "256x"  # mRaceStates
+        "256x"  # mPitModes
+        "768x"  # mOrientations
+        "256x"  # mSpeeds
+        "4096x" # mCarNames
+        "4096x" # mCarClassNames
+        "4x"    # mEnforcedPitStopLap
+        "64s"   # mTranslatedTrackLocation
+        "64s"   # mTranslatedTrackVariation
+        "f"     # mBrakeBias
+        "f"     # mTurboBoostPressure
+        "160x"  # mTyreCompound
+        "256x"  # mPitSchedules
+        "256x"  # mHighestFlagColours
+        "256x"  # mHighestFlagReasons
+        "256x"  # mNationalities
+        "4x"    # mSnowDensity
+        "4x"    # mSessionDuration
+        "4x"    # mSessionAdditionalLaps
+        "4f"    # mTyreTempLeft
+        "4f"    # mTyreTempCenter
+        "4f"    # mTyreTempRight
     )
 
     def __init__(self, buf):
@@ -203,7 +239,15 @@ class AMS2SharedMemory:
             lax, lay, laz, # mLocalAcceleration
             ttfl, ttfr, ttrl, ttrr, # mTyreTemp
             btfl, btfr, btrl, btrr, # mBrakeTempCelsius
-            stfl, stfr, strl, sttrr # mSuspensionTravel
+            stfl, stfr, strl, sttrr, # mSuspensionTravel
+            apfl, apfr, aprl, aprr, # mAirPressure,
+            mTranslatedTrackLocation,
+            mTranslatedTrackVariation,
+            self.mBrakeBias,
+            self.mTurboBoostPressure,
+            ttlfl, ttlfr, ttlrl, ttlrr,
+            ttcfl, ttcfr, ttcrl, ttcrr,
+            ttrfl, ttrfr, ttrrl, ttrrr,
 
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
@@ -211,10 +255,16 @@ class AMS2SharedMemory:
         self.mCarClassName = mCarClassName.decode('utf-8').rstrip('\0')
         self.mTrackLocation = mTrackLocation.decode('utf-8').rstrip('\0')
         self.mTrackVariation = mTrackVariation.decode('utf-8').rstrip('\0')
+        self.mTranslatedTrackLocation = mTranslatedTrackLocation.decode('utf-8').rstrip('\0')
+        self.mTranslatedTrackVariation = mTranslatedTrackVariation.decode('utf-8').rstrip('\0')
         self.mLocalAcceleration = Vector(lax, lay, laz)
         self.mTyreTemp = Wheels(ttfl, ttfr, ttrl, ttrr)
         self.mBrakeTempCelsius = Wheels(btfl, btfr, btrl, btrr)
         self.mSuspensionTravel = Wheels(stfl, stfr, strl, sttrr)
+        self.mAirPressure = Wheels(apfl, apfr, aprl, aprr)
+        self.mTyreTempLeft = Wheels(ttlfl, ttlfr, ttlrl, ttlrr)
+        self.mTyreTempCenter = Wheels(ttcfl, ttcfr, ttcrl, ttcrr)
+        self.mTyreTempRight = Wheels(ttrfl, ttrfr, ttrrl, ttrrr)
 
         self.participants = []
         #  unpack the participants

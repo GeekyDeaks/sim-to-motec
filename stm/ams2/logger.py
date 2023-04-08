@@ -16,6 +16,9 @@ class AMS2Logger(BaseLogger):
                 'suspfl', 'suspfr', 'susprl', 'susprr',
                 'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr',
                 'braketempfl', 'braketempfr', 'braketemprl', 'braketemprr',
+                'tyretempflo', 'tyretempfro',
+                'tyretempflc', 'tyretempfrc',
+                'tyretempfli', 'tyretempfri',
                 'lap', 'laptime',
                 'racestate'
                 ]
@@ -99,6 +102,9 @@ class AMS2Logger(BaseLogger):
             *p.mSuspensionTravel,
             *p.mTyreTemp,
             *p.mBrakeTempCelsius,
+            p.mTyreTempLeft.fl, p.mTyreTempRight.fr,     # outer
+            p.mTyreTempCenter.fl, p.mTyreTempCenter.fr, # centre
+            p.mTyreTempRight.fl, p.mTyreTempLeft.fr,   # inner
             p.driver.mCurrentLap,
             p.mCurrentTime,
             p.mRaceState

@@ -15,10 +15,10 @@ class TestBaseLogger(unittest.TestCase):
 
     def test_valid_filename(self):
 
-        event = STMEvent(driver="Steve:McQueen", date="10/01/2021")
-        l = BaseLogger(filetemplate="a/b/{driver}_{vehicle}_{date}")
+        event = STMEvent(driver="Steve:McQueen", datetime="2021-12-01")
+        l = BaseLogger(filetemplate="a/b/{driver}_{vehicle}_{datetime}")
         l.new_log(event=event, channels=[])
-        self.assertEqual(l.filename, "a/b/SteveMcQueen_10012021")
+        self.assertEqual(l.filename, "a/b/SteveMcQueen_2021-12-01")
 
 if __name__ == '__main__':
     unittest.main()

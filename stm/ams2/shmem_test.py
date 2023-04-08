@@ -75,5 +75,12 @@ class TestAMS2SharedMemory(unittest.TestCase):
                                121.5243148803711, 121.5244140625)
             self.assertEqual(sm.mBrakeTempCelsius, expected)
 
+    def test_inrace_translated(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+
+            sm = AMS2SharedMemory(fin.read())
+            expected = "Bathurst"
+            self.assertEqual(sm.mTranslatedTrackLocation, expected)
+
 if __name__ == '__main__':
     unittest.main()
