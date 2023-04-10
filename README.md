@@ -88,6 +88,10 @@ Sampler -> Logger -> MoTeC
 Sampler and Logger are Sim specific, but they have BaseSampler and BaseLogger to handle the core loops and common functions like adding samples,
 saving a log file and starting a new one
 
+# pyinstaller
+
+    pyinstaller --onefile gt7.py
+
 # Tests
 
     python -m unittest discover -v -s stm -p '*_test.py'
