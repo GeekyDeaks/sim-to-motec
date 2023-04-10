@@ -39,12 +39,21 @@ class RawSampler(Thread):
         (self.freq, ) = res.fetchone()
         res = cur.execute("SELECT * FROM samples ORDER BY timestamp")
 
+        last_data = None
+
         while self.running:
 
             try:
                 timestamp, data = next(res)
                 if isinstance(timestamp, int):
                     timestamp = timestamp / 1000.0
+
+                if data is None:
+                    # repeat the last changed sample
+                    data = last_data
+                else:
+                    last_data = data
+
                 self.samples.put( (timestamp, data), block=True )
             except:
                 self.running = False
