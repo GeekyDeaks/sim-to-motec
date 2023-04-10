@@ -12,11 +12,13 @@ class STMEvent:
                 session = "",
                 comment = "" ):
         
+        now = dt.now().strftime("%Y-%m-%dT%H:%M:%S")
+        
         if datetime is None:
-            datetime = dt.now().strftime("%Y-%m-%dT%H:%M:%S")
+            datetime = now
 
         if not comment and not shortcomment:
-            shortcomment = f"converted by sim-to-motec at {datetime}"
+            shortcomment = f"converted by sim-to-motec at {now}"
 
         self.datetime = datetime
         self.name = name
