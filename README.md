@@ -4,7 +4,12 @@ Simple racing/driving sim telemetry to MoTeC log conversion
 
 Currently supports AMS2 and GT7
 
-# Getting started
+# Prebuilt Windows Executables
+
+Due to complexities compiling library dependencies on Windows, prebuilt binaries can 
+be found in the [releases](releases)
+
+# Getting started with the scripts
 
     git clone https://github.com/GeekyDeaks/sim-to-motec.git
     cd sim-to-motec
@@ -22,11 +27,11 @@ A new i2 log file will be created each time the logic detects a session change, 
 
 Example:
 
-    python gt7.py 192.168.1.101 --driver "Wilma Cargo"
+    python gt7-cli.py 192.168.1.101 --driver "Wilma Cargo"
 
 Usage:
 
-    python gt7.py [-h] [--name NAME] [--driver DRIVER] [--session SESSION] [--vehicle VEHICLE] [--venue VENUE] [--freq FREQ] [--saveraw] [--loadraw] addr
+    python gt7-cli.py [-h] [--name NAME] [--driver DRIVER] [--session SESSION] [--vehicle VEHICLE] [--venue VENUE] [--freq FREQ] [--saveraw] [--loadraw] addr
 
     positional arguments:
         addr               ip address of playstation or raw file
@@ -57,11 +62,11 @@ Convert AMS2 samples from shared memory to MoTeC i2 log files.  Currently can de
 
 Example:
 
-    python ams2.py
+    python ams2-cli.py
 
 Usage:
 
-    python ams2.py [-h] [--freq FREQ] [--saveraw] [--loadraw LOADRAW]
+    python ams2-cli.py [-h] [--freq FREQ] [--saveraw] [--loadraw LOADRAW]
 
     options:
         -h, --help         show this help message and exit
@@ -75,7 +80,7 @@ The base logger supports saving the raw samples to an sqlite3 db under `logs/raw
 There is a RawSampler which can read in an sqlite3 db and 'replay' the samples through a logger to allow offline development or debugging.
 The current loggers support this via the `--loadraw` parameter e.g.
 
-    python ams2.py --loadraw logs/raw/ams2/1679937106.db
+    python ams2-cli.py --loadraw logs/raw/ams2/1679937106.db
 
 # Architecture
 
