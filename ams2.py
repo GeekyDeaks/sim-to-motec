@@ -3,6 +3,7 @@ import json
 import os
 import time
 
+from stm.version import __version__
 from stm.ams2 import AMS2Logger, AMS2Sampler
 from logging import getLogger, basicConfig, DEBUG
 
@@ -56,11 +57,11 @@ layout = [
         sg.Checkbox("Rawfile", key="RAWFILE")
      ],
     [sg.HorizontalSeparator()],
-    [sg.Output(size=(80, 12), echo_stdout_stderr=True)]     
+    [sg.Output(size=(100, 12), echo_stdout_stderr=True)]     
 ]
 
 # Create the window
-window = sg.Window("AMS2 logger", layout, finalize=True)
+window = sg.Window(f"AMS2 logger v{__version__}", layout, finalize=True)
 # start the logger after creating the output element
 basicConfig(
      level=DEBUG,
