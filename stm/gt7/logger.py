@@ -84,6 +84,10 @@ class GT7Logger(BaseLogger):
         if not currp.in_race:
             self.save_log()
             return
+        
+        if currp.current_lap < lastp.current_lap:
+            # possibly restarted the event
+            self.save_log()
 
         if not self.log:
             self.track_detector = GT7TrackDetector()
