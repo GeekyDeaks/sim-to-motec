@@ -49,7 +49,13 @@ def main():
         venue=args.venue
     )
 
-    logger.start()
+    try:
+        logger.start()
+        logger.join()
+    except KeyboardInterrupt:
+        l.warning("stopping")
+        logger.stop()
+        logger.join()
 
 if __name__ == '__main__':
     main()

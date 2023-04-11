@@ -1,6 +1,8 @@
 from stm.sampler import BaseSampler
 import socket
 import time
+from logging import getLogger
+l = getLogger(__name__)
 
 DEFAULT_PORT = 33740
 DEFAULT_HEARTBEAT_PORT = 33739
@@ -42,7 +44,12 @@ class GT7Sampler(BaseSampler):
             except socket.timeout:
                 self.send_hb()
 
+
     def send_hb(self):
         send_data = b'A'
-        self.socket.sendto(send_data, self.hb_addr)
+        try:
+            self.socket.sendto(send_data, self.hb_addr)
+        except Exception as e:
+            #l.error(e)
+            pass
 

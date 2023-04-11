@@ -19,7 +19,7 @@ class BaseSampler(Thread):
         self.samples.put(sample, block=False)
 
     def stop(self):
-        l.warn("stopping sampler")
+        l.warning("stopping sampler")
         self.running = False
 
 class RawSampler(Thread):
@@ -64,5 +64,5 @@ class RawSampler(Thread):
         return self.samples.get(timeout=timeout)
     
     def stop(self):
-        l.warn("stopping sampler")
+        l.warning("stopping sampler")
         self.running = False

@@ -8,3 +8,4 @@ shm_info
 /build
 /dist
 *.spec
+*.cfg
