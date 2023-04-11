@@ -119,8 +119,8 @@ while True:
             window["SEQ"].update(p.mSequenceNumber)
             window["VEHICLE"].update(logger.get_vehicle())
             window["VENUE"].update(logger.get_venue())
-            window["GAMESTATE"].update(p.mGameState.name.title())
-            window["RACESTATE"].update(p.mRaceState.name.title())
+            window["GAMESTATE"].update(p.mGameState.name)
+            window["RACESTATE"].update(p.mRaceState.name)
             window["SESSION"].update(p.mSessionState.name.title())
     else:
         window["QUIT"].update(disabled=False, button_color=BUTTON_ENABLED)
