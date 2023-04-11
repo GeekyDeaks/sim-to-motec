@@ -47,6 +47,9 @@ class AMS2Logger(BaseLogger):
         freq = self.sampler.freq
         br2 = 0
 
+        if p.mGameState == AMS2GameState.INGAME_PAUSED:
+            return
+
         # check we are playing
         if p.mGameState != AMS2GameState.INGAME_PLAYING:
             self.save_log()
