@@ -49,7 +49,8 @@ def main():
 
     try:
         logger.start()
-        logger.join()
+        while logger.is_alive():
+            logger.join(0.1)
     except KeyboardInterrupt:
         l.warning("stopping")
         logger.stop()
