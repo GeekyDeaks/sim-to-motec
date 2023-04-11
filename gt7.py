@@ -56,7 +56,7 @@ layout = [
         sg.Checkbox("Rawfile", key="RAWFILE")
      ],
     [sg.HorizontalSeparator()],
-    [sg.Output(size=(80, 12))]     
+    [sg.Output(size=(80, 12), echo_stdout_stderr=True)]     
 ]
 
 # Create the window

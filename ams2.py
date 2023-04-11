@@ -56,7 +56,7 @@ layout = [
         sg.Checkbox("Rawfile", key="RAWFILE")
      ],
     [sg.HorizontalSeparator()],
-    [sg.Output(size=(80, 12))]     
+    [sg.Output(size=(80, 12), echo_stdout_stderr=True)]     
 ]
 
 # Create the window
@@ -112,7 +112,9 @@ while True:
         # update with values
         if logger.last_packet:
             p = logger.last_packet
-            window["LAP"].update( f"{p.driver.mCurrentLap}/{p.mLapsInEvent}" )
+
+            if p.driver:
+                window["LAP"].update( f"{p.driver.mCurrentLap}/{p.mLapsInEvent}" )
             window["SEQ"].update(p.mSequenceNumber)
             window["VEHICLE"].update(logger.get_vehicle())
             window["VENUE"].update(logger.get_venue())
