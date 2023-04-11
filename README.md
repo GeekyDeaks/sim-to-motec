@@ -7,7 +7,7 @@ Currently supports AMS2 and GT7
 # Prebuilt Windows Executables
 
 Due to complexities compiling library dependencies on Windows, prebuilt binaries can 
-be found in the [releases](releases)
+be found in the [releases](https://github.com/GeekyDeaks/sim-to-motec/releases)
 
 # Getting started with the scripts
 
