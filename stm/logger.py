@@ -4,9 +4,11 @@ from .channels import get_channel_definition
 import os
 import re
 import sqlite3
+from pathlib import Path
 from datetime import datetime
 from logging import getLogger
 l = getLogger(__name__)
+
 
 class BaseLogger:
 
@@ -124,9 +126,16 @@ class BaseLogger:
 
             template_vars[k] = v
 
-        filename = self.filetemplate.format(**template_vars)
-        filename = re.sub(r'_+', '_', filename)
-        self.filename = re.sub(r'/_', '/', filename)
+        filepath = Path(self.filetemplate).parts
+        # do substitution
+        filepath = [ p.format(**template_vars) for p in filepath ]
+        # sub out any duplicate _
+        filepath = [ re.sub(r'_+', '_', p) for p in filepath ]
+        # sub out any leading or trailing _
+        filepath = [ re.sub(r'^_|_$', '', p ) for p in filepath ]
+        # remove any blank
+        filepath = [ p for p in filepath if p ]
+        self.filename = os.path.join(*filepath)
 
     def add_samples(self, samples):
         self.log.add_samples(samples)
@@ -138,7 +147,7 @@ class BaseLogger:
         freq = self.sampler.freq
         sample_time = samples / freq
         # check we have a sensible laptime for the number of samples
-        if abs(sample_time - laptime) > (2 / freq):
+        if abs(sample_time - laptime) > (3 / freq):
             # just use the sample_time
             l.warning(f"lap {lap}, ignoring time {laptime:.3f} as too far from sample period {sample_time:.3f}")
             laptime = sample_time

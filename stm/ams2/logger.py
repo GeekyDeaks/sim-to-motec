@@ -9,18 +9,19 @@ l = getLogger(__name__)
 class AMS2Logger(BaseLogger):
 
     channels = [
-                'beacon', 'br2', 'lap', 'rpm', 'gear', 
+                'beacon', 'br2', # lap or sector points
+                'lap', 'rpm', 'gear', 
                 'throttle', 'brake', 'steer', 'speed', 
                 'lat', 'long',
-                'glat', 'gvert', 'glong',
-                'suspfl', 'suspfr', 'susprl', 'susprr',
-                'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr',
-                'braketempfl', 'braketempfr', 'braketemprl', 'braketemprr',
-                'tyretempflo', 'tyretempfro',
-                'tyretempflc', 'tyretempfrc',
-                'tyretempfli', 'tyretempfri',
+                'glat', 'gvert', 'glong',  # g forces
+                'suspfl', 'suspfr', 'susprl', 'susprr', # suspension
+                'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr', # combined tyre temp
+                'braketempfl', 'braketempfr', 'braketemprl', 'braketemprr', # brake temp
+                'tyretempflo', 'tyretempfro', # outer temp
+                'tyretempflc', 'tyretempfrc', # center temp
+                'tyretempfli', 'tyretempfri', # inner temp
                 'lap', 'laptime',
-                'racestate'
+                'racestate' # AMS2 race status
                 ]
 
     def __init__(self,
