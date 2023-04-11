@@ -16,7 +16,6 @@ def main():
 
     parser = argparse.ArgumentParser(description="Log GT7 samples to MoTeC i2")
     parser.add_argument("addr", type=str, help="ip address of playstation or raw file")
-    parser.add_argument("--name", default="", help="name of the file (used for filename prefix)")
     parser.add_argument("--driver", type=str, default="", help="Driver name")
     parser.add_argument("--session", type=str, default="", help="Session e.g. Practice, Qualify, Race")
     parser.add_argument("--vehicle", type=str, default="", help="Override name of vehicle")
@@ -26,7 +25,7 @@ def main():
     parser.add_argument("--loadraw", help="load raw samples from an sqlite3 db", action="store_true")
     args = parser.parse_args()
 
-    filetemplate = os.path.join("logs", "gt7", "{name}_{driver}_{venue}_{session}_{vehicle}_{datetime}")
+    filetemplate = os.path.join("logs", "gt7", "{venue}_{vehicle}_{driver}_{session}_{datetime}")
 
     if args.saveraw:
         rawfile = os.path.join("logs", "raw", "gt7", f"{time.time():.0f}.db" )
@@ -42,7 +41,6 @@ def main():
         rawfile=rawfile,
         sampler=sampler,
         filetemplate=filetemplate,
-        name=args.name, 
         driver=args.driver,
         session=args.session,
         vehicle=args.vehicle,

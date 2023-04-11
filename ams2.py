@@ -3,20 +3,18 @@ import json
 import os
 import time
 
-from stm.gt7 import GT7Logger, GT7Sampler
+from stm.ams2 import AMS2Logger, AMS2Sampler
 from logging import getLogger, basicConfig, DEBUG
 
 # try and load the sate
-STATE_FILE = "gt7.cfg"
+STATE_FILE = "ams2.cfg"
 
 try:
     with open(STATE_FILE) as f:
         state = json.load(f)
 except Exception as e:
     state = {
-        "IP": "192.168.1.100",
-        "DRIVER": "",
-        "SESSION": ""
+        "FREQ": "20",
     }
 
 sg.change_look_and_feel('Default1')
@@ -25,24 +23,26 @@ BUTTON_DISABLED = (sg.theme_background_color(), sg.theme_background_color())
 BUTTON_ENABLED = (sg.theme_button_color_text(), sg.theme_background_color())
 
 labels = [
-    [sg.Text("PS IP Address")],
-    [sg.Text("Driver")],
-    [sg.Text("Session")],
+    [sg.Text("Sampling Frequency")],
     [sg.Text("Log File")],
     [sg.Text("Vehicle")],
     [sg.Text("Venue")],
-    [sg.Text("Tick")],
+    [sg.Text("Sequence")],
+    [sg.Text("Game State")],
+    [sg.Text("Race State")],
+    [sg.Text("Session")],
     [sg.Text("Lap")],
 ]
 
 values = [
-    [sg.Input(state["IP"], key="IP", size=(15,1), enable_events=True)],
-    [sg.Input(state["DRIVER"], key="DRIVER", size=(15,1), enable_events=True )],
-    [sg.Input(state["SESSION"], key="SESSION", size=(15,1), enable_events=True )],
+    [sg.Input(state["FREQ"], key="FREQ", size=(5,1), enable_events=True), sg.Text("Hz", justification="l")],
     [sg.Text("Not Started",key="LOGFILE" )],
     [sg.Text("N/A", key="VEHICLE")],
     [sg.Text("N/A", key="VENUE")],
-    [sg.Text("N/A", key="TICK")],
+    [sg.Text("N/A", key="SEQ")],
+    [sg.Text("N/A", key="GAMESTATE")],
+    [sg.Text("N/A", key="RACESTATE")],
+    [sg.Text("N/A", key="SESSION")],
     [sg.Text("N/A", key="LAP")],
 ]
 
@@ -60,7 +60,7 @@ layout = [
 ]
 
 # Create the window
-window = sg.Window("GT7 logger", layout, finalize=True)
+window = sg.Window("AMS2 logger", layout, finalize=True)
 # start the logger after creating the output element
 basicConfig(
      level=DEBUG,
@@ -78,26 +78,24 @@ while True:
     if event in (sg.WINDOW_CLOSED, "QUIT"):
         break
 
-    if event == "IP" and len(values['IP']) and values['IP'][-1] not in ('.1234567890'):
-        window["IP"].update(values['IP'][:-1])
+    if event == "FREQ" and len(values['FREQ']) and values['FREQ'][-1] not in ('1234567890'):
+        window["FREQ"].update(values['FREQ'][:-1])
 
     if event in state:
         state[event] = values[event]
 
     if event == "START":
-        filetemplate = os.path.join("logs", "gt7", "{venue}_{vehicle}_{driver}_{session}_{datetime}")
+        filetemplate = os.path.join("logs", "ams2", "{venue}_{vehicle}_{driver}_{session}_{datetime}")
 
         if values["RAWFILE"]:
-            rawfile = os.path.join("logs", "raw", "gt7", f"{time.time():.0f}.db" )
+            rawfile = os.path.join("logs", "raw", "ams2", f"{time.time():.0f}.db" )
         else:
             rawfile = None
 
-        logger = GT7Logger(
+        logger = AMS2Logger(
             rawfile=rawfile,
-            sampler=GT7Sampler(addr=values['IP'], freq=60),
-            filetemplate=filetemplate,
-            driver=values["DRIVER"],
-            session=values["SESSION"]
+            sampler=AMS2Sampler(freq=values["FREQ"]),
+            filetemplate=filetemplate
         )
         logger.start()
 
@@ -114,21 +112,25 @@ while True:
         # update with values
         if logger.last_packet:
             p = logger.last_packet
-            window["LAP"].update( f"{p.current_lap}/{p.laps}" )
-            window["TICK"].update(f"{p.tick}")
+            window["LAP"].update( f"{p.driver.mCurrentLap}/{p.mLapsInEvent}" )
+            window["SEQ"].update(p.mSequenceNumber)
             window["VEHICLE"].update(logger.get_vehicle())
             window["VENUE"].update(logger.get_venue())
-
-
+            window["GAMESTATE"].update(p.mGameState.name.title())
+            window["RACESTATE"].update(p.mRaceState.name.title())
+            window["SESSION"].update(p.mSessionState.name.title())
     else:
         window["QUIT"].update(disabled=False, button_color=BUTTON_ENABLED)
         window["START"].update(disabled=False, button_color=BUTTON_ENABLED)
         window["STOP"].update(disabled=True, button_color=BUTTON_DISABLED)
         window["LOGFILE"].update("Not Started")
         window["LAP"].update("N/A")
-        window["TICK"].update("N/A")
+        window["SEQ"].update("N/A")
         window["VEHICLE"].update("N/A")
         window["VENUE"].update("N/A")
+        window["GAMESTATE"].update("N/A")
+        window["RACESTATE"].update("N/A")
+        window["SESSION"].update("N/A")
 
 # try and save the state
 try:
