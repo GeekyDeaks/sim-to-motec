@@ -14,7 +14,7 @@ from stm.gt7 import GT7Logger, GT7Sampler
 
 def main():
 
-    parser = argparse.ArgumentParser(description="Log GT7 samples to MoTeC")
+    parser = argparse.ArgumentParser(description="Log GT7 samples to MoTeC i2")
     parser.add_argument("addr", type=str, help="ip address of playstation or raw file")
     parser.add_argument("--name", default="", help="name of the file (used for filename prefix)")
     parser.add_argument("--driver", type=str, default="", help="Driver name")
