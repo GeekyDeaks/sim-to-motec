@@ -151,7 +151,7 @@ class AMS2SharedMemory:
         "4x"    # mWindDirectionX
         "4x"    # mWindDirectionY
         "4x"    # mCloudBrightness
-        "4x"    # mSequenceNumber
+        "i"     # mSequenceNumber
         "16x"   # mWheelLocalPositionY      
         "4f"    # mSuspensionTravel
         "16x"   # mSuspensionVelocity
@@ -198,9 +198,9 @@ class AMS2SharedMemory:
         (
             self.mVersion, 
             self.mBuildVersionNumber,
-            self.mGameState,
-            self.mSessionState,
-            self.mRaceState,
+            mGameState,
+            mSessionState,
+            mRaceState,
             self.mViewedParticipantIndex,
             self.mNumParticipants,
             mParticipantInfo,
@@ -239,6 +239,7 @@ class AMS2SharedMemory:
             lax, lay, laz, # mLocalAcceleration
             ttfl, ttfr, ttrl, ttrr, # mTyreTemp
             btfl, btfr, btrl, btrr, # mBrakeTempCelsius
+            self.mSequenceNumber,
             stfl, stfr, strl, sttrr, # mSuspensionTravel
             apfl, apfr, aprl, aprr, # mAirPressure,
             mTranslatedTrackLocation,
@@ -251,6 +252,9 @@ class AMS2SharedMemory:
 
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
+        self.mGameState = AMS2GameState(mGameState)
+        self.mSessionState = AMS2SessionState(mSessionState)
+        self.mRaceState = AMS2RaceState(mRaceState)
         self.mCarName = mCarName.decode('utf-8').rstrip('\0')
         self.mCarClassName = mCarClassName.decode('utf-8').rstrip('\0')
         self.mTrackLocation = mTrackLocation.decode('utf-8').rstrip('\0')

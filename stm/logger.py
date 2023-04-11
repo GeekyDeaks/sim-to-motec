@@ -1,3 +1,4 @@
+from threading import Thread
 from queue import Empty
 from .motec import MotecLog, MotecLogExtra, MotecEvent
 from .channels import get_channel_definition
@@ -9,17 +10,18 @@ from datetime import datetime
 from logging import getLogger
 l = getLogger(__name__)
 
-
-class BaseLogger:
+class BaseLogger(Thread):
 
     def __init__(self, sampler=None, filetemplate=None, rawfile=None):
+        super().__init__()
         self.sampler = sampler
         self.filetemplate = filetemplate
+        self.filename = None
         self.log = None
         self.rawfile = rawfile
         self.lap_samples = 0
 
-    def start(self):
+    def run(self):
 
         l.info("starting logger")
 
@@ -56,10 +58,6 @@ class BaseLogger:
             except Empty:
                 pass
 
-            except KeyboardInterrupt:
-                l.warn("stopping")
-                break
-
             except Exception as e:
                 # might have been something in the processing that triggered the exception
                 # so let's see if we can save it for later
@@ -68,12 +66,10 @@ class BaseLogger:
                 
                 # keep going?
                 raise e
-                #l.error(e)
 
         if con:
             con.commit()
         self.save_log()
-        self.sampler.stop()
         self.sampler.join()
 
     def active_log(self):
@@ -158,6 +154,10 @@ class BaseLogger:
         self.logx.add_lap(laptime)
         self.lap_samples = 0
 
+    def stop(self):
+        if self.sampler:
+            self.sampler.stop()
+
     def save_log(self):
 
         self.lap_samples = 0
@@ -183,6 +183,19 @@ class BaseLogger:
             with open(ldfilename, "wb") as fout:
                 fout.write(self.log.to_string())
         else:
-            l.warn(f"aborting log {self.filename}, not enough laps")
+            l.warning(f"aborting log {self.filename}, not enough laps")
 
         self.log = None
+
+
+    def get_venue(self):
+        if self.log:
+            return self.log.venue
+        else:
+            return ""
+        
+    def get_vehicle(self):
+        if self.log:
+            return self.log.vehicle
+        else:
+            return ""

@@ -16,7 +16,7 @@ class AMS2Sampler(BaseSampler):
         self.shmem_name = shmem_name
         if not freq:
             freq = DEFAULT_FREQ
-        self.freq = freq
+        self.freq = int(freq)
 
     def run(self):
 

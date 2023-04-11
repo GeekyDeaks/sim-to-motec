@@ -1,55 +1,144 @@
+import PySimpleGUI as sg
+import json
+import os
+import time
+
+from stm.version import __version__
+from stm.gt7 import GT7Logger, GT7Sampler
 from logging import getLogger, basicConfig, DEBUG
+
+# try and load the sate
+STATE_FILE = "gt7.cfg"
+
+try:
+    with open(STATE_FILE) as f:
+        state = json.load(f)
+except Exception as e:
+    state = {
+        "IP": "192.168.1.100",
+        "DRIVER": "",
+        "SESSION": ""
+    }
+
+sg.change_look_and_feel('Default1')
+
+BUTTON_DISABLED = (sg.theme_background_color(), sg.theme_background_color())
+BUTTON_ENABLED = (sg.theme_button_color_text(), sg.theme_background_color())
+
+labels = [
+    [sg.Text("PS IP Address")],
+    [sg.Text("Driver")],
+    [sg.Text("Session")],
+    [sg.Text("Log File")],
+    [sg.Text("Vehicle")],
+    [sg.Text("Venue")],
+    [sg.Text("Tick")],
+    [sg.Text("Lap")],
+]
+
+values = [
+    [sg.Input(state["IP"], key="IP", size=(15,1), enable_events=True)],
+    [sg.Input(state["DRIVER"], key="DRIVER", size=(15,1), enable_events=True )],
+    [sg.Input(state["SESSION"], key="SESSION", size=(15,1), enable_events=True )],
+    [sg.Text("Not Started",key="LOGFILE" )],
+    [sg.Text("N/A", key="VEHICLE")],
+    [sg.Text("N/A", key="VENUE")],
+    [sg.Text("N/A", key="TICK")],
+    [sg.Text("N/A", key="LAP")],
+]
+
+# Define the window's contents
+layout = [
+    [sg.Column(labels, element_justification='r'), sg.Column(values)],
+    [
+        sg.Button('Start', key="START"), 
+        sg.Button("Stop", key="STOP", disabled=True, button_color=BUTTON_DISABLED), 
+        sg.Button('Quit', key="QUIT"),
+        sg.Checkbox("Rawfile", key="RAWFILE")
+     ],
+    [sg.HorizontalSeparator()],
+    [sg.Output(size=(100, 12), echo_stdout_stderr=True)]     
+]
+
+# Create the window
+window = sg.Window(f"GT7 logger v{__version__}", layout, finalize=True)
+# start the logger after creating the output element
 basicConfig(
      level=DEBUG,
      format="%(asctime)s.%(msecs)03d [%(levelname)s] %(name)s: %(message)s",
-     datefmt="%Y-%m-%d %H:%M:%S"
+     datefmt="%H:%M:%S"
 )
 l = getLogger(__name__)
 
-import argparse
-import os
-import time
-from stm.sampler import RawSampler
-from stm.gt7 import GT7Logger, GT7Sampler
+logger = None
 
-def main():
+# Display and interact with the Window using an Event Loop
+while True:
+    event, values = window.read(timeout=500)
+    # See if user wants to quit or window was closed
+    if event in (sg.WINDOW_CLOSED, "QUIT"):
+        break
 
-    parser = argparse.ArgumentParser(description="Log GT7 samples to MoTeC")
-    parser.add_argument("addr", type=str, help="ip address of playstation or raw file")
-    parser.add_argument("--name", default="", help="name of the file (used for filename prefix)")
-    parser.add_argument("--driver", type=str, default="", help="Driver name")
-    parser.add_argument("--session", type=str, default="", help="Session e.g. Practice, Qualify, Race")
-    parser.add_argument("--vehicle", type=str, default="", help="Override name of vehicle")
-    parser.add_argument("--venue", type=str, default="", help="Venue/Track name, MoTeC will not generate a track map without this")
-    parser.add_argument("--freq", type=int, default=60, help="frequency to collect samples, currently ignored")
-    parser.add_argument("--saveraw", help="save raw samples to an sqlite3 db for later analysis", action="store_true")
-    parser.add_argument("--loadraw", help="load raw samples from an sqlite3 db", action="store_true")
-    args = parser.parse_args()
+    if event == "IP" and len(values['IP']) and values['IP'][-1] not in ('.1234567890'):
+        window["IP"].update(values['IP'][:-1])
 
-    filetemplate = os.path.join("logs", "gt7", "{name}_{driver}_{venue}_{session}_{vehicle}_{datetime}")
+    if event in state:
+        state[event] = values[event]
 
-    if args.saveraw:
-        rawfile = os.path.join("logs", "raw", "gt7", f"{time.time():.0f}.db" )
+    if event == "START":
+        filetemplate = os.path.join("logs", "gt7", "{venue}_{vehicle}_{driver}_{session}_{datetime}")
+
+        if values["RAWFILE"]:
+            rawfile = os.path.join("logs", "raw", "gt7", f"{time.time():.0f}.db" )
+        else:
+            rawfile = None
+
+        logger = GT7Logger(
+            rawfile=rawfile,
+            sampler=GT7Sampler(addr=values['IP'], freq=60),
+            filetemplate=filetemplate,
+            driver=values["DRIVER"],
+            session=values["SESSION"]
+        )
+        logger.start()
+
+    if event == "STOP" and logger:
+        logger.stop()
+        logger.join()
+        logger = None
+
+    if logger:
+        window["QUIT"].update(disabled=True, button_color=BUTTON_DISABLED)
+        window["START"].update(disabled=True, button_color=BUTTON_DISABLED)
+        window["STOP"].update(disabled=False, button_color=BUTTON_ENABLED)
+        window["LOGFILE"].update(logger.filename)
+        # update with values
+        if logger.last_packet:
+            p = logger.last_packet
+            window["LAP"].update( f"{p.current_lap}/{p.laps}" )
+            window["TICK"].update(f"{p.tick}")
+            window["VEHICLE"].update(logger.get_vehicle())
+            window["VENUE"].update(logger.get_venue())
+
+
     else:
-        rawfile = None
+        window["QUIT"].update(disabled=False, button_color=BUTTON_ENABLED)
+        window["START"].update(disabled=False, button_color=BUTTON_ENABLED)
+        window["STOP"].update(disabled=True, button_color=BUTTON_DISABLED)
+        window["LOGFILE"].update("Not Started")
+        window["LAP"].update("N/A")
+        window["TICK"].update("N/A")
+        window["VEHICLE"].update("N/A")
+        window["VENUE"].update("N/A")
 
-    if args.loadraw:
-        sampler = RawSampler(rawfile=args.addr)
-    else:
-        sampler = GT7Sampler(addr=args.addr, freq=args.freq)
+# try and save the state
+try:
+    with open(STATE_FILE, "w") as f:
+        json.dump(state, f)
+except Exception as e:
+    print(e)
+    pass
 
-    logger = GT7Logger(
-        rawfile=rawfile,
-        sampler=sampler,
-        filetemplate=filetemplate,
-        name=args.name, 
-        driver=args.driver,
-        session=args.session,
-        vehicle=args.vehicle,
-        venue=args.venue
-    )
+# Finish up by removing from the screen
+window.close()
 
-    logger.start()
-
-if __name__ == '__main__':
-    main()

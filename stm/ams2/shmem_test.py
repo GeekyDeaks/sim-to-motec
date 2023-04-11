@@ -4,7 +4,7 @@ from stm.ams2.shmem import Wheels
 
 PATH=os.path.dirname(__file__)
 
-from stm.ams2.shmem import AMS2SharedMemory
+from stm.ams2.shmem import AMS2SharedMemory, AMS2RaceState, AMS2GameState, AMS2SessionState
 
 class TestAMS2SharedMemory(unittest.TestCase):
 
@@ -81,6 +81,24 @@ class TestAMS2SharedMemory(unittest.TestCase):
             sm = AMS2SharedMemory(fin.read())
             expected = "Bathurst"
             self.assertEqual(sm.mTranslatedTrackLocation, expected)
+
+    def test_game_state(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+            sm = AMS2SharedMemory(fin.read())
+            expected = AMS2GameState.INGAME_PAUSED
+            self.assertEqual(sm.mGameState, expected)
+
+    def test_race_state(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+            sm = AMS2SharedMemory(fin.read())
+            expected = AMS2RaceState.NOT_STARTED
+            self.assertEqual(sm.mRaceState, expected)
+
+    def test_session_state(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+            sm = AMS2SharedMemory(fin.read())
+            expected = AMS2SessionState.RACE
+            self.assertEqual(sm.mSessionState, expected)
 
 if __name__ == '__main__':
     unittest.main()
