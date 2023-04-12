@@ -108,7 +108,7 @@ class AMS2Logger(BaseLogger):
             p.mTyreTempRight.fl, p.mTyreTempLeft.fr,   # inner
             p.driver.mCurrentLap,
             p.mCurrentTime,
-            p.mRaceState
+            p.mRaceState.value
         ])
 
 
