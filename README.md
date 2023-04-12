@@ -20,8 +20,8 @@ be found in the [releases](https://github.com/GeekyDeaks/sim-to-motec/releases)
 # GT7
 
 Convert UDP packets from the GT7 telemetry to a MoTeC i2 log file.  Currently can determine the car, and potentially the venue/track 
-which is required for MoTeC to generate a track map from the fake GPS. Expects UDP samples to arrive at 60Hz and will pad
-missing samples, so unlikely to work correctly with 120Hz or VRR without changes to the sampling or logging logic.
+which is required for MoTeC to generate a track map from the fake GPS. Expects UDP samples to arrive at 60Hz which appears to hold
+true even when running in 120Hz mode
 
 A new i2 log file will be created each time the logic detects a session change, usually via the lap number decreasing.
 
@@ -38,7 +38,6 @@ Usage:
 
     options:
         -h, --help         show this help message and exit
-        --name NAME        name of the file (used for filename prefix)
         --driver DRIVER    Driver name
         --session SESSION  Session e.g. Practice, Qualify, Race
         --vehicle VEHICLE  Override name of vehicle
@@ -88,7 +87,7 @@ Sampler -> Logger -> MoTeC
 
 - Sampler collects the raw UDP/Memory packets from the SIM and queues them
 - Logger converts and saves samples and decides if a new session/log is to be created, optionally saving the raw samples for later playback
-- MoTeC creates a MoTeC ld and ldx file from the collected samples and laptimes
+- MoTeC creates a MoTeC i2 ld and ldx file from the collected samples and laptimes
 
 Sampler and Logger are Sim specific, but they have BaseSampler and BaseLogger to handle the core loops and common functions like adding samples,
 saving a log file and starting a new one
