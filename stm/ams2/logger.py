@@ -20,8 +20,10 @@ class AMS2Logger(BaseLogger):
                 'tyretempflo', 'tyretempfro', # outer temp
                 'tyretempflc', 'tyretempfrc', # center temp
                 'tyretempfli', 'tyretempfri', # inner temp
+                #'wheelslipfl', 'wheelslipfr', 'wheelsliprl', 'wheelsliprr', # wheel slip
+                'rideheightfl', 'rideheightfr', 'rideheightrl', 'rideheightrr', 
                 'lap', 'laptime',
-                'racestate' # AMS2 race status
+                'racestate', # AMS2 race status
                 ]
 
     def __init__(self,
@@ -106,9 +108,11 @@ class AMS2Logger(BaseLogger):
             p.mTyreTempLeft.fl, p.mTyreTempRight.fr,     # outer
             p.mTyreTempCenter.fl, p.mTyreTempCenter.fr, # centre
             p.mTyreTempRight.fl, p.mTyreTempLeft.fr,   # inner
+            #*[s * 2.23693629 for s in p.mTyreSlipSpeed], # wheel slip m/s -> mph
+            *p.mRideHeight,
             p.driver.mCurrentLap,
             p.mCurrentTime,
-            p.mRaceState.value
+            p.mRaceState.value,
         ])
 
 

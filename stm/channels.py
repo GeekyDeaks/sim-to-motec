@@ -291,10 +291,73 @@ CHANNELS = {
         "shortname": "TTempFRI",
         "units": "C"
     },
+    "wheelslipfl": {
+        "datatype": 5,
+        "decplaces": 1,
+        "name": "Wheel Slip FL",
+        "shortname": "WSLPFL",
+        "units": "mph"
+    },
+    "wheelslipfr": {
+        "datatype": 5,
+        "decplaces": 1,
+        "name": "Wheel Slip FR",
+        "shortname": "WSLPFR",
+        "units": "mph"
+    },
+    "wheelsliprl": {
+        "datatype": 5,
+        "decplaces": 1,
+        "name": "Wheel Slip RL",
+        "shortname": "WSLPRL",
+        "units": "mph"
+    },
+    "wheelsliprr": {
+        "datatype": 5,
+        "decplaces": 1,
+        "name": "Wheel Slip RR",
+        "shortname": "WSLPRR",
+        "units": "mph"
+    },
+    "frontwing": {
+        "decplaces": 2,
+        "name": "Front Wing",
+        "shortname": "FWING",
+    },
+    "rearwing": {
+        "decplaces": 2,
+        "name": "Rear Wing",
+        "shortname": "RWING",
+    },
+    "rideheightfl": {
+        "decplaces": 2,
+        "name": "Ride Height FL",
+        "shortname": "RHeightFL",
+    },
+    "rideheightfr": {
+        "decplaces": 2,
+        "name": "Ride Height FR",
+        "shortname": "RHeightFR",
+    },
+    "rideheightrl": {
+        "decplaces": 2,
+        "name": "Ride Height RL",
+        "shortname": "RHeightRL",
+    },
+    "rideheightrr": {
+        "decplaces": 2,
+        "name": "Ride Height RR",
+        "shortname": "RHeightRR",
+    },
     "debug1": {
         "decplaces": 2,
         "name": "Debug 1",
         "shortname": "Debug1",
+    },
+    "debug2": {
+        "decplaces": 2,
+        "name": "Debug 2",
+        "shortname": "Debug2",
     }
 }
 

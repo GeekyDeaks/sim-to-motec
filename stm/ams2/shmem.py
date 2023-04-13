@@ -4,6 +4,7 @@ from collections import namedtuple
 from stm.maths import Vector
 
 Wheels = namedtuple("Wheels", ["fl", "fr", "rl", "rr"])
+Wings = namedtuple("Wing", ["front", "rear"])
 
 class AMS2GameState(Enum):
     EXITED = 0
@@ -121,13 +122,13 @@ class AMS2SharedMemory:
         "3f"    # mWorldVelocity
         "3f"    # mAngularVelocity
         "3f"    # mLocalAcceleration
-        "12x"   # mWorldAcceleration
+        "3f"    # mWorldAcceleration
         "12x"   # mExtentsCentre
         "16x"   # mTyreFlags
         "16x"   # mTerrain
-        "16x"   # mTyreY
-        "16x"   # mTyreRPS
-        "16x"   # mTyreSlipSpeed
+        "4f"    # mTyreY
+        "4f"    # mTyreRPS
+        "4f"    # mTyreSlipSpeed
         "4f"    # mTyreTemp
         "16x"   # mTyreGrip
         "16x"   # mTyreHeightAboveGround
@@ -158,7 +159,7 @@ class AMS2SharedMemory:
         "4f"    # mAirPressure
         "4x"    # mEngineSpeed
         "4x"    # mEngineTorque
-        "8x"    # mWings
+        "2f"    # mWings
         "4x"    # mHandBrake
         "256x"  # mCurrentSector1Times
         "256x"  # mCurrentSector2Times
@@ -191,6 +192,8 @@ class AMS2SharedMemory:
         "4f"    # mTyreTempLeft
         "4f"    # mTyreTempCenter
         "4f"    # mTyreTempRight
+        "I"     # mDrsState,
+        "4f"    # mRideHeight
     )
 
     def __init__(self, buf):
@@ -237,11 +240,16 @@ class AMS2SharedMemory:
             wvx, wvy, wvz, # mWorldVelocity
             avx, avy, avz, # mAngularVelocity
             lax, lay, laz, # mLocalAcceleration
+            wax, way, waz, # mWorldAcceleration
+            tyfl, tyfr, tyrl, tyrr, # mTyreY
+            trpsfl, trpsfr, trpsrl, trpsrr, # mTyreRPS
+            tssfl, tssfr, tssrl, tssrr, # mTyreSlipSpeed
             ttfl, ttfr, ttrl, ttrr, # mTyreTemp
             btfl, btfr, btrl, btrr, # mBrakeTempCelsius
             self.mSequenceNumber,
             stfl, stfr, strl, sttrr, # mSuspensionTravel
             apfl, apfr, aprl, aprr, # mAirPressure,
+            wf, wr, # mWings
             mTranslatedTrackLocation,
             mTranslatedTrackVariation,
             self.mBrakeBias,
@@ -249,6 +257,8 @@ class AMS2SharedMemory:
             ttlfl, ttlfr, ttlrl, ttlrr,
             ttcfl, ttcfr, ttcrl, ttcrr,
             ttrfl, ttrfr, ttrrl, ttrrr,
+            self.mDrsState,
+            rhfl, rhfr, rhrl, rhrr, # mRideHeight
 
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
@@ -262,17 +272,24 @@ class AMS2SharedMemory:
         self.mTranslatedTrackLocation = mTranslatedTrackLocation.decode('utf-8').rstrip('\0')
         self.mTranslatedTrackVariation = mTranslatedTrackVariation.decode('utf-8').rstrip('\0')
         self.mLocalAcceleration = Vector(lax, lay, laz)
+        self.mWorldAcceleration = Vector(wax, way, waz)
+        self.mTyreY = Wheels(tyfl, tyfr, tyrl, tyrr)
+        self.mTyreRPS = Wheels(trpsfl, trpsfr, trpsrl, trpsrr)
+        self.mTyreSlipSpeed = Wheels(tssfl, tssfr, tssrl, tssrr)
         self.mTyreTemp = Wheels(ttfl, ttfr, ttrl, ttrr)
         self.mBrakeTempCelsius = Wheels(btfl, btfr, btrl, btrr)
         self.mSuspensionTravel = Wheels(stfl, stfr, strl, sttrr)
         self.mAirPressure = Wheels(apfl, apfr, aprl, aprr)
+        self.mWings = Wings(wf, wr)
         self.mTyreTempLeft = Wheels(ttlfl, ttlfr, ttlrl, ttlrr)
         self.mTyreTempCenter = Wheels(ttcfl, ttcfr, ttcrl, ttcrr)
         self.mTyreTempRight = Wheels(ttrfl, ttrfr, ttrrl, ttrrr)
+        self.mRideHeight = Wheels(rhfl, rhfr, rhrl, rhrr)
 
         self.participants = []
+        driver_index = self.mViewedParticipantIndex
         #  unpack the participants
-        if self.mNumParticipants > 0:
+        if self.mNumParticipants > 0 and driver_index >= 0:
 
             start = 0
             for _ in range(self.mNumParticipants):
@@ -282,7 +299,7 @@ class AMS2SharedMemory:
                 self.participants.append(participant)
                 start = end
 
-            self.driver = self.participants[0]
+            self.driver = self.participants[driver_index]
         else:
             self.driver = None
 
