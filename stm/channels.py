@@ -333,21 +333,25 @@ CHANNELS = {
         "decplaces": 2,
         "name": "Ride Height FL",
         "shortname": "RHeightFL",
+        "units": "cm"
     },
     "rideheightfr": {
         "decplaces": 2,
         "name": "Ride Height FR",
         "shortname": "RHeightFR",
+        "units": "cm"
     },
     "rideheightrl": {
         "decplaces": 2,
         "name": "Ride Height RL",
         "shortname": "RHeightRL",
+        "units": "cm"
     },
     "rideheightrr": {
         "decplaces": 2,
         "name": "Ride Height RR",
         "shortname": "RHeightRR",
+        "units": "cm"
     },
     "debug1": {
         "decplaces": 2,
