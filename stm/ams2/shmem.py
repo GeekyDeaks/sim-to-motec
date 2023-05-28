@@ -155,10 +155,10 @@ class AMS2SharedMemory:
         "i"     # mSequenceNumber
         "16x"   # mWheelLocalPositionY      
         "4f"    # mSuspensionTravel
-        "16x"   # mSuspensionVelocity
+        "4f"    # mSuspensionVelocity
         "4f"    # mAirPressure
         "4x"    # mEngineSpeed
-        "4x"    # mEngineTorque
+        "f"     # mEngineTorque
         "2f"    # mWings
         "4x"    # mHandBrake
         "256x"  # mCurrentSector1Times
@@ -248,7 +248,9 @@ class AMS2SharedMemory:
             btfl, btfr, btrl, btrr, # mBrakeTempCelsius
             self.mSequenceNumber,
             stfl, stfr, strl, sttrr, # mSuspensionTravel
+            svfl, svfr, svrl, svrr, # mSuspensionVelocity
             apfl, apfr, aprl, aprr, # mAirPressure,
+            self.mEngineTorque,
             wf, wr, # mWings
             mTranslatedTrackLocation,
             mTranslatedTrackVariation,
@@ -279,6 +281,7 @@ class AMS2SharedMemory:
         self.mTyreTemp = Wheels(ttfl, ttfr, ttrl, ttrr)
         self.mBrakeTempCelsius = Wheels(btfl, btfr, btrl, btrr)
         self.mSuspensionTravel = Wheels(stfl, stfr, strl, sttrr)
+        self.mSuspensionVelocity = Wheels(svfl, svfr, svrl, svrr)
         self.mAirPressure = Wheels(apfl, apfr, aprl, aprr)
         self.mWings = Wings(wf, wr)
         self.mTyreTempLeft = Wheels(ttlfl, ttlfr, ttlrl, ttlrr)

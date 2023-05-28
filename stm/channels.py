@@ -36,14 +36,12 @@ CHANNELS = {
         "units": "mph"
     },
     "lat": {
-        "datatype": 5,
         "decplaces": 7,
         "name": "GPS Latitude",
         "shortname": "GPSLat",
         "units": "deg"
     },
     "long": {
-        "datatype": 5,
         "decplaces": 7,
         "name": "GPS Longitude",
         "shortname": "GPSLong",
@@ -78,154 +76,180 @@ CHANNELS = {
         "units": "rpm"
     },
     "velx": {
-        "datatype": 5,
         "decplaces": 3,
         "name": "Velocity X",
         "shortname": "VELX",
         "units": "m"
     },
     "vely": {
-        "datatype": 5,
         "decplaces": 3,
         "name": "Velocity Y",
         "shortname": "VELY",
         "units": "m"
     },
     "velz": {
-        "datatype": 5,
         "decplaces": 3,
         "name": "Velocity Z",
         "shortname": "VELZ",
         "units": "m"
     },
     "glat": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "G Force Lat",
         "shortname": "G Lat",
         "units": "G"
     },
     "gvert": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "G Force Vert",
         "shortname": "G Vert",
         "units": "G"
     },
     "glong": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "G Force Long",
         "shortname": "G Long",
         "units": "G"
     },
     "wspdfl": {
-        "datatype": 5,
         "decplaces": 1,
         "name": "Wheel Speed FL",
         "shortname": "WSpd FL",
         "units": "mph"
     },
     "wspdfr": {
-        "datatype": 5,
         "decplaces": 1,
         "name": "Wheel Speed FR",
         "shortname": "WSpd FR",
         "units": "mph"
     },
     "wspdrl": {
-        "datatype": 5,
         "decplaces": 1,
         "name": "Wheel Speed RL",
         "shortname": "WSpd RL",
         "units": "mph"
     },
     "wspdrr": {
-        "datatype": 5,
         "decplaces": 1,
         "name": "Wheel Speed RR",
         "shortname": "WSpd RR",
         "units": "mph"
     },
     "suspfl": {
-        "datatype": 5,
         "decplaces": 3,
         "name": "Susp Pos FL",
         "shortname": "SuspFL",
         "units": "m"
     },
     "suspfr": {
-        "datatype": 5,
         "decplaces": 3,
         "name": "Susp Pos FR",
         "shortname": "SuspFR",
         "units": "m"
     },
     "susprl": {
-        "datatype": 5,
         "decplaces": 3,
         "name": "Susp Pos RL",
-        "shortname": "SuspHRL",
+        "shortname": "SuspRL",
         "units": "m"
     },
     "susprr": {
-        "datatype": 5,
         "decplaces": 3,
         "name": "Susp Pos RR",
         "shortname": "SuspRR",
         "units": "m"
     },
+    "suspvelfl": {
+        "decplaces": 3,
+        "name": "Susp Vel FL",
+        "shortname": "SuspVFL",
+        "units": "m/s"
+    },
+    "suspvelfr": {
+        "decplaces": 3,
+        "name": "Susp Vel FR",
+        "shortname": "SuspVFR",
+        "units": "m/s"
+    },
+    "suspvelrl": {
+        "decplaces": 3,
+        "name": "Susp Vel RL",
+        "shortname": "SuspVRL",
+        "units": "m/s"
+    },
+    "suspvelrr": {
+        "decplaces": 3,
+        "name": "Susp Vel RR",
+        "shortname": "SuspVRR",
+        "units": "m/s"
+    },
     "tyretempfl": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Tyre Temp FL",
         "shortname": "TTempFL",
         "units": "C"
     },
     "tyretempfr": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Tyre Temp FR",
         "shortname": "TTempFR",
         "units": "C"
     },
     "tyretemprl": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Tyre Temp RL",
         "shortname": "TTempRL",
         "units": "C"
     },
     "tyretemprr": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Tyre Temp RR",
         "shortname": "TTempRR",
         "units": "C"
     },
+    "tyrepresfl": {
+        "decplaces": 2,
+        "name": "Tyre Pressure FL",
+        "shortname": "TPresFL",
+        "units": "kPa"
+    },
+    "tyrepresfr": {
+        "decplaces": 2,
+        "name": "Tyre Pressure FR",
+        "shortname": "TPresFR",
+        "units": "kPa"
+    },
+    "tyrepresrl": {
+        "decplaces": 2,
+        "name": "Tyre Pressure RL",
+        "shortname": "TPresRL",
+        "units": "kPa"
+    },
+    "tyrepresrr": {
+        "decplaces": 2,
+        "name": "Tyre Pressure RR",
+        "shortname": "TPresRR",
+        "units": "kPa"
+    },
     "braketempfl": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Brake Temp FL",
         "shortname": "BTempFL",
         "units": "C"
     },
     "braketempfr": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Brake Temp FR",
         "shortname": "BTempFR",
         "units": "C"
     },
     "braketemprl": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Brake Temp RL",
         "shortname": "BTempRL",
         "units": "C"
     },
     "braketemprr": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Brake Temp RR",
         "shortname": "BTempRR",
@@ -250,70 +274,60 @@ CHANNELS = {
         "shortname": "RState",
     },
     "tyretempflo": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Tyre Temp FL Outer",
         "shortname": "TTempFLO",
         "units": "C"
     },
     "tyretempfro": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Tyre Temp FR Outer",
         "shortname": "TTempFRO",
         "units": "C"
     },
     "tyretempflc": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Tyre Temp FL Centre",
         "shortname": "TTempFLC",
         "units": "C"
     },
     "tyretempfrc": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Tyre Temp FR Centre",
         "shortname": "TTempFRC",
         "units": "C"
     },
     "tyretempfli": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Tyre Temp FL Inner",
         "shortname": "TTempFLI",
         "units": "C"
     },
     "tyretempfri": {
-        "datatype": 5,
         "decplaces": 2,
         "name": "Tyre Temp FR Inner",
         "shortname": "TTempFRI",
         "units": "C"
     },
     "wheelslipfl": {
-        "datatype": 5,
         "decplaces": 1,
         "name": "Wheel Slip FL",
         "shortname": "WSLPFL",
         "units": "mph"
     },
     "wheelslipfr": {
-        "datatype": 5,
         "decplaces": 1,
         "name": "Wheel Slip FR",
         "shortname": "WSLPFR",
         "units": "mph"
     },
     "wheelsliprl": {
-        "datatype": 5,
         "decplaces": 1,
         "name": "Wheel Slip RL",
         "shortname": "WSLPRL",
         "units": "mph"
     },
     "wheelsliprr": {
-        "datatype": 5,
         "decplaces": 1,
         "name": "Wheel Slip RR",
         "shortname": "WSLPRR",
@@ -352,6 +366,22 @@ CHANNELS = {
         "name": "Ride Height RR",
         "shortname": "RHeightRR",
         "units": "cm"
+    },
+    "turbopres": {
+        "decplaces": 2,
+        "name": "Turbo Boost Pressure",
+        "shortname": "TurboP"
+    },    
+    "brakebias": {
+        "decplaces": 2,
+        "name": "Brake Bias",
+        "shortname": "BrakeBias"
+    },    
+    "enginetorque": {
+        "decplaces": 2,
+        "name": "Engine Torque",
+        "shortname": "ETorque",
+        "units": "Nm"
     },
     "debug1": {
         "decplaces": 2,
