@@ -13,6 +13,7 @@ STATE_FILE = "gt7.cfg"
 state = {
     "IP": "192.168.1.100",
     "PORT": 33740,
+    "REPLAY": False,
     "DRIVER": "",
     "SESSION": ""
 }
@@ -32,6 +33,7 @@ BUTTON_ENABLED = (sg.theme_button_color_text(), sg.theme_background_color())
 labels = [
     [sg.Text("PS IP Address")],
     [sg.Text("Local UDP Port")],
+    [sg.Text("Capture Replays")],
     [sg.Text("Driver")],
     [sg.Text("Session")],
     [sg.Text("Log File")],
@@ -44,6 +46,7 @@ labels = [
 values = [
     [sg.Input(state["IP"], key="IP", size=(15,1), enable_events=True)],
     [sg.Input(state["PORT"], key="PORT", size=(15,1), enable_events=True), sg.Text("Only change this if using a UDP relay", font="arial 12 italic")],
+    [sg.Checkbox("", state["REPLAY"], key="REPLAY", enable_events=True)],
     [sg.Input(state["DRIVER"], key="DRIVER", size=(15,1), enable_events=True )],
     [sg.Input(state["SESSION"], key="SESSION", size=(15,1), enable_events=True )],
     [sg.Text("Not Started",key="LOGFILE" )],
@@ -106,6 +109,7 @@ while True:
             rawfile=rawfile,
             sampler=GT7Sampler(addr=values["IP"], port=values["PORT"], freq=60),
             filetemplate=filetemplate,
+            replay=values["REPLAY"],
             driver=values["DRIVER"],
             session=values["SESSION"]
         )

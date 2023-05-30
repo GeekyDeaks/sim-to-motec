@@ -22,6 +22,7 @@ class GT7Logger(BaseLogger):
                 rawfile=None,
                 sampler=None,
                 filetemplate=None,
+                replay=False,
                 name="",
                 session="",
                 vehicle="",
@@ -47,6 +48,7 @@ class GT7Logger(BaseLogger):
         self.skip_samples = 0
         self.track = None
         self.track_detector = None
+        self.replay = replay
 
     def process_sample(self, timestamp, sample):
 
@@ -82,7 +84,7 @@ class GT7Logger(BaseLogger):
         if currp.paused:
             return
 
-        if not currp.in_race:
+        if not currp.in_race and not self.replay:
             self.save_log()
             return
         
@@ -103,6 +105,11 @@ class GT7Logger(BaseLogger):
             event = copy(self.event)
             event.datetime = then.strftime("%Y-%m-%dT%H:%M:%S")
             event.vehicle = vehicle
+
+            # mark the session as a replay
+            if not currp.in_race and not event.session:
+                event.session = "Replay"
+
             self.current_event = event
             self.new_log(channels=self.channels, event=event)
 
@@ -125,7 +132,7 @@ class GT7Logger(BaseLogger):
                 self.track_detector.guess(lastp.position.x, lastp.position.z, currp.position.x, currp.position.z)
 
                 if self.track_detector.track_name:
-                    self.current_event.venue = self.track_detector.track_name
+                    self.current_event.venue = str(self.track_detector.track_name).replace(" - ", "-")
                     self.update_event(event=self.current_event)
 
         else:
@@ -155,6 +162,10 @@ class GT7Logger(BaseLogger):
 
         # calculate wheel speed (needs to be inverted)
         wheelspeed = [ r * s * -2.23693629 for r,s in zip(currp.wheelradius, currp.wheelspeed) ]
+
+        if not currp.in_race:
+            # wheelspeed is not inverted in replay
+            wheelspeed *= -1
 
         self.add_samples([
             beacon,
