@@ -10,23 +10,28 @@ from logging import getLogger, basicConfig, DEBUG
 # try and load the sate
 STATE_FILE = "gt7.cfg"
 
+state = {
+    "IP": "192.168.1.100",
+    "PORT": 33740,
+    "DRIVER": "",
+    "SESSION": ""
+}
+
 try:
     with open(STATE_FILE) as f:
-        state = json.load(f)
+        state.update(json.load(f))
 except Exception as e:
-    state = {
-        "IP": "192.168.1.100",
-        "DRIVER": "",
-        "SESSION": ""
-    }
+    pass
 
 sg.change_look_and_feel('Default1')
+sg.set_options(font="Arial 12")
 
 BUTTON_DISABLED = (sg.theme_background_color(), sg.theme_background_color())
 BUTTON_ENABLED = (sg.theme_button_color_text(), sg.theme_background_color())
 
 labels = [
     [sg.Text("PS IP Address")],
+    [sg.Text("Local UDP Port")],
     [sg.Text("Driver")],
     [sg.Text("Session")],
     [sg.Text("Log File")],
@@ -38,6 +43,7 @@ labels = [
 
 values = [
     [sg.Input(state["IP"], key="IP", size=(15,1), enable_events=True)],
+    [sg.Input(state["PORT"], key="PORT", size=(15,1), enable_events=True), sg.Text("Only change this if using a UDP relay", font="arial 12 italic")],
     [sg.Input(state["DRIVER"], key="DRIVER", size=(15,1), enable_events=True )],
     [sg.Input(state["SESSION"], key="SESSION", size=(15,1), enable_events=True )],
     [sg.Text("Not Started",key="LOGFILE" )],
@@ -82,6 +88,9 @@ while True:
     if event == "IP" and len(values['IP']) and values['IP'][-1] not in ('.1234567890'):
         window["IP"].update(values['IP'][:-1])
 
+    if event == "PORT" and len(values['PORT']) and values['PORT'][-1] not in ('1234567890'):
+        window["PORT"].update(values['PORT'][:-1])
+
     if event in state:
         state[event] = values[event]
 
@@ -95,7 +104,7 @@ while True:
 
         logger = GT7Logger(
             rawfile=rawfile,
-            sampler=GT7Sampler(addr=values['IP'], freq=60),
+            sampler=GT7Sampler(addr=values["IP"], port=values["PORT"], freq=60),
             filetemplate=filetemplate,
             driver=values["DRIVER"],
             session=values["SESSION"]

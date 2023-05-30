@@ -53,6 +53,7 @@ class GT7Logger(BaseLogger):
         p = GT7DataPacket(sample)
         if not self.last_packet:
             self.last_packet = p
+            l.info(f"received first packet from GT7 with ID {p.tick}")
 
         # fill in any missing ticks
         missing = range(self.last_packet.tick + 1, p.tick)
