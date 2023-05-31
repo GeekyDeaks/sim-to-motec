@@ -14,7 +14,8 @@ class AMS2Logger(BaseLogger):
                 'throttle', 'brake', 'steer', 'speed', 
                 'lat', 'long',
                 'glat', 'gvert', 'glong',  # g forces
-                'suspfl', 'suspfr', 'susprl', 'susprr', # suspension
+                'suspfl', 'suspfr', 'susprl', 'susprr', # suspension travel
+                'suspvelfl', 'suspvelfr', 'suspvelrl', 'suspvelrr', # suspension velocity
                 'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr', # combined tyre temp
                 'braketempfl', 'braketempfr', 'braketemprl', 'braketemprr', # brake temp
                 'tyretempflo', 'tyretempfro', # outer temp
@@ -22,6 +23,10 @@ class AMS2Logger(BaseLogger):
                 'tyretempfli', 'tyretempfri', # inner temp
                 #'wheelslipfl', 'wheelslipfr', 'wheelsliprl', 'wheelsliprr', # wheel slip
                 'rideheightfl', 'rideheightfr', 'rideheightrl', 'rideheightrr', 
+                'tyrepresfl', 'tyrepresfr', 'tyrepresrl', 'tyrepresrr', # mAirPressure
+                'turbopres',
+                'brakebias',
+                'enginetorque',
                 'lap', 'laptime',
                 'racestate', # AMS2 race status
                 ]
@@ -102,7 +107,8 @@ class AMS2Logger(BaseLogger):
             glat,
             gvert,
             -glong,
-            *p.mSuspensionTravel,
+            *[sp * 100 for sp in p.mSuspensionTravel],
+            *p.mSuspensionVelocity,
             *p.mTyreTemp,
             *p.mBrakeTempCelsius,
             p.mTyreTempLeft.fl, p.mTyreTempRight.fr,     # outer
@@ -110,6 +116,10 @@ class AMS2Logger(BaseLogger):
             p.mTyreTempRight.fl, p.mTyreTempLeft.fr,   # inner
             #*[s * 2.23693629 for s in p.mTyreSlipSpeed], # wheel slip m/s -> mph
             *p.mRideHeight,
+            *p.mAirPressure,
+            p.mTurboBoostPressure,
+            p.mBrakeBias,
+            p.mEngineTorque,
             p.driver.mCurrentLap,
             p.mCurrentTime,
             p.mRaceState.value,

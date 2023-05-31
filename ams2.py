@@ -19,6 +19,7 @@ except Exception as e:
     }
 
 sg.change_look_and_feel('Default1')
+sg.set_options(font="Arial 12")
 
 BUTTON_DISABLED = (sg.theme_background_color(), sg.theme_background_color())
 BUTTON_ENABLED = (sg.theme_button_color_text(), sg.theme_background_color())

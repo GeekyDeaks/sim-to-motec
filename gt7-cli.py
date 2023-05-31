@@ -20,6 +20,7 @@ def main():
     parser.add_argument("--session", type=str, default="", help="Session e.g. Practice, Qualify, Race")
     parser.add_argument("--vehicle", type=str, default="", help="Override name of vehicle")
     parser.add_argument("--venue", type=str, default="", help="Venue/Track name, MoTeC will not generate a track map without this")
+    parser.add_argument("--replay", action="store_true", help="log replay telemetry")
     parser.add_argument("--freq", type=int, default=60, help="frequency to collect samples, currently ignored")
     parser.add_argument("--saveraw", help="save raw samples to an sqlite3 db for later analysis", action="store_true")
     parser.add_argument("--loadraw", help="load raw samples from an sqlite3 db", action="store_true")
@@ -41,6 +42,7 @@ def main():
         rawfile=rawfile,
         sampler=sampler,
         filetemplate=filetemplate,
+        replay=args.replay,
         driver=args.driver,
         session=args.session,
         vehicle=args.vehicle,
