@@ -107,7 +107,7 @@ class AMS2Logger(BaseLogger):
             glat,
             gvert,
             -glong,
-            *p.mSuspensionTravel,
+            *[sp * 100 for sp in p.mSuspensionTravel],
             *p.mSuspensionVelocity,
             *p.mTyreTemp,
             *p.mBrakeTempCelsius,

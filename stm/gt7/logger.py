@@ -16,6 +16,7 @@ class GT7Logger(BaseLogger):
                 'suspfl', 'suspfr', 'susprl', 'susprr',
                 'wspdfl', 'wspdfr', 'wspdrl', 'wspdrr',
                 'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr',
+                'rideheight'
                 ]
 
     def __init__(self,
@@ -160,12 +161,13 @@ class GT7Logger(BaseLogger):
         gvert = deltav.y * freq / 9.8 # Y
         glong = deltav.z * freq / 9.8 # Z
 
-        # calculate wheel speed (needs to be inverted)
-        wheelspeed = [ r * s * -2.23693629 for r,s in zip(currp.wheelradius, currp.wheelspeed) ]
-
-        if not currp.in_race:
+        ms_to_mph = 2.23693629
+        if currp.in_race:
+            # calculate wheel speed (needs to be inverted)
+            wheelspeed = [ r * s * -ms_to_mph for r,s in zip(currp.wheelradius, currp.wheelspeed) ]
+        else:
             # wheelspeed is not inverted in replay
-            wheelspeed *= -1
+            wheelspeed = [ r * s * ms_to_mph for r,s in zip(currp.wheelradius, currp.wheelspeed) ]
 
         self.add_samples([
             beacon,
@@ -174,7 +176,7 @@ class GT7Logger(BaseLogger):
             currp.gear,
             currp.throttle * 100 / 255,
             currp.brake * 100 / 255,
-            currp.speed * 2.23693629, # m/s to mph
+            currp.speed * ms_to_mph, # m/s to mph
             lat,
             long,
             deltav.x,
@@ -183,10 +185,9 @@ class GT7Logger(BaseLogger):
             glat,
             gvert,
             -glong,
-            *currp.suspension,
+            *[p * 100 for p in currp.suspension],
             *wheelspeed,
-            *currp.tyretemp
+            *currp.tyretemp,
+            currp.ride_height * 100
         ])
-
-
 

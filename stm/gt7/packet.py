@@ -35,7 +35,7 @@ class GT7DataPacket:
         "3f"  # VELOCITY               / 3f  / 12x / 0x0010
         "4f"  # ROTATION               / 4f  / 12x / 0x001C
         "12x" # VELOCITY_ANGULAR       / 3f  / 12x / 0x002C
-        "4x"  # RIDE_HEIGHT            / f   / 4x  / 0x0038
+        "f"   # RIDE_HEIGHT            / f   / 4x  / 0x0038
         "f"   # RPM                    / f   / 4x  / 0x003C
         "4x"  # IV                     / 4B  / 4x  / 0x0040
         "4x"  # CURRENT_FUEL           / f   / 4x  / 0x0044
@@ -84,6 +84,7 @@ class GT7DataPacket:
             px, py, pz,
             vx, vy, vz,
             rw, rx, ry, rz,
+            self.ride_height,
             self.rpm,
             self.speed,
             ttfl, ttfr, ttrl, ttrr,

@@ -139,25 +139,25 @@ CHANNELS = {
         "decplaces": 3,
         "name": "Susp Pos FL",
         "shortname": "SuspFL",
-        "units": "m"
+        "units": "cm"
     },
     "suspfr": {
         "decplaces": 3,
         "name": "Susp Pos FR",
         "shortname": "SuspFR",
-        "units": "m"
+        "units": "cm"
     },
     "susprl": {
         "decplaces": 3,
         "name": "Susp Pos RL",
         "shortname": "SuspRL",
-        "units": "m"
+        "units": "cm"
     },
     "susprr": {
         "decplaces": 3,
         "name": "Susp Pos RR",
         "shortname": "SuspRR",
-        "units": "m"
+        "units": "cm"
     },
     "suspvelfl": {
         "decplaces": 3,
@@ -365,6 +365,12 @@ CHANNELS = {
         "decplaces": 2,
         "name": "Ride Height RR",
         "shortname": "RHeightRR",
+        "units": "cm"
+    },
+    "rideheight": {
+        "decplaces": 2,
+        "name": "Ride Height",
+        "shortname": "RHeight",
         "units": "cm"
     },
     "turbopres": {
