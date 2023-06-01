@@ -7,7 +7,11 @@ Currently supports AMS2 and GT7
 # Prebuilt Windows Executables
 
 Due to complexities compiling library dependencies on Windows, prebuilt binaries can 
-be found in the [releases](https://github.com/GeekyDeaks/sim-to-motec/releases)
+be found in the [releases](https://github.com/GeekyDeaks/sim-to-motec/releases) section.  Each exe file is 
+generated using [pyinstaller](https://pyinstaller.org) and is a self extracting archive containing a python interpreter as well
+as the scripts and dependencies from this repo
+
+If you are on a *nix OS or prefer not to override security to run an untrusted executable, then keep reading:
 
 # Getting started with the scripts
 
@@ -24,6 +28,8 @@ which is required for MoTeC to generate a track map from the fake GPS. Expects U
 true even when running in 120Hz mode
 
 A new i2 log file will be created each time the logic detects a session change, usually via the lap number decreasing.
+
+There is an option enable logging of replays, but this can result in unwanted log file creation.
 
 Example:
 
@@ -42,6 +48,7 @@ Usage:
         --session SESSION  Session e.g. Practice, Qualify, Race
         --vehicle VEHICLE  Override name of vehicle
         --venue VENUE      Override Venue/Track name
+        --replay           log replay telemetry
         --freq FREQ        frequency to collect samples, currently ignored
         --saveraw          save raw samples to an sqlite3 db for later analysis
         --loadraw          load raw samples from an sqlite3 db
