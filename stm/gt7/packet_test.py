@@ -40,5 +40,19 @@ class TestGT7Packet(unittest.TestCase):
             self.assertEqual(pkt.paused, False, "should not decode paused")
             self.assertEqual(pkt.in_race, False, "should decode inrace")
 
+    def test_oil_pressure(self):
+        with open(os.path.join(PATH, "test", "barcelonagp911.bin"), "rb") as fin:
+
+            pkt = GT7DataPacket(fin.read())
+            expected = 6.866572856903076
+            self.assertEqual(pkt.oil_pressure, expected)
+
+    def test_oil_temp(self):
+        with open(os.path.join(PATH, "test", "barcelonagp911.bin"), "rb") as fin:
+
+            pkt = GT7DataPacket(fin.read())
+            expected = 110.0
+            self.assertEqual(pkt.oil_temp, expected)
+
 if __name__ == '__main__':
     unittest.main()

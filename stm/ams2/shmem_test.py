@@ -100,5 +100,23 @@ class TestAMS2SharedMemory(unittest.TestCase):
             expected = AMS2SessionState.RACE
             self.assertEqual(sm.mSessionState, expected)
 
+    def test_mFuelLevel(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+            sm = AMS2SharedMemory(fin.read())
+            expected = 0.5
+            self.assertEqual(sm.mFuelLevel, expected)
+
+    def test_mOilTempCelsius(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+            sm = AMS2SharedMemory(fin.read())
+            expected = 63.48016357421875
+            self.assertEqual(sm.mOilTempCelsius, expected)
+
+    def test_mOilPressureKPa(self):
+        with open(os.path.join(PATH, "test", "ams2_inrace.bin"), "rb") as fin:
+            sm = AMS2SharedMemory(fin.read())
+            expected = 65.2686767578125
+            self.assertEqual(sm.mOilPressureKPa, expected)
+
 if __name__ == '__main__':
     unittest.main()

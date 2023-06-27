@@ -389,6 +389,30 @@ CHANNELS = {
         "shortname": "ETorque",
         "units": "Nm"
     },
+    "oiltemp": {
+        "decplaces": 2,
+        "name": "Eng Oil Temp",
+        "shortname": "OilTemp",
+        "units": "C"
+    },
+    "oilpres": {
+        "decplaces": 2,
+        "name": "Eng Oil Pres",
+        "shortname": "OilPres",
+        "units": "kPa"
+    },
+    "watertemp": {
+        "decplaces": 2,
+        "name": "Eng Water Temp",
+        "shortname": "WaterTemp",
+        "units": "C"
+    },
+    "waterpres": {
+        "decplaces": 2,
+        "name": "Eng Water Pres",
+        "shortname": "WaterPres",
+        "units": "kPa"
+    },
     "debug1": {
         "decplaces": 2,
         "name": "Debug 1",

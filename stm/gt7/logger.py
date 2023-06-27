@@ -16,7 +16,8 @@ class GT7Logger(BaseLogger):
                 'suspfl', 'suspfr', 'susprl', 'susprr',
                 'wspdfl', 'wspdfr', 'wspdrl', 'wspdrr',
                 'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr',
-                'rideheight'
+                'rideheight',
+                'oilpres', 'oiltemp', 'watertemp'
                 ]
 
     def __init__(self,
@@ -188,6 +189,9 @@ class GT7Logger(BaseLogger):
             *[p * 100 for p in currp.suspension],
             *wheelspeed,
             *currp.tyretemp,
-            currp.ride_height * 100
+            currp.ride_height * 100,
+            currp.oil_pressure,
+            currp.oil_temp,
+            currp.water_temp
         ])
 
