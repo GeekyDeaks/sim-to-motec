@@ -38,8 +38,8 @@ class GT7DataPacket:
         "f"   # RIDE_HEIGHT            / f   / 4x  / 0x0038
         "f"   # RPM                    / f   / 4x  / 0x003C
         "4x"  # IV                     / 4B  / 4x  / 0x0040
-        "4x"  # CURRENT_FUEL           / f   / 4x  / 0x0044
-        "4x"  # FUEL_CAPACITY          / f   / 4x  / 0x0048
+        "f"   # CURRENT_FUEL           / f   / 4x  / 0x0044
+        "f"   # FUEL_CAPACITY          / f   / 4x  / 0x0048
         "f"   # SPEED                  / f   / 4x  / 0x004C
         "f"   # TURBO_BOOST            / f   / 4x  / 0x0050
         "f"   # OIL_PRESSURE           / f   / 4x  / 0x0054
@@ -86,6 +86,8 @@ class GT7DataPacket:
             rw, rx, ry, rz,
             self.ride_height,
             self.rpm,
+            self.current_fuel,
+            self.fuel_capacity,
             self.speed,
             self.turbo_boost,
             self.oil_pressure,

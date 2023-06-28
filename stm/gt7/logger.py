@@ -11,15 +11,18 @@ l = getLogger(__name__)
 
 class GT7Logger(BaseLogger):
 
-    channels = ['beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'steer', 
-                'speed', 'lat', 'long',
-                'velx', 'vely', 'velz', 'glat', 'gvert', 'glong', 
-                'suspfl', 'suspfr', 'susprl', 'susprr',
-                'wspdfl', 'wspdfr', 'wspdrl', 'wspdrr',
-                'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr',
-                'rideheight',
-                'oilpres', 'oiltemp', 'watertemp'
-                ]
+    channels = [
+        'beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'steer', 
+        'speed', 'lat', 'long',
+        'velx', 'vely', 'velz', 'glat', 'gvert', 'glong', 
+        'suspfl', 'suspfr', 'susprl', 'susprr',
+        'wspdfl', 'wspdfr', 'wspdrl', 'wspdrr',
+        'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr',
+        'rideheight',
+        'oilpres', 'oiltemp', 'watertemp',
+        { "name": "fuellevel", "units": "%" },
+        { "name": "fuelcapacity", "units": "%" }
+    ]
 
     def __init__(self,
                 rawfile=None,
@@ -200,6 +203,8 @@ class GT7Logger(BaseLogger):
             currp.ride_height * 100,
             currp.oil_pressure,
             currp.oil_temp,
-            currp.water_temp
+            currp.water_temp,
+            currp.current_fuel,
+            currp.fuel_capacity
         ])
 

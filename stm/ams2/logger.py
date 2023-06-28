@@ -9,29 +9,30 @@ l = getLogger(__name__)
 class AMS2Logger(BaseLogger):
 
     channels = [
-                'beacon', 'br2', # lap or sector points
-                'lap', 'rpm', 'gear', 
-                'throttle', 'brake', 'steer', 'speed', 
-                'lat', 'long',
-                'glat', 'gvert', 'glong',  # g forces
-                'suspfl', 'suspfr', 'susprl', 'susprr', # suspension travel
-                'suspvelfl', 'suspvelfr', 'suspvelrl', 'suspvelrr', # suspension velocity
-                'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr', # combined tyre temp
-                'braketempfl', 'braketempfr', 'braketemprl', 'braketemprr', # brake temp
-                'tyretempflo', 'tyretempfro', # outer temp
-                'tyretempflc', 'tyretempfrc', # center temp
-                'tyretempfli', 'tyretempfri', # inner temp
-                #'wheelslipfl', 'wheelslipfr', 'wheelsliprl', 'wheelsliprr', # wheel slip
-                'rideheightfl', 'rideheightfr', 'rideheightrl', 'rideheightrr', 
-                'tyrepresfl', 'tyrepresfr', 'tyrepresrl', 'tyrepresrr', # mAirPressure
-                'turbopres',
-                'oiltemp', 'oilpres',
-                'watertemp', 'waterpres',
-                'brakebias',
-                'enginetorque',
-                'lap', 'laptime',
-                'racestate', # AMS2 race status
-                ]
+        'beacon', 'br2', # lap or sector points
+        'lap', 'rpm', 'gear', 
+        'throttle', 'brake', 'steer', 'speed', 
+        'lat', 'long',
+        'glat', 'gvert', 'glong',  # g forces
+        'suspfl', 'suspfr', 'susprl', 'susprr', # suspension travel
+        'suspvelfl', 'suspvelfr', 'suspvelrl', 'suspvelrr', # suspension velocity
+        'tyretempfl', 'tyretempfr', 'tyretemprl', 'tyretemprr', # combined tyre temp
+        'braketempfl', 'braketempfr', 'braketemprl', 'braketemprr', # brake temp
+        'tyretempflo', 'tyretempfro', # outer temp
+        'tyretempflc', 'tyretempfrc', # center temp
+        'tyretempfli', 'tyretempfri', # inner temp
+        #'wheelslipfl', 'wheelslipfr', 'wheelsliprl', 'wheelsliprr', # wheel slip
+        'rideheightfl', 'rideheightfr', 'rideheightrl', 'rideheightrr', 
+        'tyrepresfl', 'tyrepresfr', 'tyrepresrl', 'tyrepresrr', # mAirPressure
+        'turbopres',
+        'oiltemp', 'oilpres',
+        'watertemp', 'waterpres',
+        'brakebias',
+        'enginetorque',
+        'lap', 'laptime',
+        'racestate', # AMS2 race status
+        'fuelpres', 'fuellevel', 'fuelcapacity'
+    ]
 
     def __init__(self,
                 rawfile=None,
@@ -136,6 +137,9 @@ class AMS2Logger(BaseLogger):
             p.driver.mCurrentLap,
             p.mCurrentTime,
             p.mRaceState.value,
+            p.mFuelPressureKPa,
+            p.mFuelLevel * p.mFuelCapacity, # this seems to be a percentage
+            p.mFuelCapacity
         ])
 
 

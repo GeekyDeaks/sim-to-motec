@@ -414,6 +414,24 @@ CHANNELS = {
         "shortname": "WaterPres",
         "units": "kPa"
     },
+    "fuelpres": {
+        "decplaces": 2,
+        "name": "Fuel Pres",
+        "shortname": "FuelPres",
+        "units": "kPa"
+    },
+    "fuellevel": {
+        "decplaces": 2,
+        "name": "Fuel Level",
+        "shortname": "FuelLevel",
+        "units": "l"
+    },
+    "fuelcapacity": {
+        "decplaces": 2,
+        "name": "Fuel Capacity",
+        "shortname": "FuelCapacity",
+        "units": "l"
+    },
     "debug1": {
         "decplaces": 2,
         "name": "Debug 1",
@@ -449,7 +467,16 @@ def get_channel_definition(name, freq=None, imperial=False):
         "units": ""
     }
 
-    cd.update(dict(CHANNELS[name]))
+    # see if we are overriding the channel specifically from the logger
+    if isinstance(name, dict):
+        td = dict(name)
+        name = td["name"]
+        del td["name"]
+        cd.update(dict(CHANNELS[name]))
+        cd.update(td)
+    else:
+        cd.update(dict(CHANNELS[name]))
+    
     # check the units
     if isinstance(cd["units"], list):
         cd["units"] = cd["units"][ 1 if imperial else 0 ]
