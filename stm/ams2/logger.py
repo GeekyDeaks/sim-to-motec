@@ -136,7 +136,7 @@ class AMS2Logger(BaseLogger):
             #*[s * 2.23693629 for s in p.mTyreSlipSpeed], # wheel slip m/s -> mph
             *p.mRideHeight,
             *p.mAirPressure,
-            p.mTurboBoostPressure,
+            p.mTurboBoostPressure / 1000.0,
             p.mOilTempCelsius,
             p.mOilPressureKPa,
             p.mWaterTempCelsius,

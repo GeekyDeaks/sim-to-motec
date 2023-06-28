@@ -419,7 +419,8 @@ CHANNELS = {
     "turbopres": {
         "decplaces": 2,
         "name": "Turbo Boost Pressure",
-        "shortname": "TurboP"
+        "shortname": "TurboP",
+        "units": "kPa"
     },    
     "brakebias": {
         "decplaces": 2,
