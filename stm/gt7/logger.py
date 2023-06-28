@@ -21,7 +21,8 @@ class GT7Logger(BaseLogger):
         'rideheight',
         'oilpres', 'oiltemp', 'watertemp',
         { "name": "fuellevel", "units": "%" },
-        { "name": "fuelcapacity", "units": "%" }
+        { "name": "fuelcapacity", "units": "%" },
+        'asm', 'tcs'
     ]
 
     def __init__(self,
@@ -205,6 +206,8 @@ class GT7Logger(BaseLogger):
             currp.oil_temp,
             currp.water_temp,
             currp.current_fuel,
-            currp.fuel_capacity
+            currp.fuel_capacity,
+            1 if currp.asm_active else 0,
+            1 if currp.tcs_active else 0
         ])
 

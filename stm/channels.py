@@ -437,6 +437,24 @@ CHANNELS = {
         "name": "Debug 1",
         "shortname": "Debug1",
     },
+    "abs": {
+        "datatype": 0,
+        "datasize": 2,
+        "name": "ABS Active",
+        "shortname": "ABSActive"
+    },
+    "tcs": {
+        "datatype": 0,
+        "datasize": 2,
+        "name": "TCS Active",
+        "shortname": "TCSActive"
+    },
+    "asm": {
+        "datatype": 0,
+        "datasize": 2,
+        "name": "ASM Active",
+        "shortname": "ASMActive"
+    },
     "debug2": {
         "decplaces": 2,
         "name": "Debug 2",

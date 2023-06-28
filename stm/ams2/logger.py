@@ -31,7 +31,8 @@ class AMS2Logger(BaseLogger):
         'enginetorque',
         'lap', 'laptime',
         'racestate', # AMS2 race status
-        'fuelpres', 'fuellevel', 'fuelcapacity'
+        'fuelpres', 'fuellevel', 'fuelcapacity',
+        'abs'
     ]
 
     def __init__(self,
@@ -139,7 +140,8 @@ class AMS2Logger(BaseLogger):
             p.mRaceState.value,
             p.mFuelPressureKPa,
             p.mFuelLevel * p.mFuelCapacity, # this seems to be a percentage
-            p.mFuelCapacity
+            p.mFuelCapacity,
+            1 if p.mAntiLockActive else 0
         ])
 
 

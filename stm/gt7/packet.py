@@ -127,6 +127,8 @@ class GT7DataPacket:
 
         self.paused = bool(self.flags & Flags.PAUSED.value)
         self.in_race = bool(self.flags & Flags.IN_RACE.value)
+        self.tcs_active = bool(self.flags & Flags.TCS.value)
+        self.asm_active = bool(self.flags & Flags.ASM.value)
 
     @staticmethod
     def decrypt(dat):
