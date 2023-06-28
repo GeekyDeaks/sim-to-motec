@@ -11,7 +11,7 @@ class AMS2Logger(BaseLogger):
     channels = [
         'beacon', 'br2', # lap or sector points
         'lap', 'rpm', 'gear', 
-        'throttle', 'brake', 'steer', 'speed', 
+        'throttle', 'brake', 'clutch', 'steer', 'speed', 
         'lat', 'long',
         'glat', 'gvert', 'glong',  # g forces
         'suspfl', 'suspfr', 'susprl', 'susprr', # suspension travel
@@ -21,6 +21,9 @@ class AMS2Logger(BaseLogger):
         'tyretempflo', 'tyretempfro', # outer temp
         'tyretempflc', 'tyretempfrc', # center temp
         'tyretempfli', 'tyretempfri', # inner temp
+        'tyretemprlo', 'tyretemprro', # outer temp
+        'tyretemprlc', 'tyretemprrc', # center temp
+        'tyretemprli', 'tyretemprri', # inner temp
         #'wheelslipfl', 'wheelslipfr', 'wheelsliprl', 'wheelsliprr', # wheel slip
         'rideheightfl', 'rideheightfr', 'rideheightrl', 'rideheightrr', 
         'tyrepresfl', 'tyrepresfr', 'tyrepresrl', 'tyrepresrr', # mAirPressure
@@ -32,7 +35,8 @@ class AMS2Logger(BaseLogger):
         'lap', 'laptime',
         'racestate', # AMS2 race status
         'fuelpres', 'fuellevel', 'fuelcapacity',
-        'abs'
+        'abs',
+        'splittime'
     ]
 
     def __init__(self,
@@ -111,6 +115,7 @@ class AMS2Logger(BaseLogger):
             p.mGear,
             p.mThrottle * 100,
             p.mBrake * 100,
+            p.mClutch * 100,
             p.mSteering * 40, # arbitratry scale based on some testing
             p.mSpeed * ms_to_speed,
             lat,
@@ -125,6 +130,9 @@ class AMS2Logger(BaseLogger):
             p.mTyreTempLeft.fl, p.mTyreTempRight.fr,     # outer
             p.mTyreTempCenter.fl, p.mTyreTempCenter.fr, # centre
             p.mTyreTempRight.fl, p.mTyreTempLeft.fr,   # inner
+            p.mTyreTempLeft.rl, p.mTyreTempRight.rr,     # outer
+            p.mTyreTempCenter.rl, p.mTyreTempCenter.rr, # centre
+            p.mTyreTempRight.rl, p.mTyreTempLeft.rr,   # inner
             #*[s * 2.23693629 for s in p.mTyreSlipSpeed], # wheel slip m/s -> mph
             *p.mRideHeight,
             *p.mAirPressure,
@@ -141,7 +149,8 @@ class AMS2Logger(BaseLogger):
             p.mFuelPressureKPa,
             p.mFuelLevel * p.mFuelCapacity, # this seems to be a percentage
             p.mFuelCapacity,
-            1 if p.mAntiLockActive else 0
+            1 if p.mAntiLockActive else 0,
+            p.mSplitTime
         ])
 
 

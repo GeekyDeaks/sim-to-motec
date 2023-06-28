@@ -12,7 +12,8 @@ l = getLogger(__name__)
 class GT7Logger(BaseLogger):
 
     channels = [
-        'beacon', 'lap', 'rpm', 'gear', 'throttle', 'brake', 'steer', 
+        'beacon', 'lap', 'rpm', 'gear', 
+        'throttle', 'brake', 'clutch', 'steer', 
         'speed', 'lat', 'long',
         'velx', 'vely', 'velz', 'glat', 'gvert', 'glong', 
         'suspfl', 'suspfr', 'susprl', 'susprr',
@@ -188,6 +189,7 @@ class GT7Logger(BaseLogger):
             currp.gear,
             currp.throttle * 100 / 255,
             currp.brake * 100 / 255,
+            currp.clutch * 100 / 255,
             0, # report the steering as zero
             currp.speed * ms_to_speed, # m/s to mph
             lat,

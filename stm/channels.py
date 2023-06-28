@@ -20,6 +20,13 @@ CHANNELS = {
         "shortname": "Brk Pos",
         "units": "%"
     },
+    "clutch": {
+        "datatype": 3,
+        "datasize": 2,
+        "name": "Clutch Pos",
+        "shortname": "ClutchPos",
+        "units": "%"
+    },
     "steer": {
         "datatype": 3,
         "datasize": 2,
@@ -309,6 +316,42 @@ CHANNELS = {
         "shortname": "TTempFRI",
         "units": "C"
     },
+    "tyretemprlo": {
+        "decplaces": 2,
+        "name": "Tyre Temp RL Outer",
+        "shortname": "TTempRLO",
+        "units": "C"
+    },
+    "tyretemprro": {
+        "decplaces": 2,
+        "name": "Tyre Temp RR Outer",
+        "shortname": "TTempRRO",
+        "units": "C"
+    },
+    "tyretemprlc": {
+        "decplaces": 2,
+        "name": "Tyre Temp RL Centre",
+        "shortname": "TTempRLC",
+        "units": "C"
+    },
+    "tyretemprrc": {
+        "decplaces": 2,
+        "name": "Tyre Temp RR Centre",
+        "shortname": "TTempRRC",
+        "units": "C"
+    },
+    "tyretemprli": {
+        "decplaces": 2,
+        "name": "Tyre Temp RL Inner",
+        "shortname": "TTempRLI",
+        "units": "C"
+    },
+    "tyretemprri": {
+        "decplaces": 2,
+        "name": "Tyre Temp RR Inner",
+        "shortname": "TTempRRI",
+        "units": "C"
+    },
     "wheelslipfl": {
         "decplaces": 1,
         "name": "Wheel Slip FL",
@@ -432,11 +475,6 @@ CHANNELS = {
         "shortname": "FuelCapacity",
         "units": "l"
     },
-    "debug1": {
-        "decplaces": 2,
-        "name": "Debug 1",
-        "shortname": "Debug1",
-    },
     "abs": {
         "datatype": 0,
         "datasize": 2,
@@ -454,6 +492,17 @@ CHANNELS = {
         "datasize": 2,
         "name": "ASM Active",
         "shortname": "ASMActive"
+    },
+    "splittime": {
+        "decplaces": 3,
+        "name": "Split Time",
+        "shortname": "SplitTime",
+        "units": "s"
+    },
+    "debug1": {
+        "decplaces": 2,
+        "name": "Debug 1",
+        "shortname": "Debug1",
     },
     "debug2": {
         "decplaces": 2,

@@ -65,7 +65,7 @@ class GT7DataPacket:
         "4f"  # TYRES_RADIUS           / 4f  / 16x / 0x00B4
         "4f"  # TYRE_SUSPENSION_TRAVEL / 4f  / 16x / 0x00C4
         "32x" # UNKNOWN_RESRVED        / 32B / 32x / 0x00D4
-        "4x"  # CLUCH                  / f   / 4x  / 0x00F4
+        "f"   # CLUCH                  / f   / 4x  / 0x00F4
         "4x"  # CLUCH_ENGAGEMENT       / f   / 4x  / 0x00F8
         "4x"  # CLUCH_RPM              / f   / 4x  / 0x00FC
         "4x"  # TOP_SPEED              / f   / 4x  / 0x0100
@@ -110,6 +110,7 @@ class GT7DataPacket:
             wsfl, wsfr, wsrl, wsrr,
             wrfl, wrfr, wrrl, wrrr,
             susfl, susfr, susrl, susrr,
+            self.clutch,
             self.car_code
         )  = self.fmt.unpack(buf)
 

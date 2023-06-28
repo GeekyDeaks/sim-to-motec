@@ -99,7 +99,10 @@ class AMS2SharedMemory:
         "f"     # mBestLapTime
         "f"     # mLastLapTime
         "f"     # mCurrentTime
-        "92x"  # skip a load of stuff we are not currently interested in
+        "f"     # mSplitTimeAhead
+        "f"     # mSplitTimeBehind
+        "f"     # mSplitTime
+        "80x"  # skip a load of stuff we are not currently interested in
         "f"     # mOilTempCelsius
         "f"     # mOilPressureKPa
         "f"     # mWaterTempCelsius
@@ -229,6 +232,9 @@ class AMS2SharedMemory:
             self.mBestLapTime,
             self.mLastLapTime,
             self.mCurrentTime,
+            self.mSplitTimeAhead,
+            self.mSplitTimeBehind,
+            self.mSplitTime,
             self.mOilTempCelsius,
             self.mOilPressureKPa,
             self.mWaterTempCelsius,
