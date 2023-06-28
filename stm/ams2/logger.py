@@ -131,7 +131,7 @@ class AMS2Logger(BaseLogger):
             p.mOilPressureKPa,
             p.mWaterTempCelsius,
             p.mWaterPressureKPa,
-            p.mBrakeBias,
+            p.mBrakeBias * 100,
             p.mEngineTorque,
             p.driver.mCurrentLap,
             p.mCurrentTime,

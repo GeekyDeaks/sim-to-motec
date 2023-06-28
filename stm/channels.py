@@ -380,8 +380,9 @@ CHANNELS = {
     },    
     "brakebias": {
         "decplaces": 2,
-        "name": "Brake Bias",
-        "shortname": "BrakeBias"
+        "name": "Brake Bias Setting",
+        "shortname": "BrakeBias",
+        "units": "%"
     },    
     "enginetorque": {
         "decplaces": 2,
