@@ -35,7 +35,7 @@ class AMS2Logger(BaseLogger):
         'lap', 'laptime',
         'racestate', # AMS2 race status
         'fuelpres', 'fuellevel', 'fuelcapacity',
-        'abs',
+        'abs', 'asm', 'tcs',
         'splittime'
     ]
 
@@ -149,7 +149,9 @@ class AMS2Logger(BaseLogger):
             p.mFuelPressureKPa,
             p.mFuelLevel * p.mFuelCapacity, # this seems to be a percentage
             p.mFuelCapacity,
-            1 if p.mAntiLockActive else 0,
+            1 if p.absActive else 0,
+            1 if p.scsActive else 0,
+            1 if p.tcsActive else 0,
             p.mSplitTime
         ])
 

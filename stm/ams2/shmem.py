@@ -34,6 +34,16 @@ class AMS2RaceState(Enum):
     RETIRED = 5
     DNF = 6
 
+class AMS2CarFlags(Enum):
+    CAR_HEADLIGHT         = (1<<0)
+    CAR_ENGINE_ACTIVE     = (1<<1)
+    CAR_ENGINE_WARNING    = (1<<2)
+    CAR_SPEED_LIMITER     = (1<<3)
+    CAR_ABS               = (1<<4)
+    CAR_HANDBRAKE         = (1<<5)
+    CAR_TCS               = (1<<6)
+    CAR_SCS               = (1<<7)
+
 
 class AMS2ParticipantInfo:
 
@@ -102,7 +112,8 @@ class AMS2SharedMemory:
         "f"     # mSplitTimeAhead
         "f"     # mSplitTimeBehind
         "f"     # mSplitTime
-        "80x"  # skip a load of stuff we are not currently interested in
+        "76x"   # skip a load of stuff we are not currently interested in
+        "I"     # mCarFlags
         "f"     # mOilTempCelsius
         "f"     # mOilPressureKPa
         "f"     # mWaterTempCelsius
@@ -235,6 +246,7 @@ class AMS2SharedMemory:
             self.mSplitTimeAhead,
             self.mSplitTimeBehind,
             self.mSplitTime,
+            self.mCarFlags,
             self.mOilTempCelsius,
             self.mOilPressureKPa,
             self.mWaterTempCelsius,
@@ -308,6 +320,10 @@ class AMS2SharedMemory:
         self.mTyreTempCenter = Wheels(ttcfl, ttcfr, ttcrl, ttcrr)
         self.mTyreTempRight = Wheels(ttrfl, ttrfr, ttrrl, ttrrr)
         self.mRideHeight = Wheels(rhfl, rhfr, rhrl, rhrr)
+
+        self.tcsActive = bool(self.mCarFlags & AMS2CarFlags.CAR_TCS.value)
+        self.scsActive = bool(self.mCarFlags & AMS2CarFlags.CAR_SCS.value)
+        self.absActive = bool(self.mCarFlags & AMS2CarFlags.CAR_ABS.value)
 
         self.participants = []
         driver_index = self.mViewedParticipantIndex
