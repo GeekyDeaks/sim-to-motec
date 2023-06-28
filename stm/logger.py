@@ -143,7 +143,7 @@ class BaseLogger(Thread):
         freq = self.sampler.freq
         sample_time = samples / freq
         # check we have a sensible laptime for the number of samples
-        if abs(sample_time - laptime) > (3 / freq):
+        if abs(sample_time - laptime) > (10 / freq):
             # just use the sample_time
             l.warning(f"lap {lap}, ignoring time {laptime:.3f} as too far from sample period {sample_time:.3f}")
             laptime = sample_time
