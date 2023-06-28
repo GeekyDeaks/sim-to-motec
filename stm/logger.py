@@ -12,7 +12,7 @@ l = getLogger(__name__)
 
 class BaseLogger(Thread):
 
-    def __init__(self, sampler=None, filetemplate=None, rawfile=None):
+    def __init__(self, sampler=None, filetemplate=None, rawfile=None, imperial=False):
         super().__init__()
         self.sampler = sampler
         self.filetemplate = filetemplate
@@ -20,6 +20,7 @@ class BaseLogger(Thread):
         self.log = None
         self.rawfile = rawfile
         self.lap_samples = 0
+        self.imperial = imperial
 
     def run(self):
 
@@ -88,7 +89,7 @@ class BaseLogger(Thread):
         # add the channels
 
         for channel in channels:
-            cd = get_channel_definition(channel, self.sampler.freq)
+            cd = get_channel_definition(channel, self.sampler.freq, self.imperial)
             self.log.add_channel(cd)
 
     def update_event(self, event=None):

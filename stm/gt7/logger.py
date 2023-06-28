@@ -31,8 +31,9 @@ class GT7Logger(BaseLogger):
                 driver="",
                 venue="", 
                 comment="",
-                shortcomment=""):
-        super().__init__(rawfile=rawfile, sampler=sampler, filetemplate=filetemplate)
+                shortcomment="",
+                imperial=False):
+        super().__init__(rawfile=rawfile, sampler=sampler, filetemplate=filetemplate, imperial=imperial)
 
         self.event = STMEvent(
             name=name,
@@ -162,13 +163,18 @@ class GT7Logger(BaseLogger):
         gvert = deltav.y * freq / 9.8 # Y
         glong = deltav.z * freq / 9.8 # Z
 
-        ms_to_mph = 2.23693629
+
+        if self.imperial:
+            ms_to_speed = 2.23693629 # m/s to mph
+        else:
+            ms_to_speed = 3.6  # m/s to kph
+
         if currp.in_race:
             # calculate wheel speed (needs to be inverted)
-            wheelspeed = [ r * s * -ms_to_mph for r,s in zip(currp.wheelradius, currp.wheelspeed) ]
+            wheelspeed = [ r * s * -ms_to_speed for r,s in zip(currp.wheelradius, currp.wheelspeed) ]
         else:
             # wheelspeed is not inverted in replay
-            wheelspeed = [ r * s * ms_to_mph for r,s in zip(currp.wheelradius, currp.wheelspeed) ]
+            wheelspeed = [ r * s * ms_to_speed for r,s in zip(currp.wheelradius, currp.wheelspeed) ]
 
         self.add_samples([
             beacon,
@@ -177,7 +183,7 @@ class GT7Logger(BaseLogger):
             currp.gear,
             currp.throttle * 100 / 255,
             currp.brake * 100 / 255,
-            currp.speed * ms_to_mph, # m/s to mph
+            currp.speed * ms_to_speed, # m/s to mph
             lat,
             long,
             deltav.x,

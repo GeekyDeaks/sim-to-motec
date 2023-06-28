@@ -10,13 +10,16 @@ from logging import getLogger, basicConfig, DEBUG
 # try and load the sate
 STATE_FILE = "ams2.cfg"
 
+state = {
+    "FREQ": "20",
+    "IMPERIAL": False
+}
+
 try:
     with open(STATE_FILE) as f:
-        state = json.load(f)
+        state.update(json.load(f))
 except Exception as e:
-    state = {
-        "FREQ": "20",
-    }
+    pass
 
 sg.change_look_and_feel('Default1')
 sg.set_options(font="Arial 12")
@@ -26,6 +29,7 @@ BUTTON_ENABLED = (sg.theme_button_color_text(), sg.theme_background_color())
 
 labels = [
     [sg.Text("Sampling Frequency")],
+    [sg.Text("Imperial Units")],
     [sg.Text("Log File")],
     [sg.Text("Vehicle")],
     [sg.Text("Venue")],
@@ -38,6 +42,7 @@ labels = [
 
 values = [
     [sg.Input(state["FREQ"], key="FREQ", size=(5,1), enable_events=True), sg.Text("Hz", justification="l")],
+    [sg.Checkbox("", state["IMPERIAL"], key="IMPERIAL", enable_events=True)],
     [sg.Text("Not Started",key="LOGFILE" )],
     [sg.Text("N/A", key="VEHICLE")],
     [sg.Text("N/A", key="VENUE")],
@@ -97,7 +102,8 @@ while True:
         logger = AMS2Logger(
             rawfile=rawfile,
             sampler=AMS2Sampler(freq=values["FREQ"]),
-            filetemplate=filetemplate
+            filetemplate=filetemplate,
+            imperial=values["IMPERIAL"]
         )
         logger.start()
 

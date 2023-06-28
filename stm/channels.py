@@ -33,7 +33,7 @@ CHANNELS = {
         "datasize": 2,
         "name": "Ground Speed",
         "shortname": "Gnd Spd",
-        "units": "mph"
+        "units": [ "kph", "mph" ]
     },
     "lat": {
         "decplaces": 7,
@@ -115,25 +115,25 @@ CHANNELS = {
         "decplaces": 1,
         "name": "Wheel Speed FL",
         "shortname": "WSpd FL",
-        "units": "mph"
+        "units": [ "kph", "mph" ]
     },
     "wspdfr": {
         "decplaces": 1,
         "name": "Wheel Speed FR",
         "shortname": "WSpd FR",
-        "units": "mph"
+        "units": [ "kph", "mph" ]
     },
     "wspdrl": {
         "decplaces": 1,
         "name": "Wheel Speed RL",
         "shortname": "WSpd RL",
-        "units": "mph"
+        "units": [ "kph", "mph" ]
     },
     "wspdrr": {
         "decplaces": 1,
         "name": "Wheel Speed RR",
         "shortname": "WSpd RR",
-        "units": "mph"
+        "units": [ "kph", "mph" ]
     },
     "suspfl": {
         "decplaces": 3,
@@ -313,25 +313,25 @@ CHANNELS = {
         "decplaces": 1,
         "name": "Wheel Slip FL",
         "shortname": "WSLPFL",
-        "units": "mph"
+        "units": [ "kph", "mph" ]
     },
     "wheelslipfr": {
         "decplaces": 1,
         "name": "Wheel Slip FR",
         "shortname": "WSLPFR",
-        "units": "mph"
+        "units": [ "kph", "mph" ]
     },
     "wheelsliprl": {
         "decplaces": 1,
         "name": "Wheel Slip RL",
         "shortname": "WSLPRL",
-        "units": "mph"
+        "units": [ "kph", "mph" ]
     },
     "wheelsliprr": {
         "decplaces": 1,
         "name": "Wheel Slip RR",
         "shortname": "WSLPRR",
-        "units": "mph"
+        "units": [ "kph", "mph" ]
     },
     "frontwing": {
         "decplaces": 2,
@@ -431,7 +431,7 @@ for (i, v) in enumerate(CHANNELS.values()):
     if "id" not in v:
         v["id"] = START_ID + i
 
-def get_channel_definition(name, freq=None):
+def get_channel_definition(name, freq=None, imperial=False):
 
     if freq is None:
         freq = 20
@@ -449,4 +449,8 @@ def get_channel_definition(name, freq=None):
     }
 
     cd.update(dict(CHANNELS[name]))
+    # check the units
+    if isinstance(cd["units"], list):
+        cd["units"] = cd["units"][ 1 if imperial else 0 ]
+
     return cd

@@ -36,9 +36,10 @@ class AMS2Logger(BaseLogger):
     def __init__(self,
                 rawfile=None,
                 sampler=None,
-                filetemplate=None):
+                filetemplate=None,
+                imperial=False):
         
-        super().__init__(rawfile=rawfile, sampler=sampler, filetemplate=filetemplate)
+        super().__init__(rawfile=rawfile, sampler=sampler, filetemplate=filetemplate, imperial=imperial)
 
         self.last_packet = None
 
@@ -94,6 +95,12 @@ class AMS2Logger(BaseLogger):
         lat, long = gps.convert(x=-p.driver.mWorldPosition.x, z=-p.driver.mWorldPosition.z)
 
         glat, gvert, glong = [ a / 9.8 for a in p.mLocalAcceleration]
+
+        if self.imperial:
+            ms_to_speed = 2.23693629 # m/s to mph
+        else:
+            ms_to_speed = 3.6  # m/s to kph
+
         self.add_samples([
             1 if br2 > 0 else 0,
             br2,
@@ -103,7 +110,7 @@ class AMS2Logger(BaseLogger):
             p.mThrottle * 100,
             p.mBrake * 100,
             p.mSteering * 40, # arbitratry scale based on some testing
-            p.mSpeed * 2.23693629, # m/s to mph
+            p.mSpeed * ms_to_speed,
             lat,
             long,
             glat,

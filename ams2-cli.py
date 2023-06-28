@@ -16,6 +16,7 @@ def main():
 
     parser = argparse.ArgumentParser(description="Log AMS2 samples to MoTeC i2")
     parser.add_argument("--freq", type=int, default=20, help="frequency (Hz) to collect samples")
+    parser.add_argument("--imperial", action="store_true", help="use imperial units")
     parser.add_argument("--saveraw", help="save raw samples to an sqlite3 db for later analysis", action="store_true")
     parser.add_argument("--loadraw", help="load raw samples from an sqlite3 db", default="")
 
@@ -36,7 +37,8 @@ def main():
     logger = AMS2Logger(
         rawfile=rawfile,
         sampler=sampler,
-        filetemplate=filetemplate
+        filetemplate=filetemplate,
+        imperial=args.imperial
     )
 
     try:

@@ -15,7 +15,9 @@ state = {
     "PORT": 33740,
     "REPLAY": False,
     "DRIVER": "",
-    "SESSION": ""
+    "SESSION": "",
+    "IMPERIAL": False
+
 }
 
 try:
@@ -34,6 +36,7 @@ labels = [
     [sg.Text("PS IP Address")],
     [sg.Text("Local UDP Port")],
     [sg.Text("Capture Replays")],
+    [sg.Text("Imperial Units")],
     [sg.Text("Driver")],
     [sg.Text("Session")],
     [sg.Text("Log File")],
@@ -47,6 +50,7 @@ values = [
     [sg.Input(state["IP"], key="IP", size=(15,1), enable_events=True)],
     [sg.Input(state["PORT"], key="PORT", size=(15,1), enable_events=True), sg.Text("Only change this if using a UDP relay", font="arial 12 italic")],
     [sg.Checkbox("", state["REPLAY"], key="REPLAY", enable_events=True)],
+    [sg.Checkbox("", state["IMPERIAL"], key="IMPERIAL", enable_events=True)],
     [sg.Input(state["DRIVER"], key="DRIVER", size=(15,1), enable_events=True )],
     [sg.Input(state["SESSION"], key="SESSION", size=(15,1), enable_events=True )],
     [sg.Text("Not Started",key="LOGFILE" )],
@@ -111,7 +115,8 @@ while True:
             filetemplate=filetemplate,
             replay=values["REPLAY"],
             driver=values["DRIVER"],
-            session=values["SESSION"]
+            session=values["SESSION"],
+            imperial=values["IMPERIAL"]
         )
         logger.start()
 
