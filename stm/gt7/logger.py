@@ -23,7 +23,6 @@ class GT7Logger(BaseLogger):
         'turbopres',
         'oilpres', 'oiltemp', 'watertemp',
         { "name": "fuellevel", "units": "%" },
-        { "name": "fuelcapacity", "units": "%" },
         'asm', 'tcs'
     ]
 
@@ -183,6 +182,11 @@ class GT7Logger(BaseLogger):
             # wheelspeed is not inverted in replay
             wheelspeed = [ r * s * ms_to_speed for r,s in zip(currp.wheelradius, currp.wheelspeed) ]
 
+        if currp.fuel_capacity > 0:
+            fuel_level = currp.current_fuel / currp.fuel_capacity * 100.0
+        else:
+            fuel_level = 0
+
         self.add_samples([
             beacon,
             currp.current_lap,
@@ -209,8 +213,7 @@ class GT7Logger(BaseLogger):
             currp.oil_pressure,
             currp.oil_temp,
             currp.water_temp,
-            currp.current_fuel,
-            currp.fuel_capacity,
+            fuel_level,
             1 if currp.asm_active else 0,
             1 if currp.tcs_active else 0
         ])
