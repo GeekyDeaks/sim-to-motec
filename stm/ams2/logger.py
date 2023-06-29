@@ -37,6 +37,7 @@ class AMS2Logger(BaseLogger):
         'fuelpres', 'fuellevel', 'fuelcapacity',
         'abs', 'asm', 'tcs',
         'drsavail', 'drs', 'ers',
+        'boost', 'boostavail',
         'splittime'
     ]
 
@@ -156,6 +157,8 @@ class AMS2Logger(BaseLogger):
             1 if p.drsAvailable else 0,
             1 if p.drsActive else 0,
             1 if p.mErsAutoModeEnabled else 0,
+            1 if p.mBoostActive else 0,
+            p.mBoostAmount,
             p.mSplitTime
         ])
 

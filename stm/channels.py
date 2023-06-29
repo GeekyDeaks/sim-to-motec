@@ -518,6 +518,18 @@ CHANNELS = {
         "name": "DRS Available",
         "shortname": "DRSAvail"
     },
+    "boost": {
+        "datatype": 0,
+        "datasize": 2,
+        "name": "Boost Active",
+        "shortname": "BoostActive"
+    },
+    "boostavail": {
+        "decplaces": 2,
+        "name": "Boost Available",
+        "shortname": "BoostAvail",
+        "units": "%"
+    },
     "debug1": {
         "decplaces": 2,
         "name": "Debug 1",
