@@ -44,6 +44,12 @@ class AMS2CarFlags(Enum):
     CAR_TCS               = (1<<6)
     CAR_SCS               = (1<<7)
 
+class AMS2DrsState(Enum):
+	DRS_INSTALLED       = (1<<0) # Vehicle has DRS capability
+	DRS_ZONE_RULES      = (1<<1) # 1 if DRS uses F1 style rules
+	DRS_AVAILABLE_NEXT  = (1<<2) # detection zone was triggered (only applies to f1 style rules)
+	DRS_AVAILABLE_NOW   = (1<<3) # detection zone was triggered and we are now in the zone (only applies to f1 style rules)
+	DRS_ACTIVE          = (1<<4) # Wing is in activated state
 
 class AMS2ParticipantInfo:
 
@@ -215,6 +221,18 @@ class AMS2SharedMemory:
         "4f"    # mTyreTempRight
         "I"     # mDrsState,
         "4f"    # mRideHeight
+        "I"     # mJoyPad0
+        "I"     # mDPad
+        "i"     # mAntiLockSetting
+        "i"     # mTractionControlSetting
+        "i"     # mErsDeploymentMode
+        "?"     # mErsAutoModeEnabled
+        "3x"    # alignment padding
+        "f"     # mClutchTemp
+        "f"     # mClutchWear
+        "f"     # mClutchOverheated
+        "f"     # mClutchSlipping
+        "i"     # mYellowFlagState
     )
 
     def __init__(self, buf):
@@ -293,6 +311,17 @@ class AMS2SharedMemory:
             ttrfl, ttrfr, ttrrl, ttrrr,
             self.mDrsState,
             rhfl, rhfr, rhrl, rhrr, # mRideHeight
+            self.mJoyPad0,
+            self.mDPad,
+            self.mAntiLockSetting,
+            self.mTractionControlSetting,
+            self.mErsDeploymentMode,
+            self.mErsAutoModeEnabled,
+            self.mClutchTemp,
+            self.mClutchWear,
+            self.mClutchOverheated,
+            self.mClutchSlipping,
+            self.mYellowFlagState
 
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
@@ -324,6 +353,9 @@ class AMS2SharedMemory:
         self.tcsActive = bool(self.mCarFlags & AMS2CarFlags.CAR_TCS.value)
         self.scsActive = bool(self.mCarFlags & AMS2CarFlags.CAR_SCS.value)
         self.absActive = bool(self.mCarFlags & AMS2CarFlags.CAR_ABS.value)
+
+        self.drsAvailable = bool(self.mDrsState & AMS2DrsState.DRS_AVAILABLE_NOW.value)
+        self.drsActive = bool(self.mDrsState & AMS2DrsState.DRS_ACTIVE.value)
 
         self.participants = []
         driver_index = self.mViewedParticipantIndex

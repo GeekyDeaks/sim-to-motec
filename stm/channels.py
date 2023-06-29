@@ -500,6 +500,24 @@ CHANNELS = {
         "shortname": "SplitTime",
         "units": "s"
     },
+    "ers": {
+        "datatype": 0,
+        "datasize": 2,
+        "name": "ERS Active",
+        "shortname": "ERSActive"
+    },
+    "drs": {
+        "datatype": 0,
+        "datasize": 2,
+        "name": "DRS Active",
+        "shortname": "DRSActive"
+    },
+    "drsavail": {
+        "datatype": 0,
+        "datasize": 2,
+        "name": "DRS Available",
+        "shortname": "DRSAvail"
+    },
     "debug1": {
         "decplaces": 2,
         "name": "Debug 1",

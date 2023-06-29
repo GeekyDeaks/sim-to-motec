@@ -36,6 +36,7 @@ class AMS2Logger(BaseLogger):
         'racestate', # AMS2 race status
         'fuelpres', 'fuellevel', 'fuelcapacity',
         'abs', 'asm', 'tcs',
+        'drsavail', 'drs', 'ers',
         'splittime'
     ]
 
@@ -152,6 +153,9 @@ class AMS2Logger(BaseLogger):
             1 if p.absActive else 0,
             1 if p.scsActive else 0,
             1 if p.tcsActive else 0,
+            1 if p.drsAvailable else 0,
+            1 if p.drsActive else 0,
+            1 if p.mErsAutoModeEnabled else 0,
             p.mSplitTime
         ])
 
