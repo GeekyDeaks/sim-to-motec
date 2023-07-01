@@ -11,7 +11,7 @@ from logging import getLogger, basicConfig, DEBUG
 STATE_FILE = "gt7.cfg"
 
 state = {
-    "IP": "192.168.1.100",
+    "IP": "255.255.255.255",
     "PORT": 33740,
     "REPLAY": False,
     "DRIVER": "",

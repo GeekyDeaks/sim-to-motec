@@ -23,6 +23,9 @@ class GT7Sampler(BaseSampler):
 
         # Create a UDP socket for the inbound packets
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        if self.hb_addr and addr == "255.255.255.255":
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+
         # Bind to any address
         self.socket.bind( ('0.0.0.0', port) )
         self.socket.settimeout(1)
