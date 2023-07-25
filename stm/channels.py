@@ -31,9 +31,9 @@ CHANNELS = {
         "datatype": 3,
         "datasize": 2,
         "decplaces": 2,
-        "name": "Steered Angle",
-        "shortname": "Str Ang",
-        "units": "deg"
+        "name": "Steering Position",
+        "shortname": "Str Pos",
+        "units": "%"
     },
     "speed": {
         "datatype": 3,
@@ -351,6 +351,30 @@ CHANNELS = {
         "name": "Tyre Temp RR Inner",
         "shortname": "TTempRRI",
         "units": "C"
+    },
+    "tyrespdfl": {
+        "decplaces": 2,
+        "name": "Tyre Speed FL",
+        "shortname": "TyreSPDFL",
+        "units": "rps"
+    },
+    "tyrespdfr": {
+        "decplaces": 2,
+        "name": "Tyre Speed FR",
+        "shortname": "TyreSPDFR",
+        "units": "rps"
+    },
+    "tyrespdrl": {
+        "decplaces": 2,
+        "name": "Tyre Speed RL",
+        "shortname": "TyreSPDRL",
+        "units": "rps"
+    },
+    "tyrespdrr": {
+        "decplaces": 2,
+        "name": "Tyre Speed RR",
+        "shortname": "TyreSPDRR",
+        "units": "rps"
     },
     "wheelslipfl": {
         "decplaces": 1,

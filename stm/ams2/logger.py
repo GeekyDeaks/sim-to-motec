@@ -27,6 +27,7 @@ class AMS2Logger(BaseLogger):
         #'wheelslipfl', 'wheelslipfr', 'wheelsliprl', 'wheelsliprr', # wheel slip
         'rideheightfl', 'rideheightfr', 'rideheightrl', 'rideheightrr', 
         'tyrepresfl', 'tyrepresfr', 'tyrepresrl', 'tyrepresrr', # mAirPressure
+        'tyrespdfl', 'tyrespdfr', 'tyrespdrl', 'tyrespdrr',# mTyreRPS
         'turbopres',
         'oiltemp', 'oilpres',
         'watertemp', 'waterpres',
@@ -118,7 +119,7 @@ class AMS2Logger(BaseLogger):
             p.mThrottle * 100,
             p.mBrake * 100,
             p.mClutch * 100,
-            p.mSteering * 40, # arbitratry scale based on some testing
+            p.mSteering * 100,
             p.mSpeed * ms_to_speed,
             lat,
             long,
@@ -138,6 +139,7 @@ class AMS2Logger(BaseLogger):
             #*[s * 2.23693629 for s in p.mTyreSlipSpeed], # wheel slip m/s -> mph
             *p.mRideHeight,
             *p.mAirPressure,
+            *[ ts * -1.0 for ts in p.mTyreRPS ],
             p.mTurboBoostPressure / 1000.0,
             p.mOilTempCelsius,
             p.mOilPressureKPa,
