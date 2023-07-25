@@ -53,11 +53,21 @@ values = [
     [sg.Text("N/A", key="LAP")],
 ]
 
+
+# try and make the logs directory to check we have the correct permissions
+canwrite = False
+try:
+    os.makedirs("logs", exist_ok=True)
+    canwrite = True
+except:
+    labels.append([ sg.Text("ERROR", text_color="red")])
+    values.append([ sg.Text("Cannot create logs directory, please copy ams2.exe to a writeable directory", text_color="red") ])
+
 # Define the window's contents
 layout = [
     [sg.Column(labels, element_justification='r'), sg.Column(values)],
     [
-        sg.Button('Start', key="START"), 
+        sg.Button('Start', key="START", disabled=not canwrite), 
         sg.Button("Stop", key="STOP", disabled=True, button_color=BUTTON_DISABLED), 
         sg.Button('Quit', key="QUIT"),
         sg.Checkbox("Rawfile", key="RAWFILE")
@@ -131,7 +141,7 @@ while True:
             window["SESSION"].update(p.mSessionState.name.title())
     else:
         window["QUIT"].update(disabled=False, button_color=BUTTON_ENABLED)
-        window["START"].update(disabled=False, button_color=BUTTON_ENABLED)
+        window["START"].update(disabled=not canwrite, button_color=BUTTON_ENABLED)
         window["STOP"].update(disabled=True, button_color=BUTTON_DISABLED)
         window["LOGFILE"].update("Not Started")
         window["LAP"].update("N/A")
