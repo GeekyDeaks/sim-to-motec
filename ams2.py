@@ -131,7 +131,9 @@ while True:
 
     if event == "STOP" and logger:
         logger.stop()
-        logger.join()
+
+    if logger and not logger.is_alive():
+        l.info("Sampler stopped")
         logger = None
 
     if logger:
