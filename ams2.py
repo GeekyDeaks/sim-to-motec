@@ -72,7 +72,7 @@ layout = [
         sg.Checkbox("Rawfile", key="RAWFILE")
      ],
     [sg.HorizontalSeparator()],
-    [sg.Multiline(size=(100, 12), key="LOG", autoscroll=True)]     
+    [sg.Multiline(size=(100, 12), key="LOG", autoscroll=True, disabled=True)]     
 ]
 
 # Create the window
