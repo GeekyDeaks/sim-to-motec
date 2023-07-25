@@ -5,7 +5,7 @@ import time
 
 from stm.version import __version__
 from stm.ams2 import AMS2Logger, AMS2Sampler
-from logging import getLogger, basicConfig, DEBUG
+from logging import getLogger, basicConfig, root, Handler, DEBUG
 
 # try and load the sate
 STATE_FILE = "ams2.cfg"
@@ -53,7 +53,6 @@ values = [
     [sg.Text("N/A", key="LAP")],
 ]
 
-
 # try and make the logs directory to check we have the correct permissions
 canwrite = False
 try:
@@ -73,7 +72,7 @@ layout = [
         sg.Checkbox("Rawfile", key="RAWFILE")
      ],
     [sg.HorizontalSeparator()],
-    [sg.Output(size=(100, 12), echo_stdout_stderr=True)]     
+    [sg.Multiline(size=(100, 12), key="LOG", autoscroll=True)]     
 ]
 
 # Create the window
@@ -84,6 +83,23 @@ basicConfig(
      format="%(asctime)s.%(msecs)03d [%(levelname)s] %(name)s: %(message)s",
      datefmt="%H:%M:%S"
 )
+
+class LogHandler(Handler):
+
+    def __init__(self):
+        Handler.__init__(self)
+
+    def emit(self, record):
+        #global buffer
+        prev = window["LOG"].get()
+        if prev:
+            prev += "\n"
+        current = prev + self.format(record)
+        window['LOG'].update(value=current)
+
+handler = LogHandler()
+handler.setFormatter(root.handlers[0].formatter)
+root.addHandler(handler)
 l = getLogger(__name__)
 
 logger = None
