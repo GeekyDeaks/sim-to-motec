@@ -11,7 +11,13 @@ be found in the [releases](https://github.com/GeekyDeaks/sim-to-motec/releases) 
 generated using [pyinstaller](https://pyinstaller.org) and is a self extracting archive containing a python interpreter as well
 as the scripts and dependencies from this repo
 
-If you are on a *nix OS or prefer not to override security to run an untrusted executable, then keep reading:
+If you are on a *nix OS or prefer not to override security to run an untrusted executable, then skip to `Getting started with the scripts`
+
+# MoTeC i2 Workspace
+
+There is a MoTeC i2 Workspace in `MotecWorkspace` that is based on the worksheet here: https://github.com/stevendaniluk/SDMotecWorkspace and has been tweaked by [RacingLegend1234](https://youtube.com/@Racinglegend1234) for use with the AMS2 channel names.
+
+A zip file of the worksheet is available in the [releases](https://github.com/GeekyDeaks/sim-to-motec/releases) section
 
 # Getting started with the scripts
 

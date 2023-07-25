@@ -356,25 +356,25 @@ CHANNELS = {
         "decplaces": 2,
         "name": "Tyre Speed FL",
         "shortname": "TyreSPDFL",
-        "units": "rps"
+        "units": "rad/s"
     },
     "tyrespdfr": {
         "decplaces": 2,
         "name": "Tyre Speed FR",
         "shortname": "TyreSPDFR",
-        "units": "rps"
+        "units": "rad/s"
     },
     "tyrespdrl": {
         "decplaces": 2,
         "name": "Tyre Speed RL",
         "shortname": "TyreSPDRL",
-        "units": "rps"
+        "units": "rad/s"
     },
     "tyrespdrr": {
         "decplaces": 2,
         "name": "Tyre Speed RR",
         "shortname": "TyreSPDRR",
-        "units": "rps"
+        "units": "rad/s"
     },
     "wheelslipfl": {
         "decplaces": 1,

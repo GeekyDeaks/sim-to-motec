@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<Maths Locale="English_Sweden.0" DefaultLocale="C" Id="Dynamics">
+ <MathItems>
+  <MathExpression Id="Wheel Angle Dynamics" DisplayUnit="deg" DisplayDPS="2" DisplayColorIndex="7" Interpolate="1" Script="sgn('Curvature Dynamic' [1/m]) * choose(abs('Curvature Dynamic' [1/m]) &gt; 0.001 AND 'Speed' [km/h] &gt; 10, atan2('Wheelbase' [m], 1 / abs('Curvature Dynamic' [1/m])), 0)" SampleRate="0" Unit="rad"/>
+  <MathExpression Id="Oversteer Angle" DisplayUnit="deg" DisplayDPS="2" DisplayColorIndex="1" Interpolate="1" Script="'Oversteer' [deg]" SampleRate="0" Unit="rad"/>
+  <MathExpression Id="Oversteer Angle Lap Avg" DisplayUnit="deg" DisplayDPS="2" DisplayColorIndex="1" Interpolate="1" Script="stat_mean('Oversteer Angle' [deg], abs('Oversteer Angle' [deg]) &gt; 1, range_change(&quot;Outings:Laps&quot;))
+
+" SampleRate="0" Unit="deg"/>
+  <MathExpression Id="Curvature Kinematic" DisplayUnit="1/m" DisplayDPS="3" DisplayColorIndex="3" Interpolate="1" Script="tan('Wheel Angle' [rad]) / 'Wheelbase' [m]" SampleRate="0" Unit="1/m"/>
+  <MathExpression Id="Curvature Dynamic" DisplayUnit="1/m" DisplayDPS="3" DisplayColorIndex="4" Interpolate="1" Script="smooth(choose('Ground Speed' [km/h] &gt; 10, smooth('Gyro Yaw Rate' [rad/s], 0.1) /'Ground Speed' [km/h], 0), 0.1)" SampleRate="0" Unit="1/m"/>
+  <MathExpression Id="Curvature Dynamic Lap Avg" DisplayUnit="1/m" DisplayDPS="2" DisplayColorIndex="4" Interpolate="1" Script="stat_mean(abs('Curvature Dynamic' [1/m]), abs('Curvature Dynamic' [1/m]) &gt; 0.002, range_change(&quot;Outings:Laps&quot;))
+
+
+" SampleRate="0" Unit="1/m"/>
+  <MathExpression Id="Yaw Rate Dynamic" DisplayUnit="rad/s" DisplayDPS="2" DisplayColorIndex="7" Interpolate="1" Script="'Accel Lat' [m/s/s] / 'Speed' [m/s]" SampleRate="0" Unit="rad/s"/>
+  <MathExpression Id="Kinetic Energy" DisplayUnit="MJ" DisplayDPS="2" DisplayColorIndex="2" Interpolate="1" Script="0.5 * 'Mass' [kg] * power('Speed' [m/s], 2)" SampleRate="0" Unit="J"/>
+  <MathExpression Id="Net Force" DisplayUnit="N" DisplayDPS="2" DisplayColorIndex="7" Interpolate="1" Script="'Mass' [kg] * smooth('Accel Long' [m/s/s], 0.2)" SampleRate="0" Unit="N"/>
+  <MathExpression Id="Net Power" DisplayUnit="kW" DisplayDPS="2" DisplayColorIndex="3" Interpolate="1" Script="'Net Force' [N] * 'Speed' [m/s]" SampleRate="0" Unit="W"/>
+  <MathExpression Id="Tractive Force" DisplayUnit="N" DisplayDPS="2" DisplayColorIndex="1" Interpolate="1" Script="'Net Force' [N] - 'Drag Force' [N]" SampleRate="0" Unit="N"/>
+  <MathExpression Id="Tractive Power" DisplayUnit="kW" DisplayDPS="2" DisplayColorIndex="2" Interpolate="1" Script="'Tractive Force' [N] * 'Speed' [m/s]" SampleRate="0" Unit="W"/>
+ </MathItems>
+</Maths>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Maths Locale="English_Sweden.0" DefaultLocale="C" Id="Slip Angle">
+ <MathConstants>
+  <MathConstant Name="ActSlipoint" Value="-3.82" Unit=""/>
+ </MathConstants>
+ <MathItems>
+  <MathExpression Id="CarSlipAngle" DisplayDPS="2" DisplayColorIndex="3" Interpolate="1" Script="atan(  ('VelocityY' [ft/s])   / 'VelocityX' [ft/s]       ) * 57.2958 " SampleRate="0" Unit=""/>
+  <MathExpression Id="CarSlipFlag" DisplayDPS="0" DisplayColorIndex="0" Interpolate="1" Script="choose('CarSlipAngle' &lt;  'ActSlipoint' [],1,-1)" SampleRate="0" Unit=""/>
+  <MathExpression Id="actionSlipLine" DisplayDPS="2" DisplayColorIndex="4" Interpolate="1" Script="'ActSlipoint' []" SampleRate="0" Unit=""/>
+ </MathItems>
+</Maths>
