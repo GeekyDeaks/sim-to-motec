@@ -90,12 +90,8 @@ class LogHandler(Handler):
         Handler.__init__(self)
 
     def emit(self, record):
-        #global buffer
-        prev = window["LOG"].get()
-        if prev:
-            prev += "\n"
-        current = prev + self.format(record)
-        window['LOG'].update(value=current)
+        current = self.format(record) + "\n"
+        window['LOG'].update(value=current, append=True)
 
 handler = LogHandler()
 handler.setFormatter(root.handlers[0].formatter)
