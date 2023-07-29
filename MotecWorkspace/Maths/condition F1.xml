@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<Maths Locale="English_Sweden.0" DefaultLocale="C" Id="condition F1" Flags="703">
+ <MathConstants>
+  <MathConstant Name="PI" Value="3.14159265" Unit=""/>
+ </MathConstants>
+ <MathItems>
+  <MathExpression Id="is1st" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 1" SampleRate="0" Unit=""/>
+  <MathExpression Id="is2nd" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 2" SampleRate="0" Unit=""/>
+  <MathExpression Id="is3rd" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 3" SampleRate="0" Unit=""/>
+  <MathExpression Id="is4th" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 4" SampleRate="0" Unit=""/>
+  <MathExpression Id="is5th" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 5" SampleRate="0" Unit=""/>
+  <MathExpression Id="is6th" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 6" SampleRate="0" Unit=""/>
+  <MathExpression Id="is2ndWOT" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 2 AND 'f1THROTTLE' [%] == 1" SampleRate="0" Unit=""/>
+  <MathExpression Id="is3rdWOT" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 3 AND 'f1THROTTLE' [%] == 1" SampleRate="0" Unit=""/>
+  <MathExpression Id="isWOT" DisplayDPS="2" DisplayColorIndex="4" Interpolate="1" Script="'f1THROTTLE' [%] == 1" SampleRate="0" Unit=""/>
+  <MathExpression Id="is7th" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 7" SampleRate="0" Unit=""/>
+  <MathExpression Id="is8th" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 8" SampleRate="0" Unit=""/>
+  <MathExpression Id="is4thWOT" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 4 AND 'f1THROTTLE' [%] == 1" SampleRate="0" Unit=""/>
+  <MathExpression Id="is5thWOT" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 5 AND 'f1THROTTLE' [%] == 1" SampleRate="0" Unit=""/>
+  <MathExpression Id="is6thWOT" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'f1GEAR' [no] == 6 AND 'f1THROTTLE' [%] == 1" SampleRate="0" Unit=""/>
+  <MathExpression Id="Oversteer" DisplayUnit="deg" DisplayDPS="2" DisplayColorIndex="7" Interpolate="1" Script="smooth(choose('F1Speed'[km/h] &lt; 50, 0, sgn('F1glat' [m/s/s]) * (('Vehicle Wheelbase'[m] * 'f1glat' [m/s/s] / sqr('f1speed'[m/s])) - sgn(stat_mean('f1Steer'[rad] * 'f1glat' [m/s/s])) * 'f1Steer'[rad])), 0.2)" SampleRate="0" Unit="rad"/>
+  <MathExpression Id="steered angle" DisplayUnit="deg" DisplayDPS="2" DisplayColorIndex="2" Interpolate="1" Script="'f1frontwheelangle' *360" SampleRate="0" Unit="deg"/>
+  <MathExpression Id="d/dx FL" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="derivative('F1TyreSurfaceTemperatureFL' [c])" SampleRate="0" Unit=""/>
+  <MathExpression Id="d/dx FR" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="derivative('F1TyreSurfaceTemperatureFR' [c])" SampleRate="0" Unit=""/>
+  <MathExpression Id="d/dx RL" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="derivative('F1TyreSurfaceTemperatureRL' [c])" SampleRate="0" Unit=""/>
+  <MathExpression Id="d/dx RR" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="derivative('F1TyreSurfaceTemperatureRR' [c])" SampleRate="0" Unit=""/>
+  <MathExpression Id="d/dx fuel" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="derivative('F1FuelInTank' [l])" SampleRate="0" Unit=""/>
+  <MathExpression Active="0" Id="avg_fuel_consumption" DisplayUnit="l" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="stat_mean(abs('d/dx fuel' [l]), 1, range_change(&quot;Outings:Laps&quot;))" SampleRate="0" Unit="l"/>
+  <MathExpression Id=" fuel_start_lap" DisplayUnit="kg" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="stat_start('F1FuelInTank', 'F1enginerpm' &gt; 0, range_change(&quot;Outings:Laps&quot;))
+
+
+
+
+" SampleRate="0" Unit="kg"/>
+  <MathExpression Id=" fuel_end_lap" DisplayUnit="kg" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="stat_end('F1FuelInTank', 'F1enginerpm' &gt; 0, range_change(&quot;Outings:Laps&quot;))
+
+
+
+
+" SampleRate="0" Unit="kg"/>
+  <MathExpression Id="fuel_lap" DisplayUnit="kg" DisplayDPS="2" DisplayColorIndex="1" Interpolate="1" Script="' fuel_start_lap' [kg]-' fuel_end_lap' [kg]" SampleRate="0" Unit="kg"/>
+  <MathExpression Id="d/dx ERS" DisplayUnit="J" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="derivative('F1ersstoreenergy' [j])" SampleRate="0" Unit="J"/>
+  <MathExpression Id="steered angle (1)" DisplayUnit="deg" DisplayDPS="2" DisplayColorIndex="2" Interpolate="1" Script="'f1frontwheelangle' *360" SampleRate="0" Unit="deg"/>
+ </MathItems>
+</Maths>

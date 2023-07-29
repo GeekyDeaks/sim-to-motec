@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Maths Locale="English_Sweden.0" DefaultLocale="C" Id="Car - Sim iRacing - Dallara P217" Flags="703" Condition="'Vehicle Id' == &quot;dallarap217&quot;">
+ <MathConstants>
+  <MathConstant Name="Track Front" Value="1.7" Unit="m"/>
+  <MathConstant Name="Track Rear" Value="1.7" Unit="m"/>
+  <MathConstant Name="Wheelbase" Value="2.70" Unit="m"/>
+ </MathConstants>
+ <MathItems>
+  <MathExpression Id="Steer Ratio" DisplayUnit="ratio" DisplayDPS="2" DisplayColorIndex="0" Interpolate="1" Script="'CarSetup_Chassis_Front_SteeringRatio' []" SampleRate="0" Unit="ratio"/>
+ </MathItems>
+</Maths>

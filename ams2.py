@@ -5,7 +5,7 @@ import time
 
 from stm.version import __version__
 from stm.ams2 import AMS2Logger, AMS2Sampler
-from logging import getLogger, basicConfig, DEBUG
+from logging import getLogger, basicConfig, root, Handler, DEBUG
 
 # try and load the sate
 STATE_FILE = "ams2.cfg"
@@ -53,17 +53,26 @@ values = [
     [sg.Text("N/A", key="LAP")],
 ]
 
+# try and make the logs directory to check we have the correct permissions
+canwrite = False
+try:
+    os.makedirs("logs", exist_ok=True)
+    canwrite = True
+except:
+    labels.append([ sg.Text("ERROR", text_color="red")])
+    values.append([ sg.Text("Cannot create logs directory, please copy ams2.exe to a writeable directory", text_color="red") ])
+
 # Define the window's contents
 layout = [
     [sg.Column(labels, element_justification='r'), sg.Column(values)],
     [
-        sg.Button('Start', key="START"), 
+        sg.Button('Start', key="START", disabled=not canwrite), 
         sg.Button("Stop", key="STOP", disabled=True, button_color=BUTTON_DISABLED), 
         sg.Button('Quit', key="QUIT"),
         sg.Checkbox("Rawfile", key="RAWFILE")
      ],
     [sg.HorizontalSeparator()],
-    [sg.Output(size=(100, 12), echo_stdout_stderr=True)]     
+    [sg.Multiline(size=(100, 12), key="LOG", autoscroll=True, disabled=True)]     
 ]
 
 # Create the window
@@ -74,6 +83,19 @@ basicConfig(
      format="%(asctime)s.%(msecs)03d [%(levelname)s] %(name)s: %(message)s",
      datefmt="%H:%M:%S"
 )
+
+class LogHandler(Handler):
+
+    def __init__(self):
+        Handler.__init__(self)
+
+    def emit(self, record):
+        current = self.format(record) + "\n"
+        window['LOG'].update(value=current, append=True)
+
+handler = LogHandler()
+handler.setFormatter(root.handlers[0].formatter)
+root.addHandler(handler)
 l = getLogger(__name__)
 
 logger = None
@@ -109,7 +131,9 @@ while True:
 
     if event == "STOP" and logger:
         logger.stop()
-        logger.join()
+
+    if logger and not logger.is_alive():
+        l.info("Sampler stopped")
         logger = None
 
     if logger:
@@ -131,7 +155,7 @@ while True:
             window["SESSION"].update(p.mSessionState.name.title())
     else:
         window["QUIT"].update(disabled=False, button_color=BUTTON_ENABLED)
-        window["START"].update(disabled=False, button_color=BUTTON_ENABLED)
+        window["START"].update(disabled=not canwrite, button_color=BUTTON_ENABLED)
         window["STOP"].update(disabled=True, button_color=BUTTON_DISABLED)
         window["LOGFILE"].update("Not Started")
         window["LAP"].update("N/A")

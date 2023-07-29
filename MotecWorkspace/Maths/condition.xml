@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Maths Locale="English_Sweden.0" DefaultLocale="C" Id="condition">
+ <MathConstants>
+  <MathConstant Name="PI" Value="3.14159265" Unit=""/>
+ </MathConstants>
+ <MathItems>
+  <MathExpression Id="is1st" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'GEAR' [no] == 1" SampleRate="0" Unit=""/>
+  <MathExpression Id="is2nd" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'GEAR' [no] == 2" SampleRate="0" Unit=""/>
+  <MathExpression Id="is3rd" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'GEAR' [no] == 3" SampleRate="0" Unit=""/>
+  <MathExpression Id="is4th" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'GEAR' [no] == 4" SampleRate="0" Unit=""/>
+  <MathExpression Id="is5th" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'GEAR' [no] == 5" SampleRate="0" Unit=""/>
+  <MathExpression Id="is6th" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'GEAR' [no] == 6" SampleRate="0" Unit=""/>
+  <MathExpression Id="is2ndWOT" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'GEAR' [no] == 2 AND 'THROTTLE' [%] == 100" SampleRate="0" Unit=""/>
+  <MathExpression Id="is3rdWOT" DisplayDPS="0" DisplayColorIndex="3" Interpolate="1" Script="'GEAR' [no] == 3 AND 'THROTTLE' [%] == 100" SampleRate="0" Unit=""/>
+  <MathExpression Id="isWOT" DisplayDPS="2" DisplayColorIndex="4" Interpolate="1" Script="'THROTTLE' [%] == 100" SampleRate="0" Unit=""/>
+ </MathItems>
+</Maths>
