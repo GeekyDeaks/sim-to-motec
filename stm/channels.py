@@ -31,8 +31,8 @@ CHANNELS = {
         "datatype": 3,
         "datasize": 2,
         "decplaces": 2,
-        "name": "Steering Position",
-        "shortname": "Str Pos",
+        "name": "Steering Pos",
+        "shortname": "SteerPos",
         "units": "%"
     },
     "speed": {
