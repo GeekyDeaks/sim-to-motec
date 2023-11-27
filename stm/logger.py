@@ -126,6 +126,8 @@ class BaseLogger(Thread):
         filepath = Path(self.filetemplate).parts
         # do substitution
         filepath = [ p.format(**template_vars) for p in filepath ]
+        # sub out any invalid chars
+        filepath = [ re.sub(r'[:/\\]+', '_', p ) for p in filepath ]
         # sub out any duplicate _
         filepath = [ re.sub(r'_+', '_', p) for p in filepath ]
         # sub out any leading or trailing _

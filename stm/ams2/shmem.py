@@ -6,6 +6,10 @@ from stm.maths import Vector
 Wheels = namedtuple("Wheels", ["fl", "fr", "rl", "rr"])
 Wings = namedtuple("Wing", ["front", "rear"])
 
+def decode_string(s):
+    if s:
+        return s.decode('utf-8').split('\0')[0]
+
 class AMS2GameState(Enum):
     EXITED = 0
     FRONT_END = 1
@@ -80,7 +84,7 @@ class AMS2ParticipantInfo:
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
         self.mWorldPosition = Vector(x, y, z)
-        self.mName = mName.decode('latin-1').rstrip('\0')
+        self.mName = decode_string(mName)
 
     @property
     def size(self):
@@ -233,6 +237,9 @@ class AMS2SharedMemory:
         "f"     # mClutchOverheated
         "f"     # mClutchSlipping
         "i"     # mYellowFlagState
+        "?"     # mSessionIsPrivate
+        "3x"    # alignment padding
+        "I"     # mLaunchStage
     )
 
     def __init__(self, buf):
@@ -321,19 +328,21 @@ class AMS2SharedMemory:
             self.mClutchWear,
             self.mClutchOverheated,
             self.mClutchSlipping,
-            self.mYellowFlagState
+            self.mYellowFlagState,
+            self.mSessionIsPrivate,
+            self.mLaunchStage
 
         ) = self.fmt.unpack(buf[:self.fmt.size])
 
         self.mGameState = AMS2GameState(mGameState)
         self.mSessionState = AMS2SessionState(mSessionState)
         self.mRaceState = AMS2RaceState(mRaceState)
-        self.mCarName = mCarName.decode('utf-8').rstrip('\0')
-        self.mCarClassName = mCarClassName.decode('utf-8').rstrip('\0')
-        self.mTrackLocation = mTrackLocation.decode('utf-8').rstrip('\0')
-        self.mTrackVariation = mTrackVariation.decode('utf-8').rstrip('\0')
-        self.mTranslatedTrackLocation = mTranslatedTrackLocation.decode('utf-8').rstrip('\0')
-        self.mTranslatedTrackVariation = mTranslatedTrackVariation.decode('utf-8').rstrip('\0')
+        self.mCarName = decode_string(mCarName)
+        self.mCarClassName = decode_string(mCarClassName)
+        self.mTrackLocation = decode_string(mTrackLocation)
+        self.mTrackVariation = decode_string(mTrackVariation)
+        self.mTranslatedTrackLocation = decode_string(mTranslatedTrackLocation)
+        self.mTranslatedTrackVariation = decode_string(mTranslatedTrackVariation)
         self.mOrientation = Vector(ox, oy, oz)
         self.mLocalVelocity = Vector(lvx, lvy, lvz)
         self.mWorldVelocity = Vector(wvx, wvy, wvz)

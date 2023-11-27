@@ -118,5 +118,11 @@ class TestAMS2SharedMemory(unittest.TestCase):
             expected = 65.2686767578125
             self.assertEqual(sm.mOilPressureKPa, expected)
 
+    def test_mclaren(self):
+        with open(os.path.join(PATH, "test", "ams2_mp4_inpits.bin"), "rb") as fin:
+            sm = AMS2SharedMemory(fin.read())
+            self.assertEqual(sm.mCarClassName, "F-Retro_Gen3")
+            self.assertEqual(sm.mCarName, "McLaren MP4/1C")
+
 if __name__ == '__main__':
     unittest.main()
