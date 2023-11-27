@@ -30,7 +30,7 @@
 // Header version number to test against
 enum
 {
-  SHARED_MEMORY_VERSION = 13
+  SHARED_MEMORY_VERSION = 14
 };
 
 // Maximum allowed length of string
@@ -316,6 +316,15 @@ enum YellowFlagState
 	YFS_MAXIMUM,
 };
 
+// (Type#17) LaunchStage current launch control state
+enum LaunchStage
+{
+  LAUNCH_INVALID = -1,    // Launch control unavailable
+  LAUNCH_OFF = 0,         // Launch control inactive
+  LAUNCH_REV,             // Launch control revving to optimum engine speed
+  LAUNCH_ON,              // Launch control actively accelerating vehicle
+};
+
 // *** Shared Memory ***
 
 typedef struct
@@ -530,6 +539,9 @@ typedef struct
 	bool  mClutchSlipping;            // true if clutch is slipping (can be induced by overheating or wear)
 
   int mYellowFlagState;             // [ enum (Type#16) YellowFlagState ]
+
+  bool mSessionIsPrivate;           // true if this is a private session where users cannot see or interact with other drivers (and so would not need positional awareness of them etc)
+  unsigned int mLaunchStage;        // [ enum (Type#17) LaunchStage
 
 } SharedMemory;
 
