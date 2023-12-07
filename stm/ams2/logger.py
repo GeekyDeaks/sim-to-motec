@@ -101,7 +101,7 @@ class AMS2Logger(BaseLogger):
             l.info(f"{self.lap_samples}, setting beacon {br2} as moving from sector {lastp.driver.mCurrentSector} to {p.driver.mCurrentSector}")
 
         # gear, throttle, brake, speed, z, x
-        lat, long = convert_to_gps(name=p.mTrackVariation, x=-p.driver.mWorldPosition.x, z=-p.driver.mWorldPosition.z)
+        lat, long = convert_to_gps(name=p.mTrackVariation, x=p.driver.mWorldPosition.x, z=p.driver.mWorldPosition.z)
         # lat, long = gps.convert(x=-p.driver.mWorldPosition.x, z=-p.driver.mWorldPosition.z)
 
         glat, gvert, glong = [ a / 9.8 for a in p.mLocalAcceleration]
