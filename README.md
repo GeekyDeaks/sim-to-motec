@@ -19,6 +19,10 @@ There is a MoTeC i2 Workspace in `MotecWorkspace` that is based on the worksheet
 
 A zip file of the worksheet is available in the [releases](https://github.com/GeekyDeaks/sim-to-motec/releases) section
 
+# AMS2 GPS Offsets
+
+The AMS2 GPS co-ordinate tweaks were kindly donated by [viper4r](https://forum.reizastudios.com/members/viper4r.14601/) from their live event monitoring tool https://github.com/eckhchri/pcars-ds-liveview
+
 # Getting started with the scripts
 
     git clone https://github.com/GeekyDeaks/sim-to-motec.git
@@ -115,6 +119,7 @@ saving a log file and starting a new one
 
 # References / Kudos
 
+- AMS2 GPS Details from https://github.com/eckhchri/pcars-ds-liveview
 - GT7 telemetry decode https://github.com/snipem/gt7dashboard 
 - Salsa20 https://github.com/oconnor663/pure_python_salsa_chacha
 - GT7 DB Files: https://github.com/ddm999/gt7info

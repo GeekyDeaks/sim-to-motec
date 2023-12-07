@@ -1,0 +1,1429 @@
+[
+  {
+    "trackVariation": "Adelaide_Historic",
+    "refLat": -34.928456,
+    "refLong": 138.618758,
+    "rotation": -1.55,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Adelaide_Modern",
+    "refLat": -34.928456,
+    "refLong": 138.618758,
+    "rotation": -1.55,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Ascurra_Dirt",
+    "refLat": -26.934041,
+    "refLong": -49.386504,
+    "rotation": 1,
+    "cor_PosX_mul": 1.004,
+    "cor_PosY_mul": 0.99
+  },
+  {
+    "trackVariation": "Ascurra_RX",
+    "refLat": -26.934041,
+    "refLong": -49.386504,
+    "rotation": 1,
+    "cor_PosX_mul": 1.004,
+    "cor_PosY_mul": 0.99
+  },
+  {
+    "trackVariation": "Azure_Circuit_2021",
+    "refLat": 43.737142,
+    "refLong": 7.427485,
+    "rotation": 125.7,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "Circuit_de_Catalunya_GP",
+    "refLat": 41.56943,
+    "refLong": 2.257912,
+    "rotation": 0.56,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Circuit_de_Catalunya_GP_NC",
+    "refLat": 41.56943,
+    "refLong": 2.257912,
+    "rotation": 0.56,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Bathurst_1983",
+    "refLat": -33.448739,
+    "refLong": 149.54617,
+    "rotation": 1.3,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "Bathurst_2020",
+    "refLat": -33.448739,
+    "refLong": 149.54617,
+    "rotation": 1.3,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "BrandsHatch_GP",
+    "refLat": 51.36051,
+    "refLong": 0.261179,
+    "rotation": 2.1,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "BrandsHatch_Indy",
+    "refLat": 51.36051,
+    "refLong": 0.261179,
+    "rotation": 2.1,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "Brasilia_Full",
+    "refLat": -15.772805,
+    "refLong": -47.899622,
+    "rotation": 0,
+    "cor_PosX_mul": 0.98,
+    "cor_PosY_mul": 1.025
+  },
+  {
+    "trackVariation": "Brasilia_Outer",
+    "refLat": -15.772805,
+    "refLong": -47.899622,
+    "rotation": 0,
+    "cor_PosX_mul": 0.98,
+    "cor_PosY_mul": 1.025
+  },
+  {
+    "trackVariation": "Buenos_Aires_Circuito_6",
+    "refLat": -34.694051,
+    "refLong": -58.458974,
+    "rotation": -0.1,
+    "cor_PosX_mul": 0.974,
+    "cor_PosY_mul": 0.976
+  },
+  {
+    "trackVariation": "Buenos_Aires_Circuito_6T",
+    "refLat": -34.694051,
+    "refLong": -58.458974,
+    "rotation": -0.1,
+    "cor_PosX_mul": 0.974,
+    "cor_PosY_mul": 0.976
+  },
+  {
+    "trackVariation": "Buenos_Aires_Circuito_7",
+    "refLat": -34.694051,
+    "refLong": -58.458974,
+    "rotation": -0.1,
+    "cor_PosX_mul": 0.974,
+    "cor_PosY_mul": 0.976
+  },
+  {
+    "trackVariation": "Buenos_Aires_Circuito_8",
+    "refLat": -34.694051,
+    "refLong": -58.458974,
+    "rotation": -0.1,
+    "cor_PosX_mul": 0.974,
+    "cor_PosY_mul": 0.976
+  },
+  {
+    "trackVariation": "Buenos_Aires_Circuito_9",
+    "refLat": -34.694051,
+    "refLong": -58.458974,
+    "rotation": -0.1,
+    "cor_PosX_mul": 0.974,
+    "cor_PosY_mul": 0.976
+  },
+  {
+    "trackVariation": "Buenos_Aires_Circuito_12",
+    "refLat": -34.694051,
+    "refLong": -58.458974,
+    "rotation": -0.1,
+    "cor_PosX_mul": 0.974,
+    "cor_PosY_mul": 0.976
+  },
+  {
+    "trackVariation": "Buenos_Aires_Circuito_15",
+    "refLat": -34.694051,
+    "refLong": -58.458974,
+    "rotation": -0.1,
+    "cor_PosX_mul": 0.974,
+    "cor_PosY_mul": 0.976
+  },
+  {
+    "trackVariation": "Buskerud_Long",
+    "refLat": 40.997664,
+    "refLong": -113.566253,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Buskerud_Short",
+    "refLat": 40.997664,
+    "refLong": -113.566253,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "CadwellPark",
+    "refLat": 53.310311,
+    "refLong": -0.05949,
+    "rotation": -2.3,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "CampoGrande1",
+    "refLat": -20.475932,
+    "refLong": -54.466071,
+    "rotation": 0.2,
+    "cor_PosX_mul": 0.992,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "Cascavel2",
+    "refLat": -24.981055,
+    "refLong": -53.386346,
+    "rotation": -1,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "Cleveland_GP",
+    "refLat": 41.520765,
+    "refLong": -81.678257,
+    "rotation": 0.53,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Cordoba_International",
+    "refLat": -31.573589,
+    "refLong": -64.363897,
+    "rotation": -0.05,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "Cordoba_GP",
+    "refLat": -31.573589,
+    "refLong": -64.363897,
+    "rotation": -0.05,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "Cordoba_NATL",
+    "refLat": -31.573589,
+    "refLong": -64.363897,
+    "rotation": -0.05,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "CuritibaInternacional",
+    "refLat": -25.44768,
+    "refLong": -49.195833,
+    "rotation": -1.5,
+    "cor_PosX_mul": 1.005,
+    "cor_PosY_mul": 1.01
+  },
+  {
+    "trackVariation": "Curitiba_outer",
+    "refLat": -25.44768,
+    "refLong": -49.195833,
+    "rotation": -1.5,
+    "cor_PosX_mul": 1.005,
+    "cor_PosY_mul": 1.01
+  },
+  {
+    "trackVariation": "CurveloLong",
+    "refLat": -18.807352,
+    "refLong": -44.409001,
+    "rotation": 0.1,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1.005
+  },
+  {
+    "trackVariation": "CurveloShort",
+    "refLat": -18.807352,
+    "refLong": -44.409001,
+    "rotation": 0.1,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1.005
+  },
+  {
+    "trackVariation": "Daytona_Speedway_Tri_Oval",
+    "refLat": 29.185571,
+    "refLong": -81.069434,
+    "rotation": -125.8,
+    "cor_PosX_mul": 1.002,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Daytona_Road_Course",
+    "refLat": 29.185571,
+    "refLong": -81.069434,
+    "rotation": -125.8,
+    "cor_PosX_mul": 1.002,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Daytona_Nascar_Road_Course",
+    "refLat": 29.185571,
+    "refLong": -81.069434,
+    "rotation": -125.8,
+    "cor_PosX_mul": 1.002,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Donington_GP",
+    "refLat": 52.829917,
+    "refLong": -1.381361,
+    "rotation": 0,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.9975
+  },
+  {
+    "trackVariation": "Donington_Nat",
+    "refLat": 52.829917,
+    "refLong": -1.381361,
+    "rotation": 0,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.9975
+  },
+  {
+    "trackVariation": "Cascais_1988",
+    "refLat": 38.750455,
+    "refLong": -9.393799,
+    "rotation": 0.25,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Cascais",
+    "refLat": 38.750455,
+    "refLong": -9.393799,
+    "rotation": 0.25,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Cascais_Alternate",
+    "refLat": 38.750455,
+    "refLong": -9.393799,
+    "rotation": 0.25,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Fontana_OVAL",
+    "refLat": 34.088868,
+    "refLong": -117.500521,
+    "rotation": 0.27,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "Fontana_SCC",
+    "refLat": 34.088868,
+    "refLong": -117.500521,
+    "rotation": 0.27,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "Foz_RX",
+    "refLat": -25.604479,
+    "refLong": -54.490209,
+    "rotation": -2,
+    "cor_PosX_mul": 0.96,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Galeao_Airport",
+    "refLat": -22.799539,
+    "refLong": -43.239885,
+    "rotation": 0.8,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "Gateway_OVAL",
+    "refLat": 38.651002,
+    "refLong": -90.135621,
+    "rotation": -1.85,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Gateway_RC1",
+    "refLat": 38.651002,
+    "refLong": -90.135621,
+    "rotation": -1.85,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Gateway_RC2",
+    "refLat": 38.651002,
+    "refLong": -90.135621,
+    "rotation": -1.85,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "GoianiaMixed",
+    "refLat": -16.718458,
+    "refLong": -49.193975,
+    "rotation": 0.3,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 0.992
+  },
+  {
+    "trackVariation": "GoianiaOuter",
+    "refLat": -16.718458,
+    "refLong": -49.193975,
+    "rotation": 0.3,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 0.992
+  },
+  {
+    "trackVariation": "GoianiaShort",
+    "refLat": -16.718458,
+    "refLong": -49.193975,
+    "rotation": 0.3,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 0.992
+  },
+  {
+    "trackVariation": "CopaSaoPauloStage2",
+    "refLat": -23.604927,
+    "refLong": -46.836331,
+    "rotation": -0.5,
+    "cor_PosX_mul": 0.99,
+    "cor_PosY_mul": 1.01
+  },
+  {
+    "trackVariation": "GranjaVianaKart101",
+    "refLat": -23.604927,
+    "refLong": -46.836331,
+    "rotation": -0.5,
+    "cor_PosX_mul": 0.99,
+    "cor_PosY_mul": 1.01
+  },
+  {
+    "trackVariation": "GranjaVianaKart102",
+    "refLat": -23.604927,
+    "refLong": -46.836331,
+    "rotation": -0.5,
+    "cor_PosX_mul": 0.99,
+    "cor_PosY_mul": 1.01
+  },
+  {
+    "trackVariation": "GranjaVianaKart121",
+    "refLat": -23.604927,
+    "refLong": -46.836331,
+    "rotation": -0.5,
+    "cor_PosX_mul": 0.99,
+    "cor_PosY_mul": 1.01
+  },
+  {
+    "trackVariation": "Guapore",
+    "refLat": -28.844471,
+    "refLong": -51.852602,
+    "rotation": 0,
+    "cor_PosX_mul": 1.014,
+    "cor_PosY_mul": 0.995
+  },
+  {
+    "trackVariation": "Hockenheim_GP",
+    "refLat": 49.328901,
+    "refLong": 8.565022,
+    "rotation": 0.35,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Hockenheim_ShortA",
+    "refLat": 49.328901,
+    "refLong": 8.565022,
+    "rotation": 0.35,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Hockenheim_ShortB",
+    "refLat": 49.328901,
+    "refLong": 8.565022,
+    "rotation": 0.35,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Hockenheim_National",
+    "refLat": 49.328901,
+    "refLong": 8.565022,
+    "rotation": 0.35,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Hockenheim_2001",
+    "refLat": 49.328901,
+    "refLong": 8.565022,
+    "rotation": 0.35,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Hockenheim_1988",
+    "refLat": 49.328901,
+    "refLong": 8.565022,
+    "rotation": 0.35,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Hockenheim_1988_short",
+    "refLat": 49.328901,
+    "refLong": 8.565022,
+    "rotation": 0.35,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Hockenheim_1977",
+    "refLat": 49.328901,
+    "refLong": 8.565022,
+    "rotation": 0.35,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Ibarra2",
+    "refLat": 0.380338,
+    "refLong": -78.098315,
+    "rotation": 0,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.007
+  },
+  {
+    "trackVariation": "Ibarra_Reverse"
+  },
+  {
+    "trackVariation": "Imola_GP_2018",
+    "refLat": 44.344389,
+    "refLong": 11.71452,
+    "rotation": -0.05,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Imola_GP_1972",
+    "refLat": 44.344389,
+    "refLong": 11.71452,
+    "rotation": -0.05,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Imola_GP_1988",
+    "refLat": 44.344389,
+    "refLong": 11.71452,
+    "rotation": -0.05,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Imola_GP_2001",
+    "refLat": 44.344389,
+    "refLong": 11.71452,
+    "rotation": -0.05,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Indianapolis_2022_Oval",
+    "refLat": 39.793347,
+    "refLong": -86.238889,
+    "rotation": 0,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Indianapolis_2022_RC",
+    "refLat": 39.793347,
+    "refLong": -86.238889,
+    "rotation": 0,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Interlagos_GP",
+    "refLat": -23.702013,
+    "refLong": -46.695844,
+    "rotation": 0.2,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.004
+  },
+  {
+    "trackVariation": "Interlagos_SCB",
+    "refLat": -23.702013,
+    "refLong": -46.695844,
+    "rotation": 0.2,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.004
+  },
+  {
+    "trackVariation": "Interlagos_Historic",
+    "refLat": -23.701977,
+    "refLong": -46.69619,
+    "rotation": 0.2,
+    "cor_PosX_mul": 0.985,
+    "cor_PosY_mul": 1.004
+  },
+  {
+    "trackVariation": "Interlagos_Historic_Outer",
+    "refLat": -23.701977,
+    "refLong": -46.69619,
+    "rotation": 0.2,
+    "cor_PosX_mul": 0.985,
+    "cor_PosY_mul": 1.004
+  },
+  {
+    "trackVariation": "InterlagosKart1",
+    "refLat": -23.702023,
+    "refLong": -46.695884,
+    "rotation": -0.2,
+    "cor_PosX_mul": 1.01,
+    "cor_PosY_mul": 1.005
+  },
+  {
+    "trackVariation": "InterlagosKart2",
+    "refLat": -23.702023,
+    "refLong": -46.695884,
+    "rotation": -0.2,
+    "cor_PosX_mul": 1.01,
+    "cor_PosY_mul": 1.005
+  },
+  {
+    "trackVariation": "InterlagosKart3",
+    "refLat": -23.702023,
+    "refLong": -46.695884,
+    "rotation": -0.2,
+    "cor_PosX_mul": 1.01,
+    "cor_PosY_mul": 1.005
+  },
+  {
+    "trackVariation": "Jacarepagua_Historic",
+    "refLat": -22.976979,
+    "refLong": -43.394669,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Jacarepagua_2005",
+    "refLat": -22.976979,
+    "refLong": -43.394669,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Jacarepagua_OVAL",
+    "refLat": -22.976979,
+    "refLong": -43.394669,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Jacarepagua_SCB",
+    "refLat": -22.976979,
+    "refLong": -43.394669,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Jacarepagua_SHORT",
+    "refLat": -22.976979,
+    "refLong": -43.394669,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Jerez_GP1988",
+    "refLat": 36.708457,
+    "refLong": -6.032549,
+    "rotation": -1.75,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Jerez_GP2019",
+    "refLat": 36.708457,
+    "refLong": -6.032549,
+    "rotation": -1.75,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Jerez_Standard",
+    "refLat": 36.708457,
+    "refLong": -6.032549,
+    "rotation": -1.75,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Kansai_GP",
+    "refLat": 34.844384,
+    "refLong": 136.532731,
+    "rotation": -1,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "Kansai_Classic",
+    "refLat": 34.844384,
+    "refLong": 136.532731,
+    "rotation": -1,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "Kansai_East",
+    "refLat": 34.844384,
+    "refLong": 136.532731,
+    "rotation": -1,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "Kansai_West",
+    "refLat": 34.844384,
+    "refLong": 136.532731,
+    "rotation": -1,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "Kyalami_2019",
+    "refLat": -25.997815,
+    "refLong": 28.068152,
+    "rotation": 0.03,
+    "cor_PosX_mul": 0.992,
+    "cor_PosY_mul": 0.987
+  },
+  {
+    "trackVariation": "Kyalami_Historic",
+    "refLat": -25.992763,
+    "refLong": 28.06786,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Laguna_Seca_2020",
+    "refLat": 36.584272,
+    "refLong": -121.753386,
+    "rotation": -0.75,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "Londrina_short",
+    "refLat": -23.281094,
+    "refLong": -51.167276,
+    "rotation": 0.2,
+    "cor_PosX_mul": 0.987,
+    "cor_PosY_mul": 0.985
+  },
+  {
+    "trackVariation": "Londrina_long",
+    "refLat": -23.281094,
+    "refLong": -51.167276,
+    "rotation": 0.2,
+    "cor_PosX_mul": 0.987,
+    "cor_PosY_mul": 0.985
+  },
+  {
+    "trackVariation": "LondrinaKart1",
+    "refLat": -23.281084,
+    "refLong": -51.167289,
+    "rotation": 0.2,
+    "cor_PosX_mul": 0.987,
+    "cor_PosY_mul": 1.01
+  },
+  {
+    "trackVariation": "LondrinaKart2",
+    "refLat": -23.281084,
+    "refLong": -51.167289,
+    "rotation": 0.2,
+    "cor_PosX_mul": 0.987,
+    "cor_PosY_mul": 1.01
+  },
+  {
+    "trackVariation": "Long_Beach",
+    "refLat": 33.763798,
+    "refLong": -118.191507,
+    "rotation": 0.6,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Montreal_Historic",
+    "refLat": 45.503808,
+    "refLong": -73.523765,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1.007
+  },
+  {
+    "trackVariation": "Montreal_Modern",
+    "refLat": 45.503808,
+    "refLong": -73.523765,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1.007
+  },
+  {
+    "trackVariation": "Monza_1971_10k",
+    "refLat": 45.623527,
+    "refLong": 9.284271,
+    "rotation": -0.2,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Monza_1971_10knc",
+    "refLat": 45.623527,
+    "refLong": 9.284271,
+    "rotation": -0.2,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Monza_1971",
+    "refLat": 45.623527,
+    "refLong": 9.284271,
+    "rotation": -0.2,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Monza_1991",
+    "refLat": 45.623527,
+    "refLong": 9.284271,
+    "rotation": -0.2,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Monza_1971_Junior",
+    "refLat": 45.623527,
+    "refLong": 9.284271,
+    "rotation": -0.2,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Monza_2020",
+    "refLat": 45.623527,
+    "refLong": 9.284271,
+    "rotation": -0.2,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Monza_2020_Junior",
+    "refLat": 45.623527,
+    "refLong": 9.284271,
+    "rotation": -0.2,
+    "cor_PosX_mul": 0.9975,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Nordschleife_2020",
+    "refLat": 50.332773,
+    "refLong": 6.943377,
+    "rotation": -0.815,
+    "cor_PosX_mul": 0.9979,
+    "cor_PosY_mul": 0.9996
+  },
+  {
+    "trackVariation": "Nordschleife_2020_24hr",
+    "refLat": 50.332773,
+    "refLong": 6.943377,
+    "rotation": -0.815,
+    "cor_PosX_mul": 0.9979,
+    "cor_PosY_mul": 0.9996
+  },
+  {
+    "trackVariation": "Nurb_GP_2020",
+    "refLat": 50.332773,
+    "refLong": 6.943377,
+    "rotation": -0.75,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Nurb_GP_2020_Veedol",
+    "refLat": 50.332773,
+    "refLong": 6.943377,
+    "rotation": -0.75,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Nurb_GP_2020_Sprint",
+    "refLat": 50.332773,
+    "refLong": 6.943377,
+    "rotation": -0.75,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Nurb_GP_2020_Sprint_S",
+    "refLat": 50.332773,
+    "refLong": 6.943377,
+    "rotation": -0.75,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Nurb_1971_Gesamt",
+    "refLat": 50.332773,
+    "refLong": 6.943377,
+    "rotation": -0.815,
+    "cor_PosX_mul": 0.9979,
+    "cor_PosY_mul": 0.9996
+  },
+  {
+    "trackVariation": "Nurb_1971_Nords",
+    "refLat": 50.332773,
+    "refLong": 6.943377,
+    "rotation": -0.815,
+    "cor_PosX_mul": 0.9979,
+    "cor_PosY_mul": 0.9996
+  },
+  {
+    "trackVariation": "Nurb_1971_Suds",
+    "refLat": 50.332773,
+    "refLong": 6.943377,
+    "rotation": -0.815,
+    "cor_PosX_mul": 0.9979,
+    "cor_PosY_mul": 0.9996
+  },
+  {
+    "trackVariation": "Nurb_2020_RX",
+    "refLat": 50.332773,
+    "refLong": 6.943377,
+    "rotation": -0.75,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Ortona1",
+    "refLat": 42.305351,
+    "refLong": 14.379913,
+    "rotation": 0.4,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "Ortona2",
+    "refLat": 42.305351,
+    "refLong": 14.379913,
+    "rotation": 0.4,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "Ortona3",
+    "refLat": 42.305351,
+    "refLong": 14.379913,
+    "rotation": 0.4,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "Ortona4",
+    "refLat": 42.305351,
+    "refLong": 14.379913,
+    "rotation": 0.4,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 0.998
+  },
+  {
+    "trackVariation": "OultonPark_International",
+    "refLat": 53.180045,
+    "refLong": -2.612829,
+    "rotation": -0.3,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9992
+  },
+  {
+    "trackVariation": "OultonPark_Classic",
+    "refLat": 53.180045,
+    "refLong": -2.612829,
+    "rotation": -0.3,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9992
+  },
+  {
+    "trackVariation": "OultonPark_Fosters",
+    "refLat": 53.180045,
+    "refLong": -2.612829,
+    "rotation": -0.3,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9992
+  },
+  {
+    "trackVariation": "OultonPark_Island",
+    "refLat": 53.180045,
+    "refLong": -2.612829,
+    "rotation": -0.3,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9992
+  },
+  {
+    "trackVariation": "Road_America_RC",
+    "refLat": 43.798198,
+    "refLong": -87.996168,
+    "rotation": 0.68,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Road_America_RCB",
+    "refLat": 43.798198,
+    "refLong": -87.996168,
+    "rotation": 0.68,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Salvador_Street_Circuit",
+    "refLat": -12.944537,
+    "refLong": -38.431418,
+    "rotation": 0,
+    "cor_PosX_mul": 1.005,
+    "cor_PosY_mul": 1.007
+  },
+  {
+    "trackVariation": "SantaCruzDoSul",
+    "refLat": -29.799978,
+    "refLong": -52.436404,
+    "rotation": -0.3,
+    "cor_PosX_mul": 1.035,
+    "cor_PosY_mul": 1.04
+  },
+  {
+    "trackVariation": "Silverstone_1975",
+    "refLat": 52.071259,
+    "refLong": -1.016689,
+    "rotation": -1.55,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Silverstone_1975_No_Chicane",
+    "refLat": 52.071259,
+    "refLong": -1.016689,
+    "rotation": -1.55,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Silverstone_1991",
+    "refLat": 52.071259,
+    "refLong": -1.016689,
+    "rotation": -1.55,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Silverstone_2001",
+    "refLat": 52.071259,
+    "refLong": -1.016689,
+    "rotation": -1.55,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Silverstone_2001_International",
+    "refLat": 52.071259,
+    "refLong": -1.016689,
+    "rotation": -1.55,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Silverstone_2001_National",
+    "refLat": 52.071259,
+    "refLong": -1.016689,
+    "rotation": -1.55,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Silverstone_GP",
+    "refLat": 52.071259,
+    "refLong": -1.016689,
+    "rotation": -1.55,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Silverstone_Intl_2019",
+    "refLat": 52.071259,
+    "refLong": -1.016689,
+    "rotation": -1.55,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Silverstone_Natl_2019",
+    "refLat": 52.071259,
+    "refLong": -1.016689,
+    "rotation": -1.55,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Snetterton_100",
+    "refLat": 52.464919,
+    "refLong": 0.947226,
+    "rotation": 1.6,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Snetterton_200",
+    "refLat": 52.464919,
+    "refLong": 0.947226,
+    "rotation": 1.6,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Snetterton_300",
+    "refLat": 52.464919,
+    "refLong": 0.947226,
+    "rotation": 1.6,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.999
+  },
+  {
+    "trackVariation": "Spa_Francorchamps_1970",
+    "refLat": 50.437348,
+    "refLong": 5.967996,
+    "rotation": -2.28,
+    "cor_PosX_mul": 0.9963,
+    "cor_PosY_mul": 0.9997
+  },
+  {
+    "trackVariation": "Spa_Francorchamps_1970_1000km",
+    "refLat": 50.437348,
+    "refLong": 5.967996,
+    "rotation": -2.28,
+    "cor_PosX_mul": 0.9963,
+    "cor_PosY_mul": 0.9997
+  },
+  {
+    "trackVariation": "Spa_Francorchamps_1993",
+    "refLat": 50.437348,
+    "refLong": 5.967998,
+    "rotation": -2.3,
+    "cor_PosX_mul": 0.9965,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Spa_Francorchamps_2020",
+    "refLat": 50.437348,
+    "refLong": 5.967998,
+    "rotation": -2.3,
+    "cor_PosX_mul": 0.9965,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Spa_Francorchamps_2022",
+    "refLat": 50.437348,
+    "refLong": 5.967998,
+    "rotation": -2.3,
+    "cor_PosX_mul": 0.9965,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Spa_Francorchamps_2022_RX",
+    "refLat": 50.437348,
+    "refLong": 5.967998,
+    "rotation": -2.3,
+    "cor_PosX_mul": 0.9965,
+    "cor_PosY_mul": 0.9995
+  },
+  {
+    "trackVariation": "Speedland1",
+    "refLat": -23.532388,
+    "refLong": -46.584453,
+    "rotation": -0.5,
+    "cor_PosX_mul": 1.015,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Speedland2",
+    "refLat": -23.532388,
+    "refLong": -46.584453,
+    "rotation": -0.5,
+    "cor_PosX_mul": 1.015,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Speedland3",
+    "refLat": -23.532388,
+    "refLong": -46.584453,
+    "rotation": -0.5,
+    "cor_PosX_mul": 1.015,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Speedland4",
+    "refLat": -23.532388,
+    "refLong": -46.584453,
+    "rotation": -0.5,
+    "cor_PosX_mul": 1.015,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Spielberg_Historic",
+    "refLat": 47.219763,
+    "refLong": 14.763679,
+    "rotation": 0,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.99
+  },
+  {
+    "trackVariation": "Spielberg_Vintage",
+    "refLat": 47.219763,
+    "refLong": 14.763679,
+    "rotation": 0,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.99
+  },
+  {
+    "trackVariation": "Spielberg_Modern",
+    "refLat": 47.219792,
+    "refLong": 14.763686,
+    "rotation": 0,
+    "cor_PosX_mul": 0.994,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Spielberg_Short",
+    "refLat": 47.219792,
+    "refLong": 14.763715,
+    "rotation": 0,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.997
+  },
+  {
+    "trackVariation": "Taruma_Internacional",
+    "refLat": -30.048717,
+    "refLong": -51.018292,
+    "rotation": 0,
+    "cor_PosX_mul": 0.992,
+    "cor_PosY_mul": 0.99
+  },
+  {
+    "trackVariation": "Taruma_Chicane",
+    "refLat": -30.048717,
+    "refLong": -51.018292,
+    "rotation": 0,
+    "cor_PosX_mul": 0.992,
+    "cor_PosY_mul": 0.99
+  },
+  {
+    "trackVariation": "Termas_Rio_Hondo",
+    "refLat": -27.507524,
+    "refLong": -64.915548,
+    "rotation": -0.9,
+    "cor_PosX_mul": 0.9985,
+    "cor_PosY_mul": 1.004
+  },
+  {
+    "trackVariation": "VeloCitta1",
+    "refLat": -22.287702,
+    "refLong": -46.848099,
+    "rotation": -0.65,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "VeloCittaTD",
+    "refLat": -22.287702,
+    "refLong": -46.848099,
+    "rotation": -0.65,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "VeloCittaClubDay",
+    "refLat": -22.287702,
+    "refLong": -46.848099,
+    "rotation": -0.65,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.003
+  },
+  {
+    "trackVariation": "Velopark_2010",
+    "refLat": -29.823389,
+    "refLong": -51.320824,
+    "rotation": -0.5,
+    "cor_PosX_mul": 1.04,
+    "cor_PosY_mul": 1.044
+  },
+  {
+    "trackVariation": "Velopark_2017",
+    "refLat": -29.823389,
+    "refLong": -51.320824,
+    "rotation": -0.5,
+    "cor_PosX_mul": 1.04,
+    "cor_PosY_mul": 1.044
+  },
+  {
+    "trackVariation": "Virginia_Full",
+    "refLat": 36.56708,
+    "refLong": -79.209072,
+    "rotation": -1.075,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Virginia_Grand",
+    "refLat": 36.56708,
+    "refLong": -79.209072,
+    "rotation": -1.075,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Virginia_North",
+    "refLat": 36.56708,
+    "refLong": -79.209072,
+    "rotation": -1.075,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Virginia_Patriot",
+    "refLat": 36.56708,
+    "refLong": -79.209072,
+    "rotation": -1.075,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Virginia_South",
+    "refLat": 36.56708,
+    "refLong": -79.209072,
+    "rotation": -1.075,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Tykki_Dirt1",
+    "refLat": 60.884125,
+    "refLong": 26.795916,
+    "rotation": 0,
+    "cor_PosX_mul": 1.03,
+    "cor_PosY_mul": 1.03
+  },
+  {
+    "trackVariation": "Tykki_Dirt2",
+    "refLat": 60.884125,
+    "refLong": 26.795916,
+    "rotation": 0,
+    "cor_PosX_mul": 1.03,
+    "cor_PosY_mul": 1.03
+  },
+  {
+    "trackVariation": "Tykki_RX",
+    "refLat": 60.884125,
+    "refLong": 26.795916,
+    "rotation": 0,
+    "cor_PosX_mul": 1.03,
+    "cor_PosY_mul": 1.03
+  },
+  {
+    "trackVariation": "Tykki_Tarmac",
+    "refLat": 60.884125,
+    "refLong": 26.795916,
+    "rotation": 0,
+    "cor_PosX_mul": 1.03,
+    "cor_PosY_mul": 1.03
+  },
+  {
+    "trackVariation": "Watkins_Glen_GP",
+    "refLat": 42.336421,
+    "refLong": -76.924775,
+    "rotation": 1.3,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Watkins_Glen_GPIL",
+    "refLat": 42.336421,
+    "refLong": -76.924775,
+    "rotation": 1.3,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Watkins_Glen_S",
+    "refLat": 42.336421,
+    "refLong": -76.924775,
+    "rotation": 1.3,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Watkins_Glen_SIL",
+    "refLat": 42.336421,
+    "refLong": -76.924775,
+    "rotation": 1.3,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Hockenheim_RX",
+    "refLat": 49.328901,
+    "refLong": 8.565022,
+    "rotation": 0.35,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1
+  },
+  {
+    "trackVariation": "Circuit_de_Catalunya_RX",
+    "refLat": 41.56943,
+    "refLong": 2.257912,
+    "rotation": 0.56,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.001
+  }
+]
