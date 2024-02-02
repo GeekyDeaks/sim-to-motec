@@ -40,6 +40,14 @@
     "cor_PosY_mul": 0.998
   },
   {
+    "trackVariation": "Barcelona_1991",
+    "refLat": 41.56943,
+    "refLong": 2.257912,
+    "rotation": 0.56,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.001
+  },
+  {
     "trackVariation": "Circuit_de_Catalunya_GP",
     "refLat": 41.56943,
     "refLong": 2.257912,
@@ -49,6 +57,14 @@
   },
   {
     "trackVariation": "Circuit_de_Catalunya_GP_NC",
+    "refLat": 41.56943,
+    "refLong": 2.257912,
+    "rotation": 0.56,
+    "cor_PosX_mul": 0.999,
+    "cor_PosY_mul": 1.001
+  },
+  {
+    "trackVariation": "Circuit_de_Catalunya_NATL_NC",
     "refLat": 41.56943,
     "refLong": 2.257912,
     "rotation": 0.56,
@@ -571,6 +587,22 @@
     "cor_PosY_mul": 1.002
   },
   {
+    "trackVariation": "Interlagos_1991",
+    "refLat": -23.70202,
+    "refLong": -46.69621,
+    "rotation": -0.5,
+    "cor_PosX_mul": 0.975,
+    "cor_PosY_mul": 1.0075
+  },
+  {
+    "trackVariation": "Interlagos_1993",
+    "refLat": -23.70202,
+    "refLong": -46.69621,
+    "rotation": -0.5,
+    "cor_PosX_mul": 0.975,
+    "cor_PosY_mul": 1.0075
+  },
+  {
     "trackVariation": "Interlagos_GP",
     "refLat": -23.702013,
     "refLong": -46.695844,
@@ -747,6 +779,22 @@
     "cor_PosY_mul": 1.003
   },
   {
+    "trackVariation": "Le_Mans_24h",
+    "refLat": 47.937495,
+    "refLong": 0.225358,
+    "rotation": 2.05,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9999
+  },
+  {
+    "trackVariation": "Le_Mans_Circuit_Bugatti",
+    "refLat": 47.937495,
+    "refLong": 0.225358,
+    "rotation": 2.05,
+    "cor_PosX_mul": 0.997,
+    "cor_PosY_mul": 0.9999
+  },
+  {
     "trackVariation": "Londrina_short",
     "refLat": -23.281094,
     "refLong": -51.167276,
@@ -785,6 +833,14 @@
     "rotation": 0.6,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.002
+  },
+  {
+    "trackVariation": "Montreal_Historic_1991",
+    "refLat": 45.503808,
+    "refLong": -73.523765,
+    "rotation": 0,
+    "cor_PosX_mul": 1,
+    "cor_PosY_mul": 1.007
   },
   {
     "trackVariation": "Montreal_Historic",
