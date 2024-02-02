@@ -86,18 +86,72 @@ CHANNELS = {
         "decplaces": 3,
         "name": "Velocity X",
         "shortname": "VELX",
-        "units": "m"
+        "units": "m/s"
     },
     "vely": {
         "decplaces": 3,
         "name": "Velocity Y",
         "shortname": "VELY",
-        "units": "m"
+        "units": "m/s"
     },
     "velz": {
         "decplaces": 3,
         "name": "Velocity Z",
         "shortname": "VELZ",
+        "units": "m/s"
+    },
+    "angvelx": {
+        "decplaces": 3,
+        "name": "Angular Velocity X",
+        "shortname": "ANGVELX",
+        "units": "rad/s"
+    },
+    "angvely": {
+        "decplaces": 3,
+        "name": "Angular Velocity Y",
+        "shortname": "ANGVELY",
+        "units": "rad/s"
+    },
+    "angvelz": {
+        "decplaces": 3,
+        "name": "Angular Velocity Z",
+        "shortname": "ANGVELZ",
+        "units": "rad/s"
+    },
+    "orientationx": {
+        "decplaces": 3,
+        "name": "Orientation X",
+        "shortname": "ORIX",
+        "units": "radians"
+    },
+    "orientationy": {
+        "decplaces": 3,
+        "name": "Orientation Y",
+        "shortname": "ORIY",
+        "units": "radians"
+    },
+    "orientationz": {
+        "decplaces": 3,
+        "name": "Orientation Z",
+        "shortname": "ORIZ",
+        "units": "radians"
+    },
+    "posx": {
+        "decplaces": 3,
+        "name": "Position X",
+        "shortname": "POSX",
+        "units": "m"
+    },
+    "posy": {
+        "decplaces": 3,
+        "name": "Position Y",
+        "shortname": "POSY",
+        "units": "m"
+    },
+    "posz": {
+        "decplaces": 3,
+        "name": "Position Z",
+        "shortname": "POSZ",
         "units": "m"
     },
     "glat": {
@@ -141,6 +195,30 @@ CHANNELS = {
         "name": "Wheel Speed RR",
         "shortname": "WSpd RR",
         "units": [ "kph", "mph" ]
+    },
+    "tyreyfl": {
+        "decplaces": 3,
+        "name": "Tyre Y FL",
+        "shortname": "TYREYFL",
+        "units": "m"
+    },
+    "tyreyfr": {
+        "decplaces": 3,
+        "name": "Tyre Y FR",
+        "shortname": "TYREYFR",
+        "units": "m"
+    },
+    "tyreyrl": {
+        "decplaces": 3,
+        "name": "Tyre Y RL",
+        "shortname": "TYREYRL",
+        "units": "m"
+    },
+    "tyreyrr": {
+        "decplaces": 3,
+        "name": "Tyre Y RR",
+        "shortname": "TYREYRR",
+        "units": "m"
     },
     "suspfl": {
         "decplaces": 3,
@@ -553,6 +631,18 @@ CHANNELS = {
         "name": "Boost Available",
         "shortname": "BoostAvail",
         "units": "%"
+    },
+    "ambienttemp": {
+        "decplaces": 2,
+        "name": "Ambient Temp",
+        "shortname": "AmbTemp",
+        "units": "C"
+    },
+    "tracktemp": {
+        "decplaces": 2,
+        "name": "Track Temp",
+        "shortname": "TrackTemp",
+        "units": "C"
     },
     "debug1": {
         "decplaces": 2,

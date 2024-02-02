@@ -55,8 +55,9 @@ class RawSampler(Thread):
                     last_data = data
 
                 self.samples.put( (timestamp, data), block=True )
-            except:
+            except Exception as e:
                 self.running = False
+                l.warning(e)
 
         con.close()
 

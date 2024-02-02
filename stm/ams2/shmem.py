@@ -176,8 +176,8 @@ class AMS2SharedMemory:
         "4x"    # mCrashState / I / 4x
         "4x"    # mAeroDamage
         "4x"    # mEngineDamage
-        "4x"    # mAmbientTemperature
-        "4x"    # mTrackTemperature
+        "f"     # mAmbientTemperature
+        "f"     # mTrackTemperature
         "4x"    # mRainDensity 
         "4x"    # mWindSpeed
         "4x"    # mWindDirectionX
@@ -303,6 +303,8 @@ class AMS2SharedMemory:
             tssfl, tssfr, tssrl, tssrr, # mTyreSlipSpeed
             ttfl, ttfr, ttrl, ttrr, # mTyreTemp
             btfl, btfr, btrl, btrr, # mBrakeTempCelsius
+            self.mAmbientTemperature,
+            self.mTrackTemperature,
             self.mSequenceNumber,
             stfl, stfr, strl, sttrr, # mSuspensionTravel
             svfl, svfr, svrl, svrr, # mSuspensionVelocity

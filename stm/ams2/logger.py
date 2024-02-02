@@ -28,6 +28,7 @@ class AMS2Logger(BaseLogger):
         'rideheightfl', 'rideheightfr', 'rideheightrl', 'rideheightrr', 
         'tyrepresfl', 'tyrepresfr', 'tyrepresrl', 'tyrepresrr', # mAirPressure
         'tyrespdfl', 'tyrespdfr', 'tyrespdrl', 'tyrespdrr',# mTyreRPS
+        'tyreyfl', 'tyreyfr', 'tyreyrl', 'tyreyrr', # Tyre Y position
         'turbopres',
         'oiltemp', 'oilpres',
         'watertemp', 'waterpres',
@@ -39,7 +40,12 @@ class AMS2Logger(BaseLogger):
         'abs', 'asm', 'tcs',
         'drsavail', 'drs', 'ers',
         'boost', 'boostavail',
-        'splittime'
+        'splittime',
+        'velx', 'vely', 'velz',
+        'angvelx', 'angvely', 'angvelz',
+        'orientationx', 'orientationy', 'orientationz',
+        'posx', 'posy', 'posz',
+        'tracktemp', 'ambienttemp'
     ]
 
     def __init__(self,
@@ -141,6 +147,7 @@ class AMS2Logger(BaseLogger):
             *p.mRideHeight,
             *p.mAirPressure,
             *[ ts * -1.0 for ts in p.mTyreRPS ],
+            *p.mTyreY,
             p.mTurboBoostPressure / 1000.0,
             p.mOilTempCelsius,
             p.mOilPressureKPa,
@@ -162,7 +169,13 @@ class AMS2Logger(BaseLogger):
             1 if p.mErsAutoModeEnabled else 0,
             1 if p.mBoostActive else 0,
             p.mBoostAmount,
-            p.mSplitTime
+            p.mSplitTime,
+            *p.mLocalVelocity,
+            *p.mAngularVelocity,
+            *p.mOrientation,
+            *p.driver.mWorldPosition,
+            p.mTrackTemperature,
+            p.mAmbientTemperature
         ])
 
 
