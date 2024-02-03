@@ -4,6 +4,7 @@ from .tracks import convert_to_gps
 from .shmem import AMS2SharedMemory, AMS2GameState
 from datetime import datetime
 from logging import getLogger
+from .convert import convert_orientation
 l = getLogger(__name__)
 
 class AMS2Logger(BaseLogger):
@@ -170,9 +171,11 @@ class AMS2Logger(BaseLogger):
             1 if p.mBoostActive else 0,
             p.mBoostAmount,
             p.mSplitTime,
-            *p.mLocalVelocity,
+            p.mLocalVelocity.x,
+            p.mLocalVelocity.y,
+            p.mLocalVelocity.z * -1.0,
             *p.mAngularVelocity,
-            *p.mOrientation,
+            *convert_orientation(p.mOrientation),
             *p.driver.mWorldPosition,
             p.mTrackTemperature,
             p.mAmbientTemperature

@@ -122,19 +122,19 @@ CHANNELS = {
         "decplaces": 3,
         "name": "Orientation X",
         "shortname": "ORIX",
-        "units": "radians"
+        "units": "deg"
     },
     "orientationy": {
         "decplaces": 3,
         "name": "Orientation Y",
         "shortname": "ORIY",
-        "units": "radians"
+        "units": "deg"
     },
     "orientationz": {
         "decplaces": 3,
         "name": "Orientation Z",
         "shortname": "ORIZ",
-        "units": "radians"
+        "units": "deg"
     },
     "posx": {
         "decplaces": 3,
