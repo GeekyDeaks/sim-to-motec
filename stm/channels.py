@@ -54,6 +54,12 @@ CHANNELS = {
         "shortname": "GPSLong",
         "units": "deg"
     },
+    "altitude": {
+        "decplaces": 3,
+        "name": "Altitude",
+        "shortname": "alt",
+        "units": "m"
+    },
     "beacon": {
         "datatype": 0,
         "datasize": 2,
@@ -218,6 +224,30 @@ CHANNELS = {
         "decplaces": 3,
         "name": "Tyre Y RR",
         "shortname": "TYREYRR",
+        "units": "m"
+    },
+    "tyrehagfl": {
+        "decplaces": 3,
+        "name": "Tyre Height Above Ground FL",
+        "shortname": "TYREHAGFL",
+        "units": "m"
+    },
+    "tyrehagfr": {
+        "decplaces": 3,
+        "name": "Tyre Height Above Ground FR",
+        "shortname": "TYREHAGFR",
+        "units": "m"
+    },
+    "tyrehagrl": {
+        "decplaces": 3,
+        "name": "Tyre Height Above Ground RL",
+        "shortname": "TYREHAGRL",
+        "units": "m"
+    },
+    "tyrehagrr": {
+        "decplaces": 3,
+        "name": "Tyre Height Above Ground RR",
+        "shortname": "TYREHAGRR",
         "units": "m"
     },
     "suspfl": {

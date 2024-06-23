@@ -161,8 +161,8 @@ class AMS2SharedMemory:
         "4f"    # mTyreRPS
         "4f"    # mTyreSlipSpeed
         "4f"    # mTyreTemp
-        "16x"   # mTyreGrip
-        "16x"   # mTyreHeightAboveGround
+        "4f"    # mTyreGrip
+        "4f"    # mTyreHeightAboveGround
         "16x"   # mTyreLateralStiffness
         "16x"   # mTyreWear
         "16x"   # mBrakeDamage
@@ -302,6 +302,8 @@ class AMS2SharedMemory:
             trpsfl, trpsfr, trpsrl, trpsrr, # mTyreRPS
             tssfl, tssfr, tssrl, tssrr, # mTyreSlipSpeed
             ttfl, ttfr, ttrl, ttrr, # mTyreTemp
+            tgfl, tgfr, tgrl, tgrr, # mTyreGrip
+            thagfl, thagfr, thagrl, thagrr, # mTyreHeightAboveGround
             btfl, btfr, btrl, btrr, # mBrakeTempCelsius
             self.mAmbientTemperature,
             self.mTrackTemperature,
@@ -355,6 +357,8 @@ class AMS2SharedMemory:
         self.mTyreRPS = Wheels(trpsfl, trpsfr, trpsrl, trpsrr)
         self.mTyreSlipSpeed = Wheels(tssfl, tssfr, tssrl, tssrr)
         self.mTyreTemp = Wheels(ttfl, ttfr, ttrl, ttrr)
+        self.mTyreGrip = Wheels(tgfl, tgfr, tgrl, tgrr)
+        self.mTyreHeightAboveGround = Wheels(thagfl, thagfr, thagrl, thagrr)
         self.mBrakeTempCelsius = Wheels(btfl, btfr, btrl, btrr)
         self.mSuspensionTravel = Wheels(stfl, stfr, strl, sttrr)
         self.mSuspensionVelocity = Wheels(svfl, svfr, svrl, svrr)

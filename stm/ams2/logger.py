@@ -1,6 +1,6 @@
 from stm.logger import BaseLogger
 from stm.event import STMEvent
-from .tracks import convert_to_gps
+from .tracks import convert_to_gps, convert_to_altitude
 from .shmem import AMS2SharedMemory, AMS2GameState
 from datetime import datetime
 from logging import getLogger
@@ -30,6 +30,7 @@ class AMS2Logger(BaseLogger):
         'tyrepresfl', 'tyrepresfr', 'tyrepresrl', 'tyrepresrr', # mAirPressure
         'tyrespdfl', 'tyrespdfr', 'tyrespdrl', 'tyrespdrr',# mTyreRPS
         'tyreyfl', 'tyreyfr', 'tyreyrl', 'tyreyrr', # Tyre Y position
+        'tyrehagfl', 'tyrehagfr', 'tyrehagrl', 'tyrehagrr', # Tyre height above ground
         'turbopres',
         'oiltemp', 'oilpres',
         'watertemp', 'waterpres',
@@ -46,7 +47,8 @@ class AMS2Logger(BaseLogger):
         'angvelx', 'angvely', 'angvelz',
         'orientationx', 'orientationy', 'orientationz',
         'posx', 'posy', 'posz',
-        'tracktemp', 'ambienttemp'
+        'tracktemp', 'ambienttemp',
+        'altitude'
     ]
 
     def __init__(self,
@@ -113,6 +115,8 @@ class AMS2Logger(BaseLogger):
 
         glat, gvert, glong = [ a / 9.8 for a in p.mLocalAcceleration]
 
+        altitude = convert_to_altitude(name=p.mTrackVariation, y=p.driver.mWorldPosition.y)
+
         if self.imperial:
             ms_to_speed = 2.23693629 # m/s to mph
         else:
@@ -149,6 +153,7 @@ class AMS2Logger(BaseLogger):
             *p.mAirPressure,
             *[ ts * -1.0 for ts in p.mTyreRPS ],
             *p.mTyreY,
+            *p.mTyreHeightAboveGround,
             p.mTurboBoostPressure / 1000.0,
             p.mOilTempCelsius,
             p.mOilPressureKPa,
@@ -178,7 +183,8 @@ class AMS2Logger(BaseLogger):
             *convert_orientation(p.mOrientation),
             *p.driver.mWorldPosition,
             p.mTrackTemperature,
-            p.mAmbientTemperature
+            p.mAmbientTemperature,
+            altitude
         ])
 
 

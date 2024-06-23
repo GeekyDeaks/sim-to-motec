@@ -3,6 +3,7 @@
     "trackVariation": "Adelaide_Historic",
     "refLat": -34.928456,
     "refLong": 138.618758,
+    "altitude": 52,
     "rotation": -1.55,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -11,6 +12,7 @@
     "trackVariation": "Adelaide_Modern",
     "refLat": -34.928456,
     "refLong": 138.618758,
+    "altitude": 52,
     "rotation": -1.55,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -19,6 +21,7 @@
     "trackVariation": "Ascurra_Dirt",
     "refLat": -26.934041,
     "refLong": -49.386504,
+    "altitude": 88,
     "rotation": 1,
     "cor_PosX_mul": 1.004,
     "cor_PosY_mul": 0.99
@@ -27,6 +30,7 @@
     "trackVariation": "Ascurra_RX",
     "refLat": -26.934041,
     "refLong": -49.386504,
+    "altitude": 88,
     "rotation": 1,
     "cor_PosX_mul": 1.004,
     "cor_PosY_mul": 0.99
@@ -35,6 +39,7 @@
     "trackVariation": "Azure_Circuit_2021",
     "refLat": 43.737142,
     "refLong": 7.427485,
+    "altitude": 1.57,
     "rotation": 125.7,
     "cor_PosX_mul": 0.997,
     "cor_PosY_mul": 0.998
@@ -43,6 +48,7 @@
     "trackVariation": "Barcelona_1991",
     "refLat": 41.56943,
     "refLong": 2.257912,
+    "altitude": 115,
     "rotation": 0.56,
     "cor_PosX_mul": 0.999,
     "cor_PosY_mul": 1.001
@@ -51,6 +57,7 @@
     "trackVariation": "Circuit_de_Catalunya_GP",
     "refLat": 41.56943,
     "refLong": 2.257912,
+    "altitude": 115,
     "rotation": 0.56,
     "cor_PosX_mul": 0.999,
     "cor_PosY_mul": 1.001
@@ -59,6 +66,7 @@
     "trackVariation": "Circuit_de_Catalunya_GP_NC",
     "refLat": 41.56943,
     "refLong": 2.257912,
+    "altitude": 115,
     "rotation": 0.56,
     "cor_PosX_mul": 0.999,
     "cor_PosY_mul": 1.001
@@ -67,6 +75,7 @@
     "trackVariation": "Circuit_de_Catalunya_NATL_NC",
     "refLat": 41.56943,
     "refLong": 2.257912,
+    "altitude": 115,
     "rotation": 0.56,
     "cor_PosX_mul": 0.999,
     "cor_PosY_mul": 1.001
@@ -75,6 +84,7 @@
     "trackVariation": "Bathurst_1983",
     "refLat": -33.448739,
     "refLong": 149.54617,
+    "altitude": 780,
     "rotation": 1.3,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.003
@@ -83,6 +93,7 @@
     "trackVariation": "Bathurst_2020",
     "refLat": -33.448739,
     "refLong": 149.54617,
+    "altitude": 780,
     "rotation": 1.3,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.003
@@ -91,6 +102,7 @@
     "trackVariation": "BrandsHatch_GP",
     "refLat": 51.36051,
     "refLong": 0.261179,
+    "altitude": 117.57,
     "rotation": 2.1,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 0.998
@@ -99,6 +111,7 @@
     "trackVariation": "BrandsHatch_Indy",
     "refLat": 51.36051,
     "refLong": 0.261179,
+    "altitude": 117.57,
     "rotation": 2.1,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 0.998
@@ -107,6 +120,7 @@
     "trackVariation": "Brasilia_Full",
     "refLat": -15.772805,
     "refLong": -47.899622,
+    "altitude": 1172,
     "rotation": 0,
     "cor_PosX_mul": 0.98,
     "cor_PosY_mul": 1.025
@@ -115,6 +129,7 @@
     "trackVariation": "Brasilia_Outer",
     "refLat": -15.772805,
     "refLong": -47.899622,
+    "altitude": 1172,
     "rotation": 0,
     "cor_PosX_mul": 0.98,
     "cor_PosY_mul": 1.025
@@ -123,6 +138,7 @@
     "trackVariation": "Buenos_Aires_Circuito_6",
     "refLat": -34.694051,
     "refLong": -58.458974,
+    "altitude": 10,
     "rotation": -0.1,
     "cor_PosX_mul": 0.974,
     "cor_PosY_mul": 0.976
@@ -131,6 +147,7 @@
     "trackVariation": "Buenos_Aires_Circuito_6T",
     "refLat": -34.694051,
     "refLong": -58.458974,
+    "altitude": 10,
     "rotation": -0.1,
     "cor_PosX_mul": 0.974,
     "cor_PosY_mul": 0.976
@@ -139,6 +156,7 @@
     "trackVariation": "Buenos_Aires_Circuito_7",
     "refLat": -34.694051,
     "refLong": -58.458974,
+    "altitude": 10,
     "rotation": -0.1,
     "cor_PosX_mul": 0.974,
     "cor_PosY_mul": 0.976
@@ -147,6 +165,7 @@
     "trackVariation": "Buenos_Aires_Circuito_8",
     "refLat": -34.694051,
     "refLong": -58.458974,
+    "altitude": 10,
     "rotation": -0.1,
     "cor_PosX_mul": 0.974,
     "cor_PosY_mul": 0.976
@@ -155,6 +174,7 @@
     "trackVariation": "Buenos_Aires_Circuito_9",
     "refLat": -34.694051,
     "refLong": -58.458974,
+    "altitude": 10,
     "rotation": -0.1,
     "cor_PosX_mul": 0.974,
     "cor_PosY_mul": 0.976
@@ -163,6 +183,7 @@
     "trackVariation": "Buenos_Aires_Circuito_12",
     "refLat": -34.694051,
     "refLong": -58.458974,
+    "altitude": 10,
     "rotation": -0.1,
     "cor_PosX_mul": 0.974,
     "cor_PosY_mul": 0.976
@@ -171,6 +192,7 @@
     "trackVariation": "Buenos_Aires_Circuito_15",
     "refLat": -34.694051,
     "refLong": -58.458974,
+    "altitude": 10,
     "rotation": -0.1,
     "cor_PosX_mul": 0.974,
     "cor_PosY_mul": 0.976
@@ -179,6 +201,7 @@
     "trackVariation": "Buskerud_Long",
     "refLat": 40.997664,
     "refLong": -113.566253,
+    "altitude": 35.188,
     "rotation": 0,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -187,6 +210,7 @@
     "trackVariation": "Buskerud_Short",
     "refLat": 40.997664,
     "refLong": -113.566253,
+    "altitude": 35.188,
     "rotation": 0,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -195,6 +219,7 @@
     "trackVariation": "CadwellPark",
     "refLat": 53.310311,
     "refLong": -0.05949,
+    "altitude": 122,
     "rotation": -2.3,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1
@@ -203,6 +228,7 @@
     "trackVariation": "CampoGrande1",
     "refLat": -20.475932,
     "refLong": -54.466071,
+    "altitude": 592,
     "rotation": 0.2,
     "cor_PosX_mul": 0.992,
     "cor_PosY_mul": 1.003
@@ -211,6 +237,7 @@
     "trackVariation": "Cascavel2",
     "refLat": -24.981055,
     "refLong": -53.386346,
+    "altitude": 750,
     "rotation": -1,
     "cor_PosX_mul": 0.999,
     "cor_PosY_mul": 1.003
@@ -219,6 +246,7 @@
     "trackVariation": "Cleveland_GP",
     "refLat": 41.520765,
     "refLong": -81.678257,
+    "altitude": 199,
     "rotation": 0.53,
     "cor_PosX_mul": 0.999,
     "cor_PosY_mul": 0.999
@@ -227,6 +255,7 @@
     "trackVariation": "Cordoba_International",
     "refLat": -31.573589,
     "refLong": -64.363897,
+    "altitude": 586,
     "rotation": -0.05,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.003
@@ -235,6 +264,7 @@
     "trackVariation": "Cordoba_GP",
     "refLat": -31.573589,
     "refLong": -64.363897,
+    "altitude": 586,
     "rotation": -0.05,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.003
@@ -243,6 +273,7 @@
     "trackVariation": "Cordoba_NATL",
     "refLat": -31.573589,
     "refLong": -64.363897,
+    "altitude": 586,
     "rotation": -0.05,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.003
@@ -251,6 +282,7 @@
     "trackVariation": "CuritibaInternacional",
     "refLat": -25.44768,
     "refLong": -49.195833,
+    "altitude": 881,
     "rotation": -1.5,
     "cor_PosX_mul": 1.005,
     "cor_PosY_mul": 1.01
@@ -259,6 +291,7 @@
     "trackVariation": "Curitiba_outer",
     "refLat": -25.44768,
     "refLong": -49.195833,
+    "altitude": 881,
     "rotation": -1.5,
     "cor_PosX_mul": 1.005,
     "cor_PosY_mul": 1.01
@@ -267,6 +300,7 @@
     "trackVariation": "CurveloLong",
     "refLat": -18.807352,
     "refLong": -44.409001,
+    "altitude": 672,
     "rotation": 0.1,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1.005
@@ -275,6 +309,7 @@
     "trackVariation": "CurveloShort",
     "refLat": -18.807352,
     "refLong": -44.409001,
+    "altitude": 672,
     "rotation": 0.1,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1.005
@@ -283,6 +318,7 @@
     "trackVariation": "Daytona_Speedway_Tri_Oval",
     "refLat": 29.185571,
     "refLong": -81.069434,
+    "altitude": 9.039,
     "rotation": -125.8,
     "cor_PosX_mul": 1.002,
     "cor_PosY_mul": 0.999
@@ -291,6 +327,7 @@
     "trackVariation": "Daytona_Road_Course",
     "refLat": 29.185571,
     "refLong": -81.069434,
+    "altitude": 9.039,
     "rotation": -125.8,
     "cor_PosX_mul": 1.002,
     "cor_PosY_mul": 0.999
@@ -299,6 +336,7 @@
     "trackVariation": "Daytona_Nascar_Road_Course",
     "refLat": 29.185571,
     "refLong": -81.069434,
+    "altitude": 9.039,
     "rotation": -125.8,
     "cor_PosX_mul": 1.002,
     "cor_PosY_mul": 0.999
@@ -307,6 +345,7 @@
     "trackVariation": "Donington_GP",
     "refLat": 52.829917,
     "refLong": -1.381361,
+    "altitude": 96,
     "rotation": 0,
     "cor_PosX_mul": 0.999,
     "cor_PosY_mul": 0.9975
@@ -315,6 +354,7 @@
     "trackVariation": "Donington_Nat",
     "refLat": 52.829917,
     "refLong": -1.381361,
+    "altitude": 96,
     "rotation": 0,
     "cor_PosX_mul": 0.999,
     "cor_PosY_mul": 0.9975
@@ -323,6 +363,7 @@
     "trackVariation": "Cascais_1988",
     "refLat": 38.750455,
     "refLong": -9.393799,
+    "altitude": 130,
     "rotation": 0.25,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.002
@@ -331,6 +372,7 @@
     "trackVariation": "Cascais",
     "refLat": 38.750455,
     "refLong": -9.393799,
+    "altitude": 130,
     "rotation": 0.25,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.002
@@ -339,6 +381,7 @@
     "trackVariation": "Cascais_Alternate",
     "refLat": 38.750455,
     "refLong": -9.393799,
+    "altitude": 130,
     "rotation": 0.25,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.002
@@ -347,6 +390,7 @@
     "trackVariation": "Fontana_OVAL",
     "refLat": 34.088868,
     "refLong": -117.500521,
+    "altitude": 377,
     "rotation": 0.27,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.003
@@ -355,6 +399,7 @@
     "trackVariation": "Fontana_SCC",
     "refLat": 34.088868,
     "refLong": -117.500521,
+    "altitude": 377,
     "rotation": 0.27,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 1.003
@@ -363,6 +408,7 @@
     "trackVariation": "Foz_RX",
     "refLat": -25.604479,
     "refLong": -54.490209,
+    "altitude": 164,
     "rotation": -2,
     "cor_PosX_mul": 0.96,
     "cor_PosY_mul": 1
@@ -371,6 +417,7 @@
     "trackVariation": "Galeao_Airport",
     "refLat": -22.799539,
     "refLong": -43.239885,
+    "altitude": 10,
     "rotation": 0.8,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1.003
@@ -379,6 +426,7 @@
     "trackVariation": "Gateway_OVAL",
     "refLat": 38.651002,
     "refLong": -90.135621,
+    "altitude": 120,
     "rotation": -1.85,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1.001
@@ -387,6 +435,7 @@
     "trackVariation": "Gateway_RC1",
     "refLat": 38.651002,
     "refLong": -90.135621,
+    "altitude": 120,
     "rotation": -1.85,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1.001
@@ -395,6 +444,7 @@
     "trackVariation": "Gateway_RC2",
     "refLat": 38.651002,
     "refLong": -90.135621,
+    "altitude": 120,
     "rotation": -1.85,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1.001
@@ -403,6 +453,7 @@
     "trackVariation": "GoianiaMixed",
     "refLat": -16.718458,
     "refLong": -49.193975,
+    "altitude": 757,
     "rotation": 0.3,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 0.992
@@ -411,6 +462,7 @@
     "trackVariation": "GoianiaOuter",
     "refLat": -16.718458,
     "refLong": -49.193975,
+    "altitude": 757,
     "rotation": 0.3,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 0.992
@@ -419,6 +471,7 @@
     "trackVariation": "GoianiaShort",
     "refLat": -16.718458,
     "refLong": -49.193975,
+    "altitude": 757,
     "rotation": 0.3,
     "cor_PosX_mul": 0.998,
     "cor_PosY_mul": 0.992
@@ -427,6 +480,7 @@
     "trackVariation": "CopaSaoPauloStage2",
     "refLat": -23.604927,
     "refLong": -46.836331,
+    "altitude": 797,
     "rotation": -0.5,
     "cor_PosX_mul": 0.99,
     "cor_PosY_mul": 1.01
@@ -435,6 +489,7 @@
     "trackVariation": "GranjaVianaKart101",
     "refLat": -23.604927,
     "refLong": -46.836331,
+    "altitude": 797,
     "rotation": -0.5,
     "cor_PosX_mul": 0.99,
     "cor_PosY_mul": 1.01
@@ -443,6 +498,7 @@
     "trackVariation": "GranjaVianaKart102",
     "refLat": -23.604927,
     "refLong": -46.836331,
+    "altitude": 797,
     "rotation": -0.5,
     "cor_PosX_mul": 0.99,
     "cor_PosY_mul": 1.01
@@ -451,6 +507,7 @@
     "trackVariation": "GranjaVianaKart121",
     "refLat": -23.604927,
     "refLong": -46.836331,
+    "altitude": 797,
     "rotation": -0.5,
     "cor_PosX_mul": 0.99,
     "cor_PosY_mul": 1.01
@@ -459,6 +516,7 @@
     "trackVariation": "Guapore",
     "refLat": -28.844471,
     "refLong": -51.852602,
+    "altitude": 474,
     "rotation": 0,
     "cor_PosX_mul": 1.014,
     "cor_PosY_mul": 0.995
@@ -467,6 +525,7 @@
     "trackVariation": "Hockenheim_GP",
     "refLat": 49.328901,
     "refLong": 8.565022,
+    "altitude": 102,
     "rotation": 0.35,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -475,6 +534,7 @@
     "trackVariation": "Hockenheim_ShortA",
     "refLat": 49.328901,
     "refLong": 8.565022,
+    "altitude": 102,
     "rotation": 0.35,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -483,6 +543,7 @@
     "trackVariation": "Hockenheim_ShortB",
     "refLat": 49.328901,
     "refLong": 8.565022,
+    "altitude": 102,
     "rotation": 0.35,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -491,6 +552,7 @@
     "trackVariation": "Hockenheim_National",
     "refLat": 49.328901,
     "refLong": 8.565022,
+    "altitude": 102,
     "rotation": 0.35,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -499,6 +561,7 @@
     "trackVariation": "Hockenheim_2001",
     "refLat": 49.328901,
     "refLong": 8.565022,
+    "altitude": 102,
     "rotation": 0.35,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -507,6 +570,7 @@
     "trackVariation": "Hockenheim_1988",
     "refLat": 49.328901,
     "refLong": 8.565022,
+    "altitude": 102,
     "rotation": 0.35,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -515,6 +579,7 @@
     "trackVariation": "Hockenheim_1988_short",
     "refLat": 49.328901,
     "refLong": 8.565022,
+    "altitude": 102,
     "rotation": 0.35,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -523,6 +588,7 @@
     "trackVariation": "Hockenheim_1977",
     "refLat": 49.328901,
     "refLong": 8.565022,
+    "altitude": 102,
     "rotation": 0.35,
     "cor_PosX_mul": 1,
     "cor_PosY_mul": 1
@@ -536,7 +602,12 @@
     "cor_PosY_mul": 1.007
   },
   {
-    "trackVariation": "Ibarra_Reverse"
+    "trackVariation": "Ibarra_Reverse",
+    "refLat": 0.380338,
+    "refLong": -78.098315,
+    "rotation": 0,
+    "cor_PosX_mul": 0.998,
+    "cor_PosY_mul": 1.007
   },
   {
     "trackVariation": "Imola_GP_2018",

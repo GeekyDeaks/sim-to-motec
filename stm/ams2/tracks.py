@@ -33,6 +33,10 @@ class AMS2Track:
             z = rz 
             
         return gps.convert(x=x, z=z, latmid=self.refLat, longmid=self.refLong)
+    
+    def convert_to_altitude(self, y):
+        alt = getattr(self, 'altitude', 0)
+        return alt + y
 
 def lookup_track(name):
     return TRACKS.get(name)
@@ -43,6 +47,13 @@ def convert_to_gps(name, x, z):
         return track.convert_to_gps(x, z)
     else:
         return gps.convert(x, z)
+    
+def convert_to_altitude(name, y):
+    track = lookup_track(name)
+    if track:
+        return track.convert_to_altitude(y)
+    else:
+        return y
 
 with open(os.path.join(PATH, "tracks", "gps.json"), "r") as fin:
     track_list = json.loads(fin.read())
